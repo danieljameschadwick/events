@@ -13,8 +13,11 @@ use Ramsey\Uuid\Uuid;
 // TODO unique constraints within ORM\Table
 
 /**
+ * This file will /eventually/ be placed into a custom User Microservice
+ * which will be managed across all my applications.
+ *
  * @ORM\Table(
- *     schema="USEM_User",
+ *     schema="events",
  *     name="tblUser"
  * )
  *

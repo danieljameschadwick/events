@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
- *     schema="USEM_User",
+ *     schema="events",
  *     name="ublRole"
  * )
  *
