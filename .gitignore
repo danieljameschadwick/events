@@ -1,3 +1,10 @@
+# Static images
+/public/images/*
+
+# .idea
+.idea
+.idea/*
+
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
@@ -57,3 +64,6 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+# OS
+.DS_Store
