@@ -1,0 +1,24 @@
+#page-container {
+    margin: auto;
+}
+
+#page-content {
+    width: @main-page-width;
+
+    margin: auto;
+
+    // move to SCSS
+    background: #565656;
+
+    .page-container {
+
+        // todo remove debug styles
+        border: 2px solid blue;
+    }
+}
+
+@media screen and (max-width: @main-page-width) {
+    #page-content {
+        width: 100%;
+    }
+}

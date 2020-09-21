@@ -1,0 +1,23 @@
+parameters:
+    symfony:
+        console_application_loader: '%currentWorkingDirectory%/vendor/autoload.php'
+        container_xml_path: '%currentWorkingDirectory%/var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+
+    level: max
+
+    paths:
+        - '%currentWorkingDirectory%'
+
+    fileExtensions:
+        - php
+
+    excludes_analyse:
+        - '%currentWorkingDirectory%/config'
+        - '%currentWorkingDirectory%/bin'
+        - '%currentWorkingDirectory%/node_modules'
+        - '%currentWorkingDirectory%/Resources'
+        - '%currentWorkingDirectory%/vendor'
+        - '%currentWorkingDirectory%/var'
+        - '%currentWorkingDirectory%/public'
+
+    reportUnmatchedIgnoredErrors: false

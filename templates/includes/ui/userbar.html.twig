@@ -1,0 +1,20 @@
+<div class="userbar">
+    <div class="userbar-brand">
+        <a href="{{ url('app_homepage') }}">{{ site_name }}</a>
+    </div>
+    <div class="userbar-account">
+        {% if app.user %}
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ app.user.username }}
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url('app_user_home', {'user': app.user.username}) }}">Profile</a>
+                <a class="dropdown-item" href="{{ url('app_user_home', {'user': app.user.username, '_fragment': 'v-pills-settings'}) }}">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url('app_logout') }}">Logout</a>
+            </div>
+        {% else %}
+            <a href="{{ url('app_login') }}">Login</a>
+        {% endif %}
+    </div>
+</div>

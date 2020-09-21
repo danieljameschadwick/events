@@ -1,0 +1,38 @@
+.userbar {
+    height: 36px;
+    width: 100%;
+
+    // move to SCSS
+    //background: @secondary;
+    //color: @brand-color;
+
+    line-height: 34px;
+
+    .userbar-brand {
+        margin-left: 10px;
+    }
+
+    .userbar-brand {
+        display: inline-block;
+    }
+
+    .userbar-account {
+        float: right;
+        display: inline-block;
+
+        margin-right: 10px;
+    }
+}
+
+.logoblock {
+    .logo {
+        text-align: center;
+        padding-top: 25px;
+    }
+}
+
+@media screen and (max-width: @brand-logo-width) {
+    .logo img {
+        width: 100%;
+    }
+}

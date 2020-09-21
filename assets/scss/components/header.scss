@@ -1,0 +1,12 @@
+.userbar {
+    background: $secondary-bg;
+
+    &.bg-dark-red {
+        // todo move to common colors
+        background: #b00c0e;
+
+        .userbar-brand {
+            color: white !important;
+        }
+    }
+}

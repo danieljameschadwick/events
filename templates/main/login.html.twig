@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Login
+{% endblock title %}
+{% block body %}
+    <div class="login">
+{#        <form method="post" data-parsley-validate data-parsley-trigger="keyup">#}
+{#            <div>#}
+{#                {% if error %}#}
+{#                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#                {% endif %}#}
+
+{#                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
+{#                <label for="inputUuid" class="sr-only">Username</label>#}
+{#                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus data-parsley-length="[1, 2]">#}
+
+{#                <label for="inputPassword" class="sr-only">Password</label>#}
+{#                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>#}
+
+{#                <input type="hidden" name="_csrf_token"#}
+{#                       value="{{ csrf_token('authenticate') }}"#}
+{#                >#}
+
+{#                <div class="checkbox mb-3">#}
+{#                    <label>#}
+{#                        <input type="checkbox" name="_remember_me"> Remember me#}
+{#                    </label>#}
+{#                </div>#}
+
+{#                <button class="btn btn-lg btn-primary" type="submit">#}
+{#                    Sign in#}
+{#                </button>#}
+{#            </div>#}
+
+{#            <a href="{{ url('app_register') }}">Click here to register.</a>#}
+
+{#        </form>#}
+
+        {{ form_start(form, {'method': 'POST', 'attr': { 'data-parsley-validate': true, 'data-parsley-trigger': 'keyup' }}) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.password) }}
+            {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('login') }}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('parsley') }}
+{% endblock javascripts %}

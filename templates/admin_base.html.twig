@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | ASE
+{% endblock title %}
+
+{% block header %}
+    {% include 'main/admin/ui/userbar.html.twig' %}
+
+    {% include 'includes/ui/logoblock.html.twig' %}
+{% endblock header %}
