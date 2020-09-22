@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Payment\Payment;
 use Payum\Core\Payum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +25,7 @@ class PaymentController extends AbstractController
     {
         $gatewayName = 'offline';
 
-        $storage = $payum->getStorage('App\Entity\Payment\Payment');
-
-        $payment = $storage->create();
+        $payment = Payment::create();
 
 dump($payment);
 die();
