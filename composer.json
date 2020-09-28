@@ -5,7 +5,10 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "payum/offline": "^1.6",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/persistence": "^1.2",
+        "fresh/doctrine-enum-bundle": "^7.1",
+        "payum/payum": "dev-twig3",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
         "ramsey/uuid": "^3.8",
@@ -30,7 +33,7 @@
         "symfony/web-link": "^5.0",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "^5.0",
-        "twig/twig": "^2.0"
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "symfony/debug-pack": "^1.0",
@@ -80,5 +83,11 @@
             "allow-contrib": false,
             "require": "^5.0"
         }
-    }
+    },
+    "repositories": [
+        {
+            "url": "https://github.com/StudioMaX/Payum.git",
+            "type": "git"
+        }
+    ]
 }

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity\Payment;
 
+use App\DTO\PaymentDTO;
 use Doctrine\ORM\Mapping as ORM;
-use Payum\Core\Model\Payment as BasePayment;
+use Payum\Core\Model\ArrayObject;
+
+//use Payum\Core\Model\Payment as BasePayment;
 
 /**
  * todo: May need to implement my own payment bundle that abstracts
@@ -17,7 +20,8 @@ use Payum\Core\Model\Payment as BasePayment;
  * )
  * @ORM\Entity
  */
-class Payment extends BasePayment
+//class Payment extends ArrayObject
+class Payment
 {
     /**
      * @ORM\Column(name="intPaymentId", type="integer")
@@ -26,73 +30,180 @@ class Payment extends BasePayment
      *
      * @var integer $id
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="strReference", type="string")
      */
-    protected $number;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="strDescription", type="string")
-     */
-    protected $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="strEmail", type="string")
-     */
-    protected $clientEmail;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="strClientId", type="string")
-     */
-    protected $clientId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="intCentesimalAmount", type="integer")
-     */
-    protected $totalAmount;
-
-    /**
-     * todo: Convert to an object/use base object
-     *
-     * @var string
-     *
-     * @ORM\Column(name="strClientId", type="string")
-     */
-    protected $currencyCode;
+    private $reference;
 
     /**
      * todo: define what type of array
      *
      * @var array
      */
-    protected $details;
+    private $details;
 
     /**
-     * @return self
+     * @var string
+     *
+     * @ORM\Column(name="strDescription", type="string")
      */
-    public static function create(): self
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="strEmail", type="string")
+     */
+    private $clientEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="strClientId", type="string")
+     */
+    private $clientId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="intCentesimalAmount", type="integer")
+     */
+    private $totalAmount;
+
+    /**
+     * todo: Convert to an object/use base object
+     *
+     * @var string
+     *
+     * @ORM\Column(name="strCurrencyCode", type="string")
+     */
+    private $currencyCode;
+
+    /**
+     * @param string $reference
+     * @param string $description
+     * @param string $clientEmail
+     * @param string $clientId
+     * @param int $totalAmount
+     * @param string $currencyCode
+     * @param array $details
+     */
+    private function __construct(
+        string $reference,
+        string $description,
+        string $clientEmail,
+        string $clientId,
+        int $totalAmount,
+        string $currencyCode,
+        array $details
+    )
     {
-        $instance = new self();
+        $this->reference = $reference;
+        $this->description = $description;
+        $this->clientEmail = $clientEmail;
+        $this->clientId = $clientId;
+        $this->totalAmount = $totalAmount;
+        $this->currencyCode = $currencyCode;
+        $this->details = $details;
+    }
 
-        $instance->setNumber(uniqid('', true));
-        $instance->setCurrencyCode('EUR');
-        $instance->setTotalAmount(123); // 1.23 EUR
-        $instance->setDescription('A description');
-        $instance->setClientId('anId');
-        $instance->setClientEmail('foo@example.com');
+    /**
+     * @param string $reference
+     * @param string $description
+     * @param string $clientId
+     * @param string $clientEmail
+     * @param int $totalAmount
+     * @param string $currencyCode
+     * @param array $details
+     *
+     * @return Payment
+     */
+    public static function create(
+        string $reference,
+        string $description,
+        string $clientId,
+        string $clientEmail,
+        int $totalAmount,
+        string $currencyCode,
+        array $details
+    ): Payment
+    {
+        return new self(
+            $reference,
+            $description,
+            $clientEmail,
+            $clientId,
+            $totalAmount,
+            $currencyCode,
+            $details
+        );
+    }
 
-        return $instance;
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference(): string
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails(): array
+    {
+        return $this->details;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientEmail(): string
+    {
+        return $this->clientEmail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalAmount(): int
+    {
+        return $this->totalAmount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencyCode(): string
+    {
+        return $this->currencyCode;
     }
 }

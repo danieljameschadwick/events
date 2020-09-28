@@ -25,7 +25,18 @@ class PaymentController extends AbstractController
     {
         $gatewayName = 'offline';
 
-        $payment = Payment::create();
+        $payment = Payment::create(
+            'asknanka',
+            'description',
+            '1234',
+            'daniel@chadwk.com',
+            599,
+            'EUR',
+            []
+        );
+
+        $this->getDoctrine()->getManager()->persist($payment);
+        $this->getDoctrine()->getManager()->flush();
 
 dump($payment);
 die();

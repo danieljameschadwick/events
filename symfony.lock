@@ -78,6 +78,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
@@ -88,6 +91,18 @@
         },
         "files": [
             "config/packages/dev/easy_log_handler.yaml"
+        ]
+    },
+    "fresh/doctrine-enum-bundle": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "6.0",
+            "ref": "fab86661c13bc12e4f14f706c86af09912d55bfb"
+        },
+        "files": [
+            "src/DBAL/Types/.gitignore"
         ]
     },
     "guzzlehttp/guzzle": {
@@ -141,9 +156,6 @@
     "payum/iso4217": {
         "version": "1.0.1"
     },
-    "payum/offline": {
-        "version": "1.6.0"
-    },
     "payum/payum-bundle": {
         "version": "2.4",
         "recipe": {
@@ -155,6 +167,9 @@
         "files": [
             "config/packages/payum.yaml"
         ]
+    },
+    "php": {
+        "version": "7.3"
     },
     "php-http/guzzle6-adapter": {
         "version": "v2.0.1"
