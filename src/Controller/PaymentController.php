@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use Payum\Core\Payum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,12 +27,11 @@ class PaymentController extends AbstractController
         $gatewayName = 'offline';
 
         $payment = Payment::create(
-            'asknanka',
             'description',
             '1234',
             'daniel@chadwk.com',
             599,
-            'EUR',
+            CurrencyCode::GBP,
             []
         );
 
