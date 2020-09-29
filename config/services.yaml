@@ -27,5 +27,8 @@ services:
     # Payments
     ##
 
-    App\Classes\Payment\Storage:
-        
+#    payment.offline_gateway_factory:
+#        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+#        arguments: [Acme\Paypal\PaypalGatewayFactory]
+#        tags:
+#            - { name: payum.gateway_factory_builder, factory: paypal }

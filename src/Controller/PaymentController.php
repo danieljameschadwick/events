@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
+use App\Entity\Payment\Token;
 use Payum\Core\Payum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,9 @@ class PaymentController extends AbstractController
             CurrencyCode::GBP,
             []
         );
+
+        $token = new Token();
+dd($token);
 
         $this->getDoctrine()->getManager()->persist($payment);
         $this->getDoctrine()->getManager()->flush();
