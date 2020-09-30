@@ -21,7 +21,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
      */
     public static $config = [
         GatewayConfiguration::OFFLINE => [
-            'gatewayName' => '',
+            'gatewayName' => 'offline',
             'factoryName' => '',
             'username' => '',
             'password' => '',

@@ -10,9 +10,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 //use Payum\Core\Model\Payment as BasePayment;
 
 /**
- * todo: May need to implement my own payment bundle that abstracts
- *  Payum to maintain a cleaner codebase
- *
  * @ORM\Table(
  *     schema="events",
  *     name="tblPayment"
@@ -23,11 +20,11 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 class Payment
 {
     /**
-     * @ORM\Column(name="intPaymentId", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     *
      * @var integer $id
+     *
+     * @ORM\Id
+     * @ORM\Column(name="intPaymentId", type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
