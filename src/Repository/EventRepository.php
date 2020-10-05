@@ -30,7 +30,7 @@ class EventRepository extends ServiceEntityRepository
     /**
      * @param string $hash
      */
-    public function getByHash(string $hash): ?Event
+    public function getOneByHash(string $hash): ?Event
     {
         $qb = $this->getQueryBuilder();
 

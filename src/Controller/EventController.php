@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\DTO\SignUpDTO;
+use App\Entity\Event;
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use App\Entity\Payment\Token;
 use App\Entity\SignUp;
 use App\Form\SignUpFormType;
+use App\Repository\EventRepository;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage;
@@ -36,6 +38,10 @@ class EventController extends AbstractController
             ->getManager()
             ->getRepository(EventRepository::class)
             ->getOneByHash($hash);
+
+        if (!$event instanceof Event) {
+            throw new \InvalidArgumentException('Event not found.');
+        }
 
         $signUpForm = $this->createForm(SignUpFormType::class);
         $signUpForm->handleRequest($request);
