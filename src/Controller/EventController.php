@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\SignUpDTO;
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use App\Entity\Payment\Token;
@@ -23,13 +24,22 @@ class EventController extends AbstractController
     /**
      * @Route(name="event_sign_up", path="/events/{hash}/sign-up")
      *
+     * @param Request $request
      * @param string $hash
      *
      * @return Response
      */
-    public function signUp(string $hash): Response
+    public function signUp(Request $request, string $hash): Response
     {
+
+
         $signUpForm = $this->createForm(SignUpFormType::class);
+        $signUpForm->handleRequest($request);
+
+
+        if ($signUpForm->isSubmitted() && $signUpForm->isValid()) {
+            dd($signUpForm->getData());
+        }
 
         return $this->render(
             'main/events/sign-up.html.twig',

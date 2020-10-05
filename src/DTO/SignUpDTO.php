@@ -37,33 +37,21 @@ class SignUpDTO
     /**
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTimeInterface $signUpDate
-     * @param User|null $user
-     */
-    public function __construct(?string $firstName, ?string $lastName, ?\DateTimeInterface $signUpDate, ?User $user)
-    {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->signUpDate = $signUpDate;
-        $this->user = $user;
-    }
-
-    /**
-     * @param string|null $firstName
-     * @param string|null $lastName
      * @param \DateTimeInterface|null $signUpDate
      * @param User|null $user
-     * 
+     *
      * @return SignUpDTO
      */
     public static function create(?string $firstName, ?string $lastName, ?\DateTimeInterface $signUpDate, ?User $user): SignUpDTO
     {
-        return new self(
-            $firstName,
-            $lastName,
-            $signUpDate,
-            $user
-        );
+        $instance = new self();
+
+        $instance->setFirstName($firstName);
+        $instance->setLastName($lastName);
+        $instance->setSignUpDate($signUpDate);
+        $instance->setUser($user);
+
+        return $instance;
     }
 
     /**
@@ -107,9 +95,9 @@ class SignUpDTO
     }
 
     /**
-     * @param \DateTimeInterface $signUpDate
+     * @param \DateTimeInterface|null $signUpDate
      */
-    public function setSignUpDate(\DateTimeInterface $signUpDate): void
+    public function setSignUpDate(?\DateTimeInterface $signUpDate): void
     {
         $this->signUpDate = $signUpDate;
     }

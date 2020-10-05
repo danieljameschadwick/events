@@ -16,7 +16,12 @@ class SignUp
     /**
      * @var string|null
      */
-    private $name;
+    private $firstName;
+
+    /**
+     * @var string|null
+     */
+    private $lastName;
 
     /**
      * @var \DateTimeInterface
@@ -29,13 +34,15 @@ class SignUp
     private $user;
 
     /**
-     * @param string|null $name
+     * @param string|null $firstName
+     * @param string|null $lastName
      * @param \DateTimeInterface $signUpDate
      * @param User|null $user
      */
-    public function __construct(?string $name, \DateTimeInterface $signUpDate, ?User $user)
+    public function __construct(?string $firstName, ?string $lastName, \DateTimeInterface $signUpDate, ?User $user)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->signUpDate = $signUpDate;
         $this->user = $user;
     }
@@ -48,7 +55,8 @@ class SignUp
     public static function create(SignUpDTO $signUpDTO): SignUp
     {
         return new self(
-            $signUpDTO->getName(),
+            $signUpDTO->getFirstName(),
+            $signUpDTO->getLastName(),
             $signUpDTO->getSignUpDate(),
             $signUpDTO->getUser()
         );
@@ -65,9 +73,33 @@ class SignUp
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->name;
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
     }
 
     /**

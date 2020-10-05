@@ -45,7 +45,7 @@ class SignUpFormType extends AbstractType
                 ]
             )
             ->add(
-                'userType',
+                'user',
                 UserType::class,
                 [
                     'required' => false,
