@@ -7,26 +7,25 @@ DROP TABLE IF EXISTS tblToken;
 
 CREATE TABLE tblPayment
 (
-    intPaymentId INT(10) NOT NULL AUTO_INCREMENT,
+    intPaymentId        INT(10)     NOT NULL AUTO_INCREMENT UNIQUE,
+    strReference        VARCHAR(35) NULL,
+    strDescription      VARCHAR(30) NULL,
+    strEmail            VARCHAR(40) NOT NULL,
+    strClientId         VARCHAR(40) NOT NULL,
+    intCentesimalAmount INT         NOT NULL,
+    strCurrencyCode     VARCHAR(7)  NOT NULL,
     PRIMARY KEY PK_intPaymentId (intPaymentId)
 );
 
 CREATE TABLE tblToken
 (
-    intTokenId     INT(10)      NOT NULL AUTO_INCREMENT,
+    intTokenId     INT(10)      NOT NULL AUTO_INCREMENT UNIQUE,
     strGatewayName VARCHAR(30)  NOT NULL,
     strAfterUrl    VARCHAR(500) NULL,
     strTargetUrl   VARCHAR(500) NULL,
     strHash        VARCHAR(150) NOT NULL,
-    KEY K_intTokenId (intTokenId)
+    PRIMARY KEY PK_intTokenId (intTokenId)
 );
-
-create unique index tblToken_intTokenId_uindex
-    on tblToken (intTokenId);
-
-alter table tblToken
-    add constraint tblToken_pk
-        primary key (intTokenId);
 
 
 

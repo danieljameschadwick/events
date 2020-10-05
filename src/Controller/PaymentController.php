@@ -7,6 +7,9 @@ namespace App\Controller;
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use App\Entity\Payment\Token;
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager;
+use Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage;
 use Payum\Core\Payum;
 use Payum\Core\Request\GetHumanStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,13 +48,16 @@ class PaymentController extends AbstractController
 //        $this->getDoctrine()->getManager()->persist($payment);
 //        $this->getDoctrine()->getManager()->flush();
 
-        $captureToken = $payum->getTokenFactory()->createCaptureToken(
-            $gatewayName,
-            $payment,
-            'payment_complete'
-        );
+//        $captureToken = $payum->getTokenFactory()->createCaptureToken(
+//            $gatewayName,
+//            $payment,
+//            'payment_complete'
+//        );
 
-dd($captureToken);
+        $tokenStorage = new DoctrineStorage(
+            $this->getDoctrine()->getManager(),
+            Payment::class
+        );
 
         return $this->redirect($captureToken->getTargetUrl());
     }

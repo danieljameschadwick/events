@@ -5,8 +5,8 @@ payum:
 
     storages:
         App\Entity\Payment\Payment:
-#            doctrine: orm
-            custom: App\Classes\Payment\Storage
+            doctrine: orm
+#            custom: App\Classes\Payment\Storage
 
     gateways:
         offline:

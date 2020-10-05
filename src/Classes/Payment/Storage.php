@@ -87,6 +87,7 @@ class Storage implements StorageInterface
     public function update($model)
     {
         // TODO: Implement update() method.
+dd($model);
     }
 
     public function delete($model)
