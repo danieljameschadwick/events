@@ -5,42 +5,74 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\DTO\SignUpDTO;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Table(
+ *     schema="events",
+ *     name="tblSignUp"
+ * )
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\SignUpRepository")
+ */
 class SignUp
 {
     /**
      * @var int
+     *
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="intSignUpId", type="integer", length=20)
      */
     private $id;
 
     /**
+     * @var Event
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="signUps")
+     * @ORM\JoinColumn(name="intEventId", referencedColumnName="intEventId")
+     */
+    private $event;
+
+    /**
      * @var string|null
+     *
+     * @ORM\Column(name="strFirstName", type="string", length=40, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string|null
+     *
+     * @ORM\Column(name="strLastName", type="string", length=40, nullable=true)
      */
     private $lastName;
 
     /**
      * @var \DateTimeInterface
+     *
+     * @ORM\Column(name="dtmSignUpDate", type="datetime")
      */
     private $signUpDate;
 
     /**
      * @var User|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="signUps")
+     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strUuid", nullable=true)
      */
     private $user;
 
     /**
+     * @param Event $event
      * @param string|null $firstName
      * @param string|null $lastName
      * @param \DateTimeInterface $signUpDate
      * @param User|null $user
      */
-    public function __construct(?string $firstName, ?string $lastName, \DateTimeInterface $signUpDate, ?User $user)
+    public function __construct(Event $event, ?string $firstName, ?string $lastName, \DateTimeInterface $signUpDate, ?User $user)
     {
+        $this->event = $event;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->signUpDate = $signUpDate;
@@ -55,6 +87,7 @@ class SignUp
     public static function create(SignUpDTO $signUpDTO): SignUp
     {
         return new self(
+            $signUpDTO->getEvent(),
             $signUpDTO->getFirstName(),
             $signUpDTO->getLastName(),
             $signUpDTO->getSignUpDate(),
@@ -68,6 +101,14 @@ class SignUp
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Event
+     */
+    public function getEvent(): Event
+    {
+        return $this->event;
     }
 
     /**

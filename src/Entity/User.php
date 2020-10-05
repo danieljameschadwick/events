@@ -63,7 +63,24 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var Event[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="organiser")
+     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strOrangisedUuid")
+     */
+    private $events;
+
+    /**
+     * @var SignUp[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\SignUp", mappedBy="user")
+     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strUuid")
+     */
+    private $signUps;
+
+    /**
      * User constructor.
+     *
      * @param string $username
      * @param string $email
      * @param string $password
@@ -75,6 +92,8 @@ class User implements UserInterface
         $this->password = $password;
 
         $this->roles = [];
+        $this->events = new ArrayCollection();
+        $this->signUps = new ArrayCollection();
     }
 
     /**
@@ -147,6 +166,14 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return Event[]|ArrayCollection
+     */
+    public function getEvents(): array
+    {
+        return $this->events;
     }
 
     /**

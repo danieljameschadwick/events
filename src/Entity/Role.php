@@ -23,8 +23,8 @@ class Role
      * @var integer|null
      *
      * @ORM\Id()
-     * @ORM\Column(name="intId", type="integer", length=20, unique=true)
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="intId", type="integer", length=20, unique=true)
      */
     private $id;
 

@@ -8,6 +8,7 @@ use App\DTO\SignUpDTO;
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use App\Entity\Payment\Token;
+use App\Entity\SignUp;
 use App\Form\SignUpFormType;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
@@ -31,14 +32,23 @@ class EventController extends AbstractController
      */
     public function signUp(Request $request, string $hash): Response
     {
-
+        $event = $this->getDoctrine()
+            ->getManager()
+            ->getRepository(EventRepository::class)
+            ->getOneByHash($hash);
 
         $signUpForm = $this->createForm(SignUpFormType::class);
         $signUpForm->handleRequest($request);
 
 
         if ($signUpForm->isSubmitted() && $signUpForm->isValid()) {
-            dd($signUpForm->getData());
+            $signUpDTO = $signUpForm->getData();
+            $signUp = SignUp::create($signUpDTO);
+
+            dd($signUp);
+
+            $this->getDoctrine()->getManager()->persist($signUp);
+//            $this->getDoctrine()->getManager()->flush();
         }
 
         return $this->render(

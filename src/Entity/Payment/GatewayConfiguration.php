@@ -7,10 +7,10 @@ namespace App\Entity\Payment;
 use Doctrine\ORM\Mapping as ORM;
 use Payum\Core\Model\GatewayConfig as BaseGatewayConfiguration;
 
-/**
- * @ORM\Table(schema="events.tblGatewayConfiguration")
- * @ORM\Entity()
- */
+///**
+// * @ORM\Table(schema="events.tblGatewayConfiguration")
+// * @ORM\Entity()
+// */
 class GatewayConfiguration extends BaseGatewayConfiguration
 {
     public const PAYPAL = 'PAYPAL';
@@ -19,7 +19,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
     /**
      * @var array[]
      */
-    public static $config = [
+    public $config = [
         GatewayConfiguration::OFFLINE => [
             'gatewayName' => 'offline',
             'factoryName' => '',
