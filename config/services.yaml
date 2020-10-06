@@ -32,3 +32,8 @@ services:
 #        arguments: [Acme\Paypal\PaypalGatewayFactory]
 #        tags:
 #            - { name: payum.gateway_factory_builder, factory: paypal }
+
+    App\Form\EventFormType:
+        arguments:
+            - '@security.helper'
+            - '@session'

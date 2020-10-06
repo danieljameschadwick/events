@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\DTO\UserDTO;
 use App\Entity\User;
+use App\Form\Type\UuidType;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -13,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class UserDataType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -42,10 +44,6 @@ class UserType extends AbstractType
                     return $uuid;
                 },
                 function ($uuidString) {
-                    if (null === $uuidString) {
-                        return null;
-                    }
-
                     return Uuid::fromString($uuidString);
                 }
             ));
@@ -57,7 +55,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-//            'data_class' => User::class, // todo: think of approach to the User problem
+            'data_class' => UserDTO::class
         ]);
     }
 }

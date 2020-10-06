@@ -59,7 +59,7 @@ class SignUp
      * @var User|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="signUps")
-     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strUuid", nullable=true)
+     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid", nullable=true)
      */
     private $user;
 

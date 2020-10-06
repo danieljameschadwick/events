@@ -22,8 +22,8 @@ class Payment
     /**
      * @var integer $id
      *
-     * @ORM\Id
      * @ORM\Column(name="intPaymentId", type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;

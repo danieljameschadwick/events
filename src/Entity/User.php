@@ -7,6 +7,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -26,11 +27,12 @@ use Ramsey\Uuid\Uuid;
 class User implements UserInterface
 {
     /**
-     * @var string|null
+     * @var UuidInterface|null
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(name="strUuid", type="guid", length=40, unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     * @ORM\Column(name="strUuid", type="uuid", length=40, unique=true)
      */
     private $uuid;
 
@@ -66,7 +68,7 @@ class User implements UserInterface
      * @var Event[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="organiser")
-     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strOrangisedUuid")
+     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strOrangisedUuid")
      */
     private $events;
 
@@ -74,7 +76,7 @@ class User implements UserInterface
      * @var SignUp[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SignUp", mappedBy="user")
-     * @ORM\JoinColumn(columnDefinition="strUuid", referencedColumnName="strUuid")
+     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid")
      */
     private $signUps;
 
@@ -125,9 +127,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @return UuidInterface|null
      */
-    public function getUuid(): ?string
+    public function getUuid(): ?UuidInterface
     {
         return $this->uuid;
     }

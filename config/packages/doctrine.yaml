@@ -10,6 +10,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             currencyCode: App\Entity\Payment\CurrencyCode
+            uuid: Ramsey\Uuid\Doctrine\UuidType
 
     orm:
         auto_generate_proxy_classes: true

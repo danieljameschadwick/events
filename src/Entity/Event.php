@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\DTO\UserDTO;
 use Doctrine\ORM\Mapping as ORM;
 use App\DTO\EventDTO;
 use App\DTO\SignUpDTO;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Table(
@@ -30,6 +32,15 @@ class Event
     private $id;
 
     /**
+     * @var UuidInterface|null
+     *
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     * @ORM\Column(name="strUuid", type="uuid", length=24, unique=true)
+     */
+    private $hash;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="strName", type="string", length=120)
@@ -37,38 +48,39 @@ class Event
     private $name;
 
     /**
-     * @var string|null
-     *
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(name="strUuid", type="guid", length=24, unique=true)
-     */
-    private $hash;
-
-    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
-     * @ORM\JoinColumn(columnDefinition="strOrganisedUuid", referencedColumnName="strUuid")
+     * @ORM\JoinColumn(name="strOrganisedUuid", referencedColumnName="strUuid")
      */
     private $organiser;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dtmDateTime", type="datetime")
+     */
+    private $dateTime;
 
     /**
      * @var SignUp[]|Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\SignUp", mappedBy="event")
-     * @ORM\JoinColumn(columnDefinition="intEventId", referencedColumnName="intEventId")
+     * @ORM\JoinColumn(name="intEventId", referencedColumnName="intEventId")
      */
     private $signUps;
 
     /**
      * @param string $name
      * @param User $organiser
+     * @param \DateTime $dateTime
      * @param SignUpDTO[] $signUpDTOs
      */
-    private function __construct(string $name, User $organiser, array $signUpDTOs)
+    private function __construct(string $name, User $organiser, \DateTime $dateTime, array $signUpDTOs)
     {
         $this->name = $name;
         $this->organiser = $organiser;
+        $this->dateTime = $dateTime;
         $this->signUps = new ArrayCollection();
 
         foreach ($signUpDTOs as $signUpDTO) {
@@ -76,7 +88,6 @@ class Event
 
             $this->signUps->add(SignUp::create($signUpDTO));
         }
-
     }
 
     /**
@@ -84,11 +95,12 @@ class Event
      *
      * @return Event
      */
-    public function create(EventDTO $eventDTO): self
+    public static function create(EventDTO $eventDTO): self
     {
         return new self(
             $eventDTO->getName(),
             $eventDTO->getOrganiser(),
+            $eventDTO->getDateTime(),
             $eventDTO->getSignUpDTOs()
         );
     }
@@ -110,9 +122,9 @@ class Event
     }
 
     /**
-     * @return string
+     * @return UuidInterface|null
      */
-    public function getHash(): string
+    public function getHash(): ?UuidInterface
     {
         return $this->hash;
     }
@@ -123,6 +135,14 @@ class Event
     public function getOrganiser(): User
     {
         return $this->organiser;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateTime(): \DateTime
+    {
+        return $this->dateTime;
     }
 
     /**

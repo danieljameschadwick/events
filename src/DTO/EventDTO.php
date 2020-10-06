@@ -19,6 +19,11 @@ class EventDTO
     private $organiser;
 
     /**
+     * @var \DateTime|null
+     */
+    private $dateTime;
+
+    /**
      * @var SignUpDTO[]
      */
     private $signUpDTOs;
@@ -26,27 +31,31 @@ class EventDTO
     /**
      * @param string|null $name
      * @param User|null $organiser
+     * @param \DateTime|null $dateTime
      * @param SignUpDTO[] $signUpDTOs
      */
-    public function __construct(?string $name, ?User $organiser, array $signUpDTOs = [])
+    public function __construct(?string $name = null, ?User $organiser = null, ?\DateTime $dateTime = null, array $signUpDTOs = [])
     {
         $this->name = $name;
         $this->organiser = $organiser;
+        $this->dateTime = $dateTime;
         $this->signUpDTOs = $signUpDTOs;
     }
 
     /**
      * @param string|null $name
      * @param User|null $organiser
+     * @param \DateTime|null $dateTime
      * @param SignUpDTO[] $signUpDTOs
      *
      * @return EventDTO
      */
-    public static function create(?string $name, ?User $organiser, array $signUpDTOs = []): EventDTO
+    public static function create(?string $name = null, ?User $organiser = null, ?\DateTime $dateTime = null, array $signUpDTOs = []): EventDTO
     {
         return new self(
             $name,
             $organiser,
+            $dateTime,
             $signUpDTOs
         );
     }
@@ -81,6 +90,22 @@ class EventDTO
     public function setOrganiser(User $organiser): void
     {
         $this->organiser = $organiser;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateTime(): ?\DateTime
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setDateTime(\DateTime $dateTime): void
+    {
+        $this->dateTime = $dateTime;
     }
 
     /**

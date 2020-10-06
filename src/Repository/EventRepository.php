@@ -7,8 +7,8 @@ namespace App\Repository;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
-
 
 class EventRepository extends ServiceEntityRepository
 {
@@ -22,19 +22,25 @@ class EventRepository extends ServiceEntityRepository
      */
     private function getQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('event')
-            ->addSelect('event')
-            ->from(Event::class, 'event');
+        return $this->createQueryBuilder('event');
     }
 
     /**
      * @param string $hash
+     *
+     * @return Event|null
+     *
+     * @throws NonUniqueResultException
      */
     public function getOneByHash(string $hash): ?Event
     {
         $qb = $this->getQueryBuilder();
+        $eb = $qb->expr();
 
-        return $qb->andWhere('event.hash', ':hash')
+        return $qb
+            ->andWhere(
+                $eb->eq('event.hash', ':hash')
+            )
             ->setParameters([
                 'hash' => $hash,
             ])

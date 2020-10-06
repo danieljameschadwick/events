@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DTO;
 
 use App\Entity\User;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
-class UserDTO {
+class UserDTO
+{
     /**
-     * @var Uuid|null
+     * @var UuidInterface|null
      */
     private $uuid;
 
@@ -32,6 +36,39 @@ class UserDTO {
     private $roles;
 
     /**
+     * UserDTO constructor.
+     * @param string|null $uuid
+     * @param string|null $username
+     * @param string|null $email
+     * @param string|null $password
+     * @param array|null $roles
+     */
+    public function __construct(?UuidInterface $uuid = null, ?string $username = null, ?string $email = null, ?string $password = null, array $roles = [])
+    {
+        $this->uuid = $uuid;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->roles = $roles;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return UserDTO
+     */
+    public static function create(User $user): self
+    {
+        return new self(
+            $user->getUuid(),
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPassword(),
+            $user->getRoles()
+        );
+    }
+
+    /**
      * @param User $user
      */
     public function populate(User $user): void
@@ -44,17 +81,17 @@ class UserDTO {
     }
 
     /**
-     * @return Uuid|null
+     * @return UuidInterface|null
      */
-    public function getUuid(): ?Uuid
+    public function getUuid(): ?UuidInterface
     {
         return $this->uuid;
     }
 
     /**
-     * @param string|null $uuid
+     * @param UuidInterface|null $uuid
      */
-    public function setUuid(?string $uuid): void
+    public function setUuid(?UuidInterface $uuid): void
     {
         $this->uuid = $uuid;
     }
