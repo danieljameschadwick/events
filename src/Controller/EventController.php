@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\SignUpDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
 use App\Form\EventFormType;
@@ -11,15 +12,16 @@ use App\Form\SignUpFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventController extends AbstractController
 {
     /**
-     * @Route(name="event_view", path="/events/{hash}/{?name}")
+     * @Route(name="event_view", path="/events/{hash}/{name?}")
      *
      * @param string $hash
-     * @param string $name
+     * @param string|null $name
      *
      * @return Response
      */
@@ -64,7 +66,6 @@ class EventController extends AbstractController
             $eventDTO = $form->getData();
             $event = Event::create($eventDTO);
 
-dd($event);
             $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 
@@ -83,14 +84,15 @@ dd($event);
     }
 
     /**
-     * @Route(name="event_sign_up", path="/events/{hash}/sign-up")
+     * @Route(name="event_sign_up", priority=100, path="/events/sign-up/{hash}")
      *
      * @param Request $request
+     * @param Session $session
      * @param string $hash
      *
      * @return Response
      */
-    public function signUp(Request $request, string $hash): Response
+    public function signUp(Request $request, Session $session, string $hash): Response
     {
         $event = $this->getDoctrine()
             ->getRepository(Event::class)
@@ -100,18 +102,23 @@ dd($event);
             throw new \InvalidArgumentException('Event not found.');
         }
 
-        $signUpForm = $this->createForm(SignUpFormType::class);
+        $signUpDTO = SignUpDTO::create($event);
+
+        $signUpForm = $this->createForm(SignUpFormType::class, $signUpDTO);
         $signUpForm->handleRequest($request);
 
         if ($signUpForm->isSubmitted() && $signUpForm->isValid()) {
             $signUpDTO = $signUpForm->getData();
-
             $signUp = SignUp::create($signUpDTO);
 
-            dd($signUp);
-
             $this->getDoctrine()->getManager()->persist($signUp);
-//            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager()->flush();
+
+            $session->set('event_sign_up', $signUp);
+
+            return $this->redirectToRoute('event_sign_up_confirmation', [
+                'hash' => $event->getHash(),
+            ]);
         }
 
         return $this->render(
@@ -122,8 +129,22 @@ dd($event);
         );
     }
 
-    public function confirmation(): Response
+    /**
+     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{hash}/confirmation")
+     *
+     * @param Request $request
+     * @param Session $session
+     *
+     * @return Response
+     */
+    public function confirmation(Request $request, Session $session): Response
     {
-        die();
+        /** @var SignUp $signUp */
+        $signUp = $session->get('event_sign_up');
+
+        return $this->render('main/events/confirmation.html.twig', [
+            'signUp' => $signUp,
+            'event' => $signUp->getEvent(),
+        ]);
     }
 }

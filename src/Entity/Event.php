@@ -10,6 +10,7 @@ use App\DTO\EventDTO;
 use App\DTO\SignUpDTO;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -34,9 +35,7 @@ class Event
     /**
      * @var UuidInterface|null
      *
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     * @ORM\Column(name="strUuid", type="uuid", length=24, unique=true)
+     * @ORM\Column(name="strUuid", type="uuid", length=40, unique=true)
      */
     private $hash;
 
@@ -75,9 +74,12 @@ class Event
      * @param User $organiser
      * @param \DateTime $dateTime
      * @param SignUpDTO[] $signUpDTOs
+     *
+     * @throws \Exception
      */
     private function __construct(string $name, User $organiser, \DateTime $dateTime, array $signUpDTOs)
     {
+        $this->hash = Uuid::uuid4();
         $this->name = $name;
         $this->organiser = $organiser;
         $this->dateTime = $dateTime;
@@ -151,5 +153,13 @@ class Event
     public function getSignUps(): array
     {
         return $this->signUps;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return sprintf('%s: %d', get_class($this), $this->getId());
     }
 }

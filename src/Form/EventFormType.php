@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\DTO\EventDTO;
 use App\DTO\UserDTO;
+use App\Entity\Event;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -82,6 +83,9 @@ class EventFormType extends AbstractType
             );
     }
 
+    /**
+     * @param FormEvent $formEvent
+     */
     public function setUser(FormEvent $formEvent): void
     {
         $user = $this->security->getUser();
@@ -94,11 +98,16 @@ class EventFormType extends AbstractType
             throw new \InvalidArgumentException('User not found.');
         }
 
-        $eventDTO = EventDTO::create();
+        /** @var Event $event */
+        $event = $formEvent->getData();
+
+        $eventDTO = EventDTO::create(
+            $event->getName(),
+            $event->getOrganiser(),
+            $event->getDateTime()
+        );
+
         $eventDTO->setOrganiser($user);
-
-dump($eventDTO);
-
         $formEvent->setData($eventDTO);
     }
 
