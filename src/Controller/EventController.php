@@ -108,6 +108,8 @@ class EventController extends AbstractController
         $signUpForm->handleRequest($request);
 
         if ($signUpForm->isSubmitted() && $signUpForm->isValid()) {
+            $session->set('event_sign_up', null);
+
             $signUpDTO = $signUpForm->getData();
             $signUp = SignUp::create($signUpDTO);
 

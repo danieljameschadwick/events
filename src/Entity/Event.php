@@ -55,11 +55,18 @@ class Event
     private $organiser;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
-     * @ORM\Column(name="dtmDateTime", type="datetime")
+     * @ORM\Column(name="dtmStartDateTime", type="datetime", nullable=true)
      */
-    private $dateTime;
+    private $startDateTime;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="dtmEndDateTime", type="datetime", nullable=true)
+     */
+    private $endDateTime;
 
     /**
      * @var SignUp[]|Collection
@@ -72,17 +79,25 @@ class Event
     /**
      * @param string $name
      * @param User $organiser
-     * @param \DateTime $dateTime
+     * @param \DateTime $startDateTime
+     * @param \DateTime|null $endDateTime
      * @param SignUpDTO[] $signUpDTOs
      *
      * @throws \Exception
      */
-    private function __construct(string $name, User $organiser, \DateTime $dateTime, array $signUpDTOs)
+    private function __construct(
+        string $name,
+        User $organiser,
+        ?\DateTime $startDateTime = null,
+        ?\DateTime $endDateTime = null,
+        array $signUpDTOs = []
+    )
     {
         $this->hash = Uuid::uuid4();
         $this->name = $name;
         $this->organiser = $organiser;
-        $this->dateTime = $dateTime;
+        $this->startDateTime = $startDateTime;
+        $this->endDateTime = $endDateTime;
         $this->signUps = new ArrayCollection();
 
         foreach ($signUpDTOs as $signUpDTO) {
@@ -102,7 +117,8 @@ class Event
         return new self(
             $eventDTO->getName(),
             $eventDTO->getOrganiser(),
-            $eventDTO->getDateTime(),
+            $eventDTO->getStartDateTime(),
+            $eventDTO->getEndDateTime(),
             $eventDTO->getSignUpDTOs()
         );
     }
@@ -142,9 +158,17 @@ class Event
     /**
      * @return \DateTime
      */
-    public function getDateTime(): \DateTime
+    public function getStartDateTime(): \DateTime
     {
-        return $this->dateTime;
+        return $this->startDateTime;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getEndDateTime(): ?\DateTime
+    {
+        return $this->endDateTime;
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\GuidType;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
@@ -159,7 +160,9 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        return array_unique(array_merge(['ROLE_USER'], $this->roles));
+        return array_unique(
+            array_merge(['ROLE_USER'], $this->roles)
+        );
     }
 
     /**
@@ -173,13 +176,13 @@ class User implements UserInterface
     /**
      * @return Event[]|ArrayCollection
      */
-    public function getEvents(): array
+    public function getEvents(): Collection
     {
         return $this->events;
     }
 
     /**
-     *
+     * @return void
      */
     public function resetRoles(): void
     {

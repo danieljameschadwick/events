@@ -11,7 +11,23 @@
         {% endif %}
 
         <div class="row">
-
+            <div class="col-12">
+                <h2>Your events</h2>
+            </div>
+            <div class="col-6">
+                {% for event in app.user.events %}
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                <a href="{{ path('event_view', {'hash': event.hash}) }}">{{ event.name }}</a>,
+                                {{ event.startDateTime|date('d/m/Y H:i:s') }} - {{ event.endDateTime|date('H:i:s') }}
+                            </p>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>You haven't signed up for any events yet. Consider looking <a>here</a>.</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock body %}

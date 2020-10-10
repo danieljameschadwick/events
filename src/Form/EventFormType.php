@@ -104,7 +104,7 @@ class EventFormType extends AbstractType
         $eventDTO = EventDTO::create(
             $event->getName(),
             $event->getOrganiser(),
-            $event->getDateTime()
+            $event->getStartDateTime()
         );
 
         $eventDTO->setOrganiser($user);

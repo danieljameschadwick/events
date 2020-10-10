@@ -21,7 +21,12 @@ class EventDTO
     /**
      * @var \DateTime|null
      */
-    private $dateTime;
+    private $startDateTime;
+
+    /**
+     * @var \DateTime|null
+     */
+    private $endDateTime;
 
     /**
      * @var SignUpDTO[]
@@ -31,31 +36,47 @@ class EventDTO
     /**
      * @param string|null $name
      * @param User|null $organiser
-     * @param \DateTime|null $dateTime
+     * @param \DateTime|null $startDateTime
+     * @param \DateTime|null $endDateTime
      * @param SignUpDTO[] $signUpDTOs
      */
-    public function __construct(?string $name = null, ?User $organiser = null, ?\DateTime $dateTime = null, array $signUpDTOs = [])
+    public function __construct(
+        ?string $name = null,
+        ?User $organiser = null,
+        ?\DateTime $startDateTime = null,
+        ?\DateTime $endDateTime = null,
+        array $signUpDTOs = []
+    )
     {
         $this->name = $name;
         $this->organiser = $organiser;
-        $this->dateTime = $dateTime;
+        $this->startDateTime = $startDateTime;
+        $this->endDateTime = $endDateTime;
         $this->signUpDTOs = $signUpDTOs;
     }
 
     /**
      * @param string|null $name
      * @param User|null $organiser
-     * @param \DateTime|null $dateTime
+     * @param \DateTime|null $startDateTime
+     * @param \DateTime|null $endDateTime
      * @param SignUpDTO[] $signUpDTOs
      *
      * @return EventDTO
      */
-    public static function create(?string $name = null, ?User $organiser = null, ?\DateTime $dateTime = null, array $signUpDTOs = []): EventDTO
+    public static function create(
+        ?string $name = null,
+        ?User $organiser = null,
+        ?\DateTime $startDateTime = null,
+        ?\DateTime $endDateTime = null,
+        array $signUpDTOs = []
+    ): EventDTO
     {
         return new self(
             $name,
             $organiser,
-            $dateTime,
+            $startDateTime,
+            $endDateTime,
             $signUpDTOs
         );
     }
@@ -95,17 +116,33 @@ class EventDTO
     /**
      * @return \DateTime|null
      */
-    public function getDateTime(): ?\DateTime
+    public function getStartDateTime(): ?\DateTime
     {
-        return $this->dateTime;
+        return $this->startDateTime;
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTime|null $startDateTime
      */
-    public function setDateTime(\DateTime $dateTime): void
+    public function setStartDateTime(?\DateTime $startDateTime): void
     {
-        $this->dateTime = $dateTime;
+        $this->startDateTime = $startDateTime;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getEndDateTime(): ?\DateTime
+    {
+        return $this->endDateTime;
+    }
+
+    /**
+     * @param \DateTime|null $endDateTime
+     */
+    public function setEndDateTime(?\DateTime $endDateTime): void
+    {
+        $this->endDateTime = $endDateTime;
     }
 
     /**
