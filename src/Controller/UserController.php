@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\DTO\UserDTO;
@@ -18,30 +20,36 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController {
     /**
-     * @Route(name="home", path="/{user}")
+     * @Route(name="view", path="/{userName?}")
      *
-     * @param string|null $user
+     * @param string|null $userName
      *
      * @return Response
      */
-    public function indexAction(?string $user = null): Response
+    public function view(?string $userName = null): Response
     {
-        dump($this->getUser()->getRoles());
-
         $settingsForm = null;
+        $user = null;
+        $currentUser = $this->getUser();
 
-        $userDTO = new UserDTO();
-        $userDTO->populate($this->getUser());
-
-        if (null === $user) {
-            $user = $this->getUser()->getUsername();
+        if (
+            !$userName
+            || $currentUser->getUserName() === $userName
+        ) {
+            $user = $currentUser;
         }
 
-        $settingsForm = $this->createForm(UserSettingFormType::class, $userDTO)
+        if (!$user instanceof User) {
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->getOneByUserName($userName);
+        }
+
+        $settingsForm = $this->createForm(UserSettingFormType::class, UserDTO::create($user))
             ->createView();
 
         return $this->render(
-            'main/profile/index.html.twig',
+            'main/profile/view.html.twig',
             [
                 'navigation' => NavigationEnumerator::$navigation,
                 'user' => $user,

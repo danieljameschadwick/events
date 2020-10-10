@@ -19,6 +19,11 @@ class EventDTO
     private $organiser;
 
     /**
+     * @var string|null
+     */
+    private $description;
+
+    /**
      * @var \DateTime|null
      */
     private $startDateTime;
@@ -36,6 +41,7 @@ class EventDTO
     /**
      * @param string|null $name
      * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
      * @param SignUpDTO[] $signUpDTOs
@@ -43,6 +49,7 @@ class EventDTO
     public function __construct(
         ?string $name = null,
         ?User $organiser = null,
+        ?string $description = null,
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
@@ -50,6 +57,7 @@ class EventDTO
     {
         $this->name = $name;
         $this->organiser = $organiser;
+        $this->description = $description;
         $this->startDateTime = $startDateTime;
         $this->endDateTime = $endDateTime;
         $this->signUpDTOs = $signUpDTOs;
@@ -58,6 +66,7 @@ class EventDTO
     /**
      * @param string|null $name
      * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
      * @param SignUpDTO[] $signUpDTOs
@@ -67,6 +76,7 @@ class EventDTO
     public static function create(
         ?string $name = null,
         ?User $organiser = null,
+        ?string $description = null,
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
@@ -75,6 +85,7 @@ class EventDTO
         return new self(
             $name,
             $organiser,
+            $description,
             $startDateTime,
             $endDateTime,
             $signUpDTOs
@@ -95,6 +106,22 @@ class EventDTO
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     /**

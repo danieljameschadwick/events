@@ -47,6 +47,13 @@ class Event
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="strDescription", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
@@ -79,15 +86,15 @@ class Event
     /**
      * @param string $name
      * @param User $organiser
-     * @param \DateTime $startDateTime
+     * @param string|null $description
+     * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[] $signUpDTOs
-     *
-     * @throws \Exception
+     * @param array $signUpDTOs
      */
     private function __construct(
         string $name,
         User $organiser,
+        ?string $description = null,
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
@@ -96,6 +103,7 @@ class Event
         $this->hash = Uuid::uuid4();
         $this->name = $name;
         $this->organiser = $organiser;
+        $this->description = $description;
         $this->startDateTime = $startDateTime;
         $this->endDateTime = $endDateTime;
         $this->signUps = new ArrayCollection();
@@ -117,6 +125,7 @@ class Event
         return new self(
             $eventDTO->getName(),
             $eventDTO->getOrganiser(),
+            $eventDTO->getDescription(),
             $eventDTO->getStartDateTime(),
             $eventDTO->getEndDateTime(),
             $eventDTO->getSignUpDTOs()
@@ -137,6 +146,14 @@ class Event
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**

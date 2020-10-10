@@ -4,15 +4,52 @@
     {{ parent() }} - Events - {{ event.name }}
 {% endblock title %}
 
+{% set canEdit = event.organiser.uuid is same as(app.user.uuid) %}
+
 {% block body %}
     <div class="container">
-        <div class="row">
+        <div class="row text-center mb-4">
             <div class="col-12">
                 <h3>{{ event.name }}</h3>
             </div>
 
             <div class="col-12">
                 {{ event.startDateTime|date('d-m-Y') }} - {{ event.endDateTime|date('H:i:s') }}
+            </div>
+
+            <div class="col-12">
+                Organised by:
+                <a href="{{ url('app_user_view', {'userName': event.organiser.username}) }}">
+                    <span class="text--bold">{{ event.organiser.name }}</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-sm-{{ canEdit ? 6 : 12 }} mb-3">
+                        <h4>Description</h4>
+                        {{ event.description }}
+                    </div>
+
+                    {% if canEdit %}
+                        <div class="col-12 col-sm-6 mb-3">
+                            <h4>Manage</h4>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-12">
+                <h4>Sign Ups</h4>
+                {% for signUp in event.signUps %}
+                    <div class="row">
+                        <div class="col-12">
+                            {{ signUp.name }}, {{ signUp.signUpDate|date('d-m-Y H:i:s') }}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

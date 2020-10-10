@@ -69,6 +69,33 @@ class EventController extends AbstractController
     }
 
     /**
+     * @Route(name="event_view_new", path="/events/{id}/{name}", priority="100")
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function view_new(int $id): Response
+    {
+        $event = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->getOneById($id);
+
+        if (!$event instanceof Event) {
+            throw new \InvalidArgumentException(
+                sprintf('Event %s not found', $id)
+            );
+        }
+
+        return $this->render(
+            'main/events/view.html.twig',
+            [
+                'event' => $event,
+            ]
+        );
+    }
+
+    /**
      * @Route(name="event_create", path="/events/create")
      *
      * @param Request $request

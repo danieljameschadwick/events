@@ -45,6 +45,25 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="strFirstName", type="string", length=80, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="strLastName", type="string", length=120, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @var bool
+     */
+    private $useRealName = true;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="strEmail", type="string", length=80, unique=true)
@@ -150,6 +169,57 @@ class User implements UserInterface
     /**
      * @return string
      */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    private function getFullName(): string
+    {
+        return sprintf(
+            '%s %s',
+            $this->getFirstName(),
+            $this->getLastName()
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        if (
+            $this->firstName && $this->lastName
+            && $this->prefersRealName()
+        ) {
+            return $this->getFullName();
+        }
+
+        return $this->getUsername();
+    }
+
+    /**
+     * @return bool
+     */
+    public function prefersRealName(): bool
+    {
+        return $this->useRealName;
+    }
+
+    /**
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
@@ -203,6 +273,14 @@ class User implements UserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return SignUp[]|ArrayCollection
+     */
+    public function getSignUps()
+    {
+        return $this->signUps;
     }
 
     /**

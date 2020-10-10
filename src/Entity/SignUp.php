@@ -120,14 +120,6 @@ class SignUp
     }
 
     /**
-     * @param string $firstName
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
      * @return string|null
      */
     public function getLastName(): ?string
@@ -136,11 +128,23 @@ class SignUp
     }
 
     /**
-     * @param string $lastName
+     * @return string
      */
-    public function setLastName(string $lastName): void
+    public function getName(): string
     {
-        $this->lastName = $lastName;
+        if ($this->getUser() instanceof User) {
+            return sprintf(
+                '%s %s',
+                $this->getUser()->getFirstName(),
+                $this->getUser()->getLastName()
+            );
+        }
+
+        return sprintf(
+            '%s %s',
+            $this->getFirstName(),
+            $this->getLastName()
+        );
     }
 
     /**

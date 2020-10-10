@@ -64,4 +64,25 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @param int $id
+     *
+     * @return Event|null
+     */
+    public function getOneById(int $id): ?Event
+    {
+        $qb = $this->getQueryBuilder();
+        $eb = $qb->expr();
+
+        return $qb
+            ->andWhere(
+                $eb->eq('event.id', ':id')
+            )
+            ->setParameters([
+                'id' => $id,
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
