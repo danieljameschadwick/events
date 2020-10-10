@@ -4,10 +4,17 @@
     {{ parent() }} - Events - {{ event.name }}
 {% endblock title %}
 
+{% set confirmationMessage =
+    (repeatSignUp
+        ? 'you\'ve already signed up to'
+        : 'you\'re all signed up to'
+    )
+%}
+
 {% block body %}
     <div class="container">
         <div class="row">
-            {{ signUp.firstName ~ ' ' ~ signUp.lastName }}, you're all signed up to {{ event.name }}.
+            {{ signUp.firstName ~ ' ' ~ signUp.lastName }}, {{ confirmationMessage }} {{ event.name }}.
         </div>
     </div>
 {% endblock body %}

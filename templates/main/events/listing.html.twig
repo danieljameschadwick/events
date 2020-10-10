@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Events
+{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Events</h2>
+            </div>
+
+            <div class="col-12">
+                {% for event in events %}
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                {{ event.name }},
+                                <a href="{{ path('event_view', {'hash': event.hash}) }}">View</a>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

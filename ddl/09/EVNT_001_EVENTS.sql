@@ -11,7 +11,8 @@ CREATE TABLE tblEvent
     strName          VARCHAR(120) NOT NULL,
     strUuid          VARCHAR(24)  NOT NULL UNIQUE,
     strOrganisedUuid VARCHAR(40)  NOT NULL,
-    dtmDateTime      DATETIME     NOT NULL,
+    dtmStartDateTime DATETIME     NULL,
+    dtmENdDateTime   DATETIME     NULL,
     KEY K_strUuid (strUuid),
     KEY K_strOrganisedUuid (strOrganisedUuid),
     PRIMARY KEY PK_intEventId (intEventId)

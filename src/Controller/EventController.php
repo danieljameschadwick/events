@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\DTO\SignUpDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
+use App\Entity\User;
 use App\Form\EventFormType;
 use App\Form\SignUpFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EventController extends AbstractController
 {
+    /**
+     * @Route(name="event_listing", path="/events")
+     *
+     * @return Response
+     */
+    public function listing(): Response
+    {
+        $events = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->getAll();
+
+        return $this->render(
+            'main/events/listing.html.twig',
+            [
+                'events' => $events
+            ]
+        );
+    }
+
     /**
      * @Route(name="event_view", path="/events/{hash}/{name?}")
      *
@@ -102,6 +122,19 @@ class EventController extends AbstractController
             throw new \InvalidArgumentException('Event not found.');
         }
 
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            throw new \InvalidArgumentException('User not found.');
+        }
+
+        if ($event->isUserSignedUp($user)) {
+            return $this->redirectToRoute('event_sign_up_confirmation', [
+                'hash' => $event->getHash(),
+                'repeated' => 'repeated',
+            ]);
+        }
+
         $signUpDTO = SignUpDTO::create($event);
 
         $signUpForm = $this->createForm(SignUpFormType::class, $signUpDTO);
@@ -132,20 +165,23 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{hash}/confirmation")
+     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{hash}/confirmation/{repeated?}")
      *
      * @param Request $request
      * @param Session $session
-     *
+     * @param string $repeated
      * @return Response
      */
-    public function confirmation(Request $request, Session $session): Response
+    public function confirmation(Request $request, Session $session, ?string $repeated = null): Response
     {
         /** @var SignUp $signUp */
         $signUp = $session->get('event_sign_up');
 
+        $repeatSignUp = isset($repeated);
+
         return $this->render('main/events/confirmation.html.twig', [
             'signUp' => $signUp,
+            'repeatSignUp' => $repeatSignUp,
             'event' => $signUp->getEvent(),
         ]);
     }

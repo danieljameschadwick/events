@@ -172,11 +172,27 @@ class Event
     }
 
     /**
-     * @return SignUp[]
+     * @return SignUp[]|Collection
      */
-    public function getSignUps(): array
+    public function getSignUps(): Collection
     {
         return $this->signUps;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function isUserSignedUp(User $user): bool
+    {
+        foreach ($this->getSignUps() as $signUp) {
+            if ($signUp->getUser() === $user) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

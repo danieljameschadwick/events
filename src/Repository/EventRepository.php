@@ -26,11 +26,28 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Event[]
+     */
+    public function getAll(): array
+    {
+        $qb = $this->getQueryBuilder();
+        $eb = $qb->expr();
+
+        return $qb
+            ->andWhere(
+                $eb->gte('event.startDateTime', ':startDateTime')
+            )
+            ->setParameters([
+                'startDateTime' => new \DateTime(),
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param string $hash
      *
      * @return Event|null
-     *
-     * @throws NonUniqueResultException
      */
     public function getOneByHash(string $hash): ?Event
     {
