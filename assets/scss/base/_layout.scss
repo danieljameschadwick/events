@@ -1,0 +1,9 @@
+#page-container
+{
+    margin: 0 4%;
+
+    @media screen and (min-width: 1024px)
+    {
+        margin: 0 auto;
+    }
+}
