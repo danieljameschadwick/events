@@ -39,19 +39,22 @@
                             Placeholder text for the event edit form.
                         </p>
                     </div>
-
                 </div>
             {% endif %}
         </div>
+    </div>
 
+    <div class="container-fluid breakout">
         <div class="row">
-            <div class="col-12 mb-4">
+            <div class="col-12 mb-4 p-0">
                 <div id="map"></div>
             </div>
         </div>
+    </div>
 
+    <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-sm-7 col-md-8">
                 <h4>Sign Ups</h4>
                 <table class="table">
                     <thead>
@@ -74,6 +77,16 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="col-12 col-sm-5 col-md-4 mb-4">
+                <div class="col-12 p-3">
+                    <h4 class="text-center mb-3">Location</h4>
+                    <p>Allam Sport Centre,</p>
+                    <p>Inglemire Lane,</p>
+                    <p>Hull,</p>
+                    <p>HU6 7TS.</p>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock body %}
@@ -81,10 +94,21 @@
 {% block javascripts %}
     <script type="application/javascript">
         function initMap() {
+            const latLng = { lat: 53.773969, lng: -0.368551 };
+
+
             map = new google.maps.Map(document.getElementById("map"), {
-                center: {lat: -34.397, lng: 150.644},
+                center: latLng,
                 zoom: 8,
             });
+
+            marker = new google.maps.Marker({
+                position: latLng,
+                map,
+                title: 'Allam Sport Centre',
+            });
+
+            marker.setMap(map);
         }
     </script>
 
