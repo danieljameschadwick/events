@@ -38,44 +38,13 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_view", path="/events/{hash}/{name?}")
-     *
-     * @param string $hash
-     * @param string|null $name
-     *
-     * @return Response
-     */
-    public function view(
-        string $hash,
-        ?string $name = null
-    ): Response
-    {
-        $event = $this->getDoctrine()
-            ->getRepository(Event::class)
-            ->getOneByHash($hash);
-
-        if (!$event instanceof Event) {
-            throw new \InvalidArgumentException(
-                sprintf('Event %s not found', $name)
-            );
-        }
-
-        return $this->render(
-            'main/events/view.html.twig',
-            [
-                'event' => $event,
-            ]
-        );
-    }
-
-    /**
-     * @Route(name="event_view_new", path="/events/{id}/{name}", priority="100")
+     * @Route(name="event_view", path="/events/{id}/{name}", priority="100")
      *
      * @param int $id
      *
      * @return Response
      */
-    public function view_new(int $id): Response
+    public function view(int $id): Response
     {
         $event = $this->getDoctrine()
             ->getRepository(Event::class)
@@ -117,7 +86,7 @@ class EventController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('event_view', [
-                'hash' => $event->getHash(),
+                'id' => $event->getId(),
                 'name' => $event->getName()
             ]);
         }
@@ -131,19 +100,19 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_sign_up", priority=100, path="/events/sign-up/{hash}")
+     * @Route(name="event_sign_up", priority=100, path="/events/sign-up/{id}/{name}")
      *
      * @param Request $request
      * @param Session $session
-     * @param string $hash
+     * @param int $id
      *
      * @return Response
      */
-    public function signUp(Request $request, Session $session, string $hash): Response
+    public function signUp(Request $request, Session $session, int $id): Response
     {
         $event = $this->getDoctrine()
             ->getRepository(Event::class)
-            ->getOneByHash($hash);
+            ->getOneById($id);
 
         if (!$event instanceof Event) {
             throw new \InvalidArgumentException('Event not found.');
@@ -179,7 +148,7 @@ class EventController extends AbstractController
             $session->set('event_sign_up', $signUp);
 
             return $this->redirectToRoute('event_sign_up_confirmation', [
-                'hash' => $event->getHash(),
+                'id' => $event->getId(),
             ]);
         }
 
@@ -192,23 +161,26 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{hash}/confirmation/{repeated?}")
+     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{id}/{name}/confirmation/{repeated?}")
      *
-     * @param Request $request
      * @param Session $session
+     * @param int $id
      * @param string $repeated
+     *
      * @return Response
      */
-    public function confirmation(Request $request, Session $session, ?string $repeated = null): Response
+    public function confirmation(Session $session, int $id, ?string $repeated = null): Response
     {
         /** @var SignUp $signUp */
         $signUp = $session->get('event_sign_up');
 
-        $repeatSignUp = isset($repeated);
+        if (!$signUp instanceof Event) {
+            throw new \InvalidArgumentException('SignUp not found.');
+        }
 
         return $this->render('main/events/confirmation.html.twig', [
             'signUp' => $signUp,
-            'repeatSignUp' => $repeatSignUp,
+            'repeatSignUp' => isset($repeated),
             'event' => $signUp->getEvent(),
         ]);
     }

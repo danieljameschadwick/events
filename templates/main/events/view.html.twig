@@ -14,7 +14,7 @@
             </div>
 
             <div class="col-12">
-                {{ event.startDateTime|date('d-m-Y') }} - {{ event.endDateTime|date('H:i:s') }}
+                {{ event.startDateTime|date('d-m-Y H:i') }} - {{ event.endDateTime|date('H:i') }}
             </div>
 
             <div class="col-12">
@@ -28,14 +28,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-12 col-sm-{{ canEdit ? 6 : 12 }} mb-3">
+                    <div class="col-12 col-sm-{{ canEdit ? 9 : 12 }} mb-3">
                         <h4>Description</h4>
                         {{ event.description }}
                     </div>
 
                     {% if canEdit %}
-                        <div class="col-12 col-sm-6 mb-3">
-                            <h4>Manage</h4>
+                        <div class="col-12 col-sm-3 mb-3 p-4 theme--background-light">
+                            <h4 class="text-center">Manage</h4>
+                            <p>Placeholder text for the event edit form.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -46,7 +47,7 @@
                 {% for signUp in event.signUps %}
                     <div class="row">
                         <div class="col-12">
-                            {{ signUp.name }}, {{ signUp.signUpDate|date('d-m-Y H:i:s') }}
+                            {{ signUp.name }}, {{ signUp.signUpDate|date('d-m-Y H:i') }}
                         </div>
                     </div>
                 {% endfor %}

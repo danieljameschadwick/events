@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-12">
                             <p>
-                                <a href="{{ path('event_view', {'hash': event.hash}) }}">{{ event.name }}</a>,
+                                <a href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>,
                                 {{ event.startDateTime|date('d/m/Y H:i:s') }} - {{ event.endDateTime|date('H:i:s') }}
                             </p>
                         </div>

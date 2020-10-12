@@ -49,9 +49,9 @@ class SignUp
     private $lastName;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="dtmSignUpDate", type="datetime")
+     * @ORM\Column(name="dtmSignUpDate", type="datetime", nullable=true)
      */
     private $signUpDate;
 
@@ -67,10 +67,10 @@ class SignUp
      * @param Event $event
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTimeInterface $signUpDate
+     * @param \DateTimeInterface|null $signUpDate
      * @param User|null $user
      */
-    public function __construct(Event $event, ?string $firstName, ?string $lastName, \DateTimeInterface $signUpDate, ?User $user)
+    public function __construct(Event $event, ?string $firstName, ?string $lastName, ?\DateTimeInterface $signUpDate = null, ?User $user = null)
     {
         $this->event = $event;
         $this->firstName = $firstName;
@@ -148,11 +148,19 @@ class SignUp
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getSignUpDate(): \DateTimeInterface
+    public function getSignUpDate(): ?\DateTimeInterface
     {
         return $this->signUpDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSignedUp(): bool
+    {
+        return $this->getSignUpDate() instanceof \DateTimeInterface;
     }
 
     /**
