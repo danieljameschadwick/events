@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
         {{ include('includes/fonts.html.twig') }}
@@ -22,7 +24,7 @@
         </div>
 
         {% block footer %}
-            {% include 'footer/footer.html.twig' %}
+{#            {% include 'footer/footer.html.twig' %}#}
         {% endblock footer %}
 
         {{ encore_entry_script_tags('app') }}
