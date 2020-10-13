@@ -45,12 +45,17 @@ Encore
     })
 
     // enables Less support
-    .enableLessLoader()
+    .enableLessLoader() // todo: remove legacy styling
     // enable SASS
-    .enableSassLoader()
+    .enableSassLoader(function (options) {}, {
+        resolveUrlLoader: false
+    })
 
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enablePostCssLoader(function(options) {
+        options.config = {
+            path: 'postcss.config.js'
+        }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
