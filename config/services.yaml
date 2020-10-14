@@ -42,3 +42,9 @@ services:
         arguments:
             - '@security.helper'
             - '@session'
+
+    App\Twig\GlobalExtension:
+        calls:
+            - ['setDoctrine', ['@doctrine']]
+        tags:
+            - 'twig.extension'

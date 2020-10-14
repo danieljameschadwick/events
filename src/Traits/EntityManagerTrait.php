@@ -7,7 +7,6 @@ namespace App\Traits;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Trait EntityManagerTrait.
@@ -42,9 +41,9 @@ trait EntityManagerTrait
     }
 
     /**
-     * @param RegistryInterface $doctrine
+     * @param Registry $doctrine
      */
-    public function setDoctrine(RegistryInterface $doctrine)
+    public function setDoctrine(Registry $doctrine)
     {
         $this->doctrine = $doctrine;
     }

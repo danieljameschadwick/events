@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Core\Feature;
 use App\Entity\Event;
 use App\Enumeration\NavigationEnumerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
