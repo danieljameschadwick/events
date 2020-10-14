@@ -44,6 +44,27 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Event[]
+     */
+    public function getUpcomingEvents(): array
+    {
+        $qb = $this->getQueryBuilder();
+        $eb = $qb->expr();
+
+        return $qb
+            ->andWhere(
+                $eb->gte('event.startDateTime', ':startDateTime'),
+                $eb->lte('event.startDateTime', ':endDateTime')
+            )
+            ->setParameters([
+                'startDateTime' => new \DateTime(),
+                'endDateTime' => new \DateTime('+4 weeks'),
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param string $hash
      *
      * @return Event|null

@@ -39,7 +39,7 @@ class AuthenticatorController extends AbstractController
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            $this->redirectToRoute('app_homepage');
+            $this->redirectToRoute('app_home');
         }
 
         //login form
@@ -95,7 +95,7 @@ class AuthenticatorController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render(

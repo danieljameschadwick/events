@@ -1,0 +1,28 @@
+<div class="whitespace-no-wrap">
+    <table class="table-responsive w-100 text-left leading-loose">
+        <thead>
+        <tr class="title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-700 text-center">
+            <th class="px-4 py-3 rounded-tl rounded-bl border-solid border border-gray-300">Date</th>
+            <th class="px-4 py-3 border-solid border border-gray-300">Time</th>
+            <th class="px-4 py-3 rounded-tr rounded-br border-solid border border-gray-300">Event</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in app.user.events %}
+            <tr>
+                <td class="px-4 py-3">
+                    {{ event.startDateTime|date('d/m/Y') }}
+                </td>
+                <td class="px-4 py-3">
+                    {{ event.startDateTime|date('H:i:s') }} - {{ event.endDateTime|date('H:i:s') }}
+                </td>
+                <td class="px-4 py-3">
+                    <a href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <p>You haven't signed up for any events yet. Consider looking <a>here</a>.</p>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
