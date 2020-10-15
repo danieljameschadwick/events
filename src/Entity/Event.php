@@ -195,6 +195,24 @@ class Event
     }
 
     /**
+     * @return int
+     */
+    public function getNumberOfSignUps(): int
+    {
+        $signUps = 0;
+
+        foreach ($this->getSignUps() as $signUp) {
+            if (!$signUp->isSignedUp()) {
+                continue;
+            }
+
+            $signUps++;
+        }
+
+        return $signUps;
+    }
+
+    /**
      * @param User $user
      *
      * @return bool
