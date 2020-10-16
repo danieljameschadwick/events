@@ -8,6 +8,7 @@
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/persistence": "^1.2",
         "fresh/doctrine-enum-bundle": "^7.1",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "payum/payum": "dev-twig3",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
