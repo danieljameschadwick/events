@@ -151,7 +151,7 @@ trait EntityManagerTrait
     }
 
     /**
-     * @throws \RuntimeException If an entity manager is closed.
+     * @throws \RuntimeException if an entity manager is closed
      */
     protected function errorOnClosedConnection()
     {
@@ -164,9 +164,7 @@ trait EntityManagerTrait
                 continue;
             }
 
-            throw new \RuntimeException(
-                sprintf('Entity manager \'%s\' is closed.', $managerName)
-            );
+            throw new \RuntimeException(sprintf('Entity manager \'%s\' is closed.', $managerName));
         }
     }
 

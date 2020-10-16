@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Event;
 use App\Entity\News\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +25,7 @@ class NewsController extends AbstractController
             ->getOneById($id);
 
         if (!$article instanceof Article) {
-            throw new \InvalidArgumentException(
-                sprintf('Article %s not found', $id)
-            );
+            throw new \InvalidArgumentException(sprintf('Article %s not found', $id));
         }
 
         return $this->render(

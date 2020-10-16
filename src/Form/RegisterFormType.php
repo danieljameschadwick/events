@@ -20,21 +20,21 @@ class RegisterFormType extends AbstractType
                 'username',
                 TextType::class,
                 [
-                    'label' => 'Username'
+                    'label' => 'Username',
                 ]
             )
             ->add(
                 'email',
                     EmailType::class,
                     [
-                        'label' => 'Email'
+                        'label' => 'Email',
                 ]
                 )
             ->add(
                 'password',
                 PasswordType::class,
                 [
-                    'label' => 'Password'
+                    'label' => 'Password',
                 ]
             )
             ->add(
@@ -42,10 +42,9 @@ class RegisterFormType extends AbstractType
                 SubmitType::class,
                 [
                     'label' => 'Save',
-                    'attr' =>
-                    [
+                    'attr' => [
 //                        'formnovalidate' => 'formnovalidate'
-                    ]
+                    ],
                 ]
             )
         ;

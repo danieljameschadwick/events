@@ -2,9 +2,6 @@
 
 namespace App\Classes\DataClass;
 
-use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Exception;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RegisterDataClass

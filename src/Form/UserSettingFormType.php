@@ -2,8 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Role;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -50,7 +48,7 @@ class UserSettingFormType extends AbstractType
                     'disabled' => true,
                     'choices' => [
                         'Role 1' => 'role_1',
-                        'Role 2' => 'role_2'
+                        'Role 2' => 'role_2',
                     ],
                 ]
             )

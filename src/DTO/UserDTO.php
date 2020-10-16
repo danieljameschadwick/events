@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use App\Entity\User;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class UserDTO
@@ -37,11 +36,12 @@ class UserDTO
 
     /**
      * UserDTO constructor.
+     *
      * @param string|null $uuid
      * @param string|null $username
      * @param string|null $email
      * @param string|null $password
-     * @param array|null $roles
+     * @param array|null  $roles
      */
     public function __construct(?UuidInterface $uuid = null, ?string $username = null, ?string $email = null, ?string $password = null, array $roles = [])
     {

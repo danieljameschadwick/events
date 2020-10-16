@@ -39,7 +39,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
     ];
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="intGatewayConfigurationId", type="integer")
@@ -105,7 +105,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
      * @param string $username
      * @param string $password
      * @param string $signature
-     * @param bool $sandbox
+     * @param bool   $sandbox
      */
     public function __construct(
         string $handle,
@@ -115,8 +115,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
         string $password,
         string $signature,
         bool $sandbox = true
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->handle = $handle;
@@ -134,7 +133,7 @@ class GatewayConfiguration extends BaseGatewayConfiguration
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword(),
                     'signature' => $this->getSignature(),
-                    'sandbox' => $this->isSandbox()
+                    'sandbox' => $this->isSandbox(),
                 ]
             )
         );

@@ -36,11 +36,12 @@ class SignUpDTO
 
     /**
      * SignUpDTO constructor.
-     * @param string|null $firstName
-     * @param string|null $lastName
+     *
+     * @param string|null             $firstName
+     * @param string|null             $lastName
      * @param \DateTimeInterface|null $signUpDate
-     * @param Event|null $event
-     * @param User|null $user
+     * @param Event|null              $event
+     * @param User|null               $user
      */
     public function __construct(?Event $event = null, ?string $firstName = null, ?string $lastName = null, ?\DateTimeInterface $signUpDate = null, ?User $user = null)
     {
@@ -52,11 +53,11 @@ class SignUpDTO
     }
 
     /**
-     * @param Event|null $event
-     * @param string|null $firstName
-     * @param string|null $lastName
+     * @param Event|null              $event
+     * @param string|null             $firstName
+     * @param string|null             $lastName
      * @param \DateTimeInterface|null $signUpDate
-     * @param User|null $user
+     * @param User|null               $user
      *
      * @return SignUpDTO
      */

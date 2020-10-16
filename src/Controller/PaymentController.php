@@ -7,8 +7,6 @@ namespace App\Controller;
 use App\Entity\Payment\CurrencyCode;
 use App\Entity\Payment\Payment;
 use App\Entity\Payment\Token;
-use Doctrine\ORM\Configuration;
-use Doctrine\ORM\EntityManager;
 use Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage;
 use Payum\Core\Payum;
 use Payum\Core\Request\GetHumanStatus;
@@ -28,8 +26,7 @@ class PaymentController extends AbstractController
      */
     public function test(
         Payum $payum
-    ): Response
-    {
+    ): Response {
         $gatewayName = 'offline';
 
         $payment = Payment::create(
@@ -66,7 +63,7 @@ class PaymentController extends AbstractController
      * @Route(name="payment_complete", path="/payment/complete")
      *
      * @param Request $request
-     * @param Payum $payum
+     * @param Payum   $payum
      *
      * @return void
      *
@@ -75,8 +72,7 @@ class PaymentController extends AbstractController
     public function complete(
         Request $request,
         Payum $payum
-    ): void
-    {
+    ): void {
         $token = $payum->getHttpRequestVerifier()->verify($request);
 
         $gateway = $payum->getGateway($token->getGatewayName());

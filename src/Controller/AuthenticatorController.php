@@ -6,14 +6,11 @@ use App\Classes\DataClass\RegisterDataClass;
 use App\Entity\User;
 use App\Form\LoginFormType;
 use App\Form\RegisterFormType;
-use App\Interfaces\DoctrineAwareInterface;
-use App\Traits\EntityManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Tests\Encoder\PasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AuthenticatorController extends AbstractController
@@ -31,7 +28,7 @@ class AuthenticatorController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      *
-     * @param Request $request
+     * @param Request             $request
      * @param AuthenticationUtils $authenticationUtils
      *
      * @return Response
@@ -55,7 +52,7 @@ class AuthenticatorController extends AbstractController
             [
                 'form' => $form->createView(),
                 'last_username' => $lastUsername,
-                'error' => $error
+                'error' => $error,
             ]
         );
     }

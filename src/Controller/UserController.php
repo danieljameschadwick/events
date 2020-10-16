@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class UserController
- * @package App\Controller
+ * Class UserController.
  *
  * @Route(name="app_user_", path="/user")
  */
-class UserController extends AbstractController {
+class UserController extends AbstractController
+{
     /**
      * @Route(name="view", path="/{userName?}")
      *

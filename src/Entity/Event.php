@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\DTO\EventDTO;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -82,12 +82,12 @@ class Event
     private $signUps;
 
     /**
-     * @param string $name
-     * @param User $organiser
-     * @param string|null $description
+     * @param string         $name
+     * @param User           $organiser
+     * @param string|null    $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param array $signUpDTOs
+     * @param array          $signUpDTOs
      */
     private function __construct(
         string $name,
@@ -96,8 +96,7 @@ class Event
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    )
-    {
+    ) {
         $this->hash = Uuid::uuid4();
         $this->name = $name;
         $this->organiser = $organiser;
@@ -206,7 +205,7 @@ class Event
                 continue;
             }
 
-            $signUps++;
+            ++$signUps;
         }
 
         return $signUps;

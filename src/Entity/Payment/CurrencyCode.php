@@ -11,7 +11,7 @@ class CurrencyCode extends AbstractEnumType
     public const GBP = 'GBP';
 
     protected static $choices = [
-        self::GBP => self::GBP
+        self::GBP => self::GBP,
     ];
 
     /**
@@ -37,6 +37,6 @@ class CurrencyCode extends AbstractEnumType
      */
     public function isGBP(): bool
     {
-        return $this->getName() === self::GBP;
+        return self::GBP === $this->getName();
     }
 }

@@ -41,11 +41,11 @@ class ArticleDTO
     /**
      * ArticleDTO constructor.
      *
-     * @param string|null $title
-     * @param string|null $text
-     * @param User|null $author
-     * @param string|null $imagePath
-     * @param string|null $strapLine
+     * @param string|null             $title
+     * @param string|null             $text
+     * @param User|null               $author
+     * @param string|null             $imagePath
+     * @param string|null             $strapLine
      * @param \DateTimeInterface|null $publishDate
      */
     public function __construct(
@@ -55,8 +55,7 @@ class ArticleDTO
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
-    )
-    {
+    ) {
         $this->title = $title;
         $this->text = $text;
         $this->author = $author;
@@ -66,11 +65,11 @@ class ArticleDTO
     }
 
     /**
-     * @param string|null $title
-     * @param string|null $text
-     * @param User|null $author
-     * @param string|null $imagePath
-     * @param string|null $strapLine
+     * @param string|null             $title
+     * @param string|null             $text
+     * @param User|null               $author
+     * @param string|null             $imagePath
+     * @param string|null             $strapLine
      * @param \DateTimeInterface|null $publishDate
      *
      * @return self
@@ -82,8 +81,7 @@ class ArticleDTO
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
-    ): self
-    {
+    ): self {
         return new self(
             $title,
             $text,
@@ -92,7 +90,6 @@ class ArticleDTO
             $strapLine,
             $publishDate
         );
-
     }
 
     /**

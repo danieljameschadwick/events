@@ -20,7 +20,7 @@ class Role
     public const ROLE_USER = 'ROLE_USER';
 
     /**
-     * @var integer|null
+     * @var int|null
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")

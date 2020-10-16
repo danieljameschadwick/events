@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,9 +45,10 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * UserLoginFormAuthenticator constructor.
-     * @param EntityManagerInterface $entityManager
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param CsrfTokenManagerInterface $csrfTokenManager
+     *
+     * @param EntityManagerInterface       $entityManager
+     * @param UrlGeneratorInterface        $urlGenerator
+     * @param CsrfTokenManagerInterface    $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
@@ -82,7 +83,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
             'csrf_token' => $request->get('login_form')['_token'],
         ];
 
-        if ($request->getSession() === null) {
+        if (null === $request->getSession()) {
             throw new \Exception('Invalid session.');
         }
 
@@ -95,7 +96,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed                 $credentials
      * @param UserProviderInterface $userProvider
      *
      * @return User|object|UserInterface|null
@@ -120,7 +121,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param mixed $credentials
+     * @param mixed         $credentials
      * @param UserInterface $user
      *
      * @return bool
@@ -131,15 +132,15 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param TokenInterface $token
-     * @param string $providerKey
+     * @param string         $providerKey
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($request->getSession() === null) {
+        if (null === $request->getSession()) {
             throw new \Exception('Session is invalid.');
         }
 

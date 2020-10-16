@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Classes\Payment;
 
+use App\Entity\Payment\Payment;
 use Doctrine\ORM\EntityManagerInterface;
 use Payum\Core\Model\Identity;
 use Payum\Core\Storage\StorageInterface;
-use App\Entity\Payment\Payment;
 
 class Storage implements StorageInterface
 {
@@ -27,7 +27,7 @@ class Storage implements StorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findBy(array $criteria)
     {
@@ -35,7 +35,7 @@ class Storage implements StorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function doFind($id)
     {
@@ -43,7 +43,7 @@ class Storage implements StorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function doUpdateModel($model)
     {
@@ -52,7 +52,7 @@ class Storage implements StorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function doDeleteModel($model)
     {
@@ -61,7 +61,7 @@ class Storage implements StorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function doGetIdentity($model)
     {
@@ -76,7 +76,6 @@ class Storage implements StorageInterface
 
     public function create()
     {
-
     }
 
     public function support($model)
@@ -87,7 +86,7 @@ class Storage implements StorageInterface
     public function update($model)
     {
         // TODO: Implement update() method.
-dd($model);
+        dd($model);
     }
 
     public function delete($model)

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity\Payment;
 
-use App\DTO\PaymentDTO;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
+
 //use Payum\Core\Model\Payment as BasePayment;
 
 /**
@@ -20,7 +20,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 class Payment
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="intPaymentId", type="integer")
      * @ORM\Id
@@ -36,7 +36,7 @@ class Payment
     private $reference;
 
     /**
-     * todo: define what type of array
+     * todo: define what type of array.
      *
      * @var array
      */
@@ -79,12 +79,12 @@ class Payment
     private $currencyCode;
 
     /**
-     * @param string $description
-     * @param string $clientEmail
-     * @param string $clientId
-     * @param int $totalAmount
-     * @param string $currencyCode
-     * @param array $details
+     * @param string      $description
+     * @param string      $clientEmail
+     * @param string      $clientId
+     * @param int         $totalAmount
+     * @param string      $currencyCode
+     * @param array       $details
      * @param string|null $reference
      */
     private function __construct(
@@ -95,8 +95,7 @@ class Payment
         string $currencyCode,
         array $details = [],
         ?string $reference = null
-    )
-    {
+    ) {
         $this->description = $description;
         $this->clientEmail = $clientEmail;
         $this->clientId = $clientId;
@@ -110,9 +109,9 @@ class Payment
      * @param string $description
      * @param string $clientId
      * @param string $clientEmail
-     * @param int $totalAmount
+     * @param int    $totalAmount
      * @param string $currencyCode
-     * @param array $details
+     * @param array  $details
      * @param string $reference
      *
      * @return Payment
@@ -125,8 +124,7 @@ class Payment
         string $currencyCode,
         array $details = [],
         ?string $reference = null
-    ): Payment
-    {
+    ): Payment {
         return new self(
             $description,
             $clientEmail,

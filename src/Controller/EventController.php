@@ -32,7 +32,7 @@ class EventController extends AbstractController
         return $this->render(
             'main/events/listing.html.twig',
             [
-                'events' => $events
+                'events' => $events,
             ]
         );
     }
@@ -51,9 +51,7 @@ class EventController extends AbstractController
             ->getOneById($id);
 
         if (!$event instanceof Event) {
-            throw new \InvalidArgumentException(
-                sprintf('Event %s not found', $id)
-            );
+            throw new \InvalidArgumentException(sprintf('Event %s not found', $id));
         }
 
         return $this->render(
@@ -73,8 +71,7 @@ class EventController extends AbstractController
      */
     public function create(
         Request $request
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(EventFormType::class);
         $form->handleRequest($request);
 
@@ -87,7 +84,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('event_view', [
                 'id' => $event->getId(),
-                'name' => $event->getName()
+                'name' => $event->getName(),
             ]);
         }
 
@@ -104,7 +101,7 @@ class EventController extends AbstractController
      *
      * @param Request $request
      * @param Session $session
-     * @param int $id
+     * @param int     $id
      *
      * @return Response
      */
@@ -164,8 +161,8 @@ class EventController extends AbstractController
      * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{id}/{name}/confirmation/{repeated?}")
      *
      * @param Session $session
-     * @param int $id
-     * @param string $repeated
+     * @param int     $id
+     * @param string  $repeated
      *
      * @return Response
      */

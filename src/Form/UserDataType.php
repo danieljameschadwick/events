@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\DTO\UserDTO;
-use App\Entity\User;
-use App\Form\Type\UuidType;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -19,7 +17,7 @@ class UserDataType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -55,7 +53,7 @@ class UserDataType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => UserDTO::class
+            'data_class' => UserDTO::class,
         ]);
     }
 }

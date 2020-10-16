@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Payum\Core\Security\TokenInterface;
 
 /**
- * todo: refactor to remove dependency on TokenInterface
+ * todo: refactor to remove dependency on TokenInterface.
  *
  * @ORM\Table(
  *     schema="events",
@@ -64,18 +64,17 @@ class Token implements TokenInterface
     /**
      * Token constructor.
      *
-     * @param string $gatewayName
+     * @param string      $gatewayName
      * @param string|null $afterUrl
      * @param string|null $targetUrl
-     * @param array $details
+     * @param array       $details
      */
     public function __construct(
         string $gatewayName = 'offline',
         string $afterUrl = null,
         string $targetUrl = null,
         array $details = []
-    )
-    {
+    ) {
         $this->gatewayName = $gatewayName;
         $this->afterUrl = $afterUrl;
         $this->targetUrl = $targetUrl;
@@ -83,10 +82,10 @@ class Token implements TokenInterface
     }
 
     /**
-     * @param string $gatewayName
+     * @param string      $gatewayName
      * @param string|null $afterUrl
      * @param string|null $targetUrl
-     * @param array $details
+     * @param array       $details
      *
      * @return Token
      */
@@ -95,8 +94,7 @@ class Token implements TokenInterface
         string $afterUrl = null,
         string $targetUrl = null,
         array $details = []
-    ): Token
-    {
+    ): Token {
         return new self(
             $gatewayName,
             $afterUrl,

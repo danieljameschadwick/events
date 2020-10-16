@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\DTO\EventDTO;
 use App\DTO\SignUpDTO;
 use App\Entity\Event;
-use App\Entity\SignUp;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -37,7 +35,7 @@ class SignUpFormType extends AbstractType
      * EventFormType constructor.
      *
      * @param Security $security
-     * @param Session $session
+     * @param Session  $session
      */
     public function __construct(Security $security, Session $session)
     {
@@ -47,7 +45,7 @@ class SignUpFormType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -57,7 +55,7 @@ class SignUpFormType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'First Name:'
+                    'label' => 'First Name:',
                 ]
             )
             ->add(
@@ -65,7 +63,7 @@ class SignUpFormType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Last Name:'
+                    'label' => 'Last Name:',
                 ]
             )
             ->add(
@@ -87,7 +85,7 @@ class SignUpFormType extends AbstractType
                 EntityType::class,
                 [
                     'required' => true,
-                    'class' => Event::class
+                    'class' => Event::class,
                 ]
             )
             ->add(
@@ -125,7 +123,7 @@ class SignUpFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => SignUpDTO::class
+            'data_class' => SignUpDTO::class,
         ]);
     }
 }

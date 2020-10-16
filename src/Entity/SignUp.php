@@ -64,11 +64,11 @@ class SignUp
     private $user;
 
     /**
-     * @param Event $event
-     * @param string|null $firstName
-     * @param string|null $lastName
+     * @param Event                   $event
+     * @param string|null             $firstName
+     * @param string|null             $lastName
      * @param \DateTimeInterface|null $signUpDate
-     * @param User|null $user
+     * @param User|null               $user
      */
     public function __construct(Event $event, ?string $firstName, ?string $lastName, ?\DateTimeInterface $signUpDate = null, ?User $user = null)
     {

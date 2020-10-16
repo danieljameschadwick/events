@@ -71,11 +71,11 @@ class Article
     private $author;
 
     /**
-     * @param string $title
-     * @param string $text
-     * @param User $author
-     * @param string|null $imagePath
-     * @param string|null $strapLine
+     * @param string                  $title
+     * @param string                  $text
+     * @param User                    $author
+     * @param string|null             $imagePath
+     * @param string|null             $strapLine
      * @param \DateTimeInterface|null $publishDate
      */
     private function __construct(
@@ -85,8 +85,7 @@ class Article
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
-    )
-    {
+    ) {
         $this->title = $title;
         $this->text = $text;
         $this->author = $author;
@@ -183,7 +182,7 @@ class Article
      */
     public function isPublished(): bool
     {
-        return $this->getPublishDate() !== null;
+        return null !== $this->getPublishDate();
     }
 
     /**

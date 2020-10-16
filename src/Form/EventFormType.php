@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\DTO\EventDTO;
-use App\DTO\UserDTO;
 use App\Entity\Event;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +34,7 @@ class EventFormType extends AbstractType
      * EventFormType constructor.
      *
      * @param Security $security
-     * @param Session $session
+     * @param Session  $session
      */
     public function __construct(Security $security, Session $session)
     {
@@ -45,7 +44,7 @@ class EventFormType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -55,7 +54,7 @@ class EventFormType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Event Name:'
+                    'label' => 'Event Name:',
                 ]
             )
             ->add(
@@ -63,7 +62,7 @@ class EventFormType extends AbstractType
                 DateTimeType::class,
                 [
                     'required' => true,
-                    'label' => 'Date Time:'
+                    'label' => 'Date Time:',
                 ]
             )
             ->add(
@@ -117,7 +116,7 @@ class EventFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EventDTO::class
+            'data_class' => EventDTO::class,
         ]);
     }
 }
