@@ -46,6 +46,9 @@
 /app/phpunit.xml
 /phpunit.xml
 
+# CS-Fixer
+.php_cs.cache
+
 # Build data
 /build/
 
