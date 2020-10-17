@@ -13,7 +13,7 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-12 {{ isNewsEnabled ? 'col-md-8 mb-4' }}">
+            <div class="col-12 {{ isNewsEnabled ? 'col-sm-7 col-md-8 mb-4' }}">
                 <div class="flex flex-wrap sm:flex-no-wrap items-center justify-between mb-2">
                     <h4 class="w-full sm:w-1/2">
                         Your upcoming events
@@ -52,13 +52,16 @@
             </div>
 
             {% if isNewsEnabled %}
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-sm-5 col-md-4">
                     <div class="flex flex-wrap">
                         {% for article in articles %}
                             {{ include('includes/ui/news/news_card_block.html.twig', {
                                 article: article
                             }) }}
                         {% endfor %}
+                        {{ include('includes/ui/news/news_card.html.twig', {
+                            article: articles[0]
+                        }) }}
                         {{ include('includes/ui/news/news_card.html.twig', {
                             article: articles[0]
                         }) }}

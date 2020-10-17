@@ -5,9 +5,11 @@
 {% endblock title %}
 
 {% block body %}
+    <div class="fluid-container">
+        {{ include('includes/ui/landing/hero.html.twig') }}
+    </div>
+
     <div class="container">
-        {% if navigation %}
-            {% include 'includes/ui/navigation.html.twig' %}
-        {% endif %}
+        {{ include('includes/ui/landing/testimonial.html.twig') }}
     </div>
 {% endblock body %}

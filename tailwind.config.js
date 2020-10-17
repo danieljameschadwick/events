@@ -11,7 +11,10 @@ module.exports = {
             gray: {
                 light: '#BBBBBB',
                 dark: '#2D2D2D',
-            }
+            },
+            theme: {
+                primary: '#FF7D12',
+            },
         }
     },
     variants: {},
