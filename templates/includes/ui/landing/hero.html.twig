@@ -1,16 +1,25 @@
+{% set getStartedLink = (
+    app.user is defined
+        ? path('app_homepage')
+        : path('app_register')
+) %}
+
 <div class="landing-splash flex">
     <div class="flex grid w-full lg:w-1/2 items-center justify-items-end text-left sm:mt-0 px-8 md:px-12 lg:pl-24 md:pr-0 mt-4">
         <div class="w-full lg:w-4/5">
             <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">
-                Get <span class="text-theme-primary">Organised.</span>
+                Get <span class="text-theme-primary">
+                    <a class="hover:text-theme-primary" href="{{ getStartedLink }}">Organised</a>.
+                </span>
             </h2>
             <p class="mt-2 text-sm text-gray-500 md:text-base">
                 Manage your sign ups, organise your own events or discover something completely new!
-                <span class="text--bold">{{ site_name }}</span> is your all encompassing
+                <span class="text--bold">{{ site_name }}</span> is your all encompassing events
+                management app to keep you up to date in which ever way you need.
             </p>
             <div class="flex justify-center mt-6">
                 <a class="px-4 py-3 bg-black-dark text-gray-200 text-xs font-semibold rounded hover:bg-theme-primary hover:text-black-dark"
-                   href="{{ path('app_register') }}">
+                   href="{{ getStartedLink }}">
                     Get Started
                 </a>
             </div>

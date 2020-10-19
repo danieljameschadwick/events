@@ -9,6 +9,20 @@
 {% block body %}
     <div class="container mt-4">
         <div class="row">
+            <div class="col-12 mb-5">
+                <div class="p-5 bg-gray-lighter rounded-xl">
+                    <h4 class="mb-3">
+                        Welcome back, {{ app.user.name }}!
+                    </h4>
+
+                    <p class="text-base mb-0">
+                        You have {{ app.user.getUpcomingEvents.count }} event in the next 2 weeks!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-12 {{ isNewsEnabled ? 'col-sm-7 col-md-8 mb-4' }}">
                 <div class="flex flex-wrap sm:flex-no-wrap items-center justify-between mb-2">
                     <h4 class="w-full sm:w-1/2">
