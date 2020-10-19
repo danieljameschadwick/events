@@ -14,9 +14,11 @@
     </head>
     <body>
         {% block header %}
-            {% include 'includes/ui/userbar.html.twig' %}
+            {% if not hideUserBar|default(true) %}
+                {% include 'includes/ui/navigation/userbar.html.twig' %}
+            {% endif %}
 
-            {% include 'includes/ui/logo_block.html.twig' %}
+            {% include 'includes/ui/navigation/navigation.html.twig' %}
         {% endblock header %}
 
         <div id="page-container">

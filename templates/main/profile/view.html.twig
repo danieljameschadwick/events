@@ -3,7 +3,7 @@
 {% set isUserProfile = (app.user.username is same as(user)) %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-4">
         {% if navigation %}
             {% include 'includes/ui/navigation.html.twig' %}
         {% endif %}

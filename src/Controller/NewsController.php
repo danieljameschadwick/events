@@ -12,7 +12,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class NewsController extends AbstractController
 {
     /**
-     * @Route(name="news_view", path="/news/{id}/{slug}")
+     * @Route(name="news_listing", path="/articles")
+     *
+     * @return Response
+     */
+    public function listing(): Response
+    {
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->getAll();
+
+        return $this->render(
+            'main/news/listing.html.twig',
+            [
+                'articles' => $articles,
+            ]
+        );
+    }
+
+    /**
+     * @Route(name="news_view", path="/articles/{id}/{slug}")
      *
      * @param int $id
      *

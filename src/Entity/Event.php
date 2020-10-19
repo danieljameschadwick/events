@@ -186,6 +186,27 @@ class Event
     }
 
     /**
+     * @return string
+     */
+    public function getFormattedDateTime(): string
+    {
+        if (!$this->getEndDateTime() instanceof \DateTimeInterface) {
+            return sprintf(
+                '%s %s',
+                $this->getStartDateTime()->format('d/m/Y'),
+                $this->getStartDateTime()->format('H:i:s')
+            );
+        }
+
+        return sprintf(
+            '%s %s - %s',
+            $this->getStartDateTime()->format('d/m/Y'),
+            $this->getStartDateTime()->format('H:i:s'),
+            $this->getEndDateTime()->format('H:i:s')
+        );
+    }
+
+    /**
      * @return SignUp[]|Collection
      */
     public function getSignUps(): Collection
