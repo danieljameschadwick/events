@@ -6,4 +6,19 @@
     {
         height: 600px;
     }
+
+    .hero-image
+    {
+        &--splash
+        {
+            background-image: url('/images/landing/splash.jpg');
+            background-size: auto 100%;
+
+            @media screen and (min-width: 1680px)
+            {
+                background-size: 100% auto;
+            }
+        }
+    }
 }
+
