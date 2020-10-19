@@ -4,7 +4,9 @@
     {{ parent() }} - Events - {{ event.name }}
 {% endblock title %}
 
-{% set canEdit = event.organiser.uuid is same as(app.user.uuid) %}
+{% set canEdit =
+    app.user.uuid is defined
+    and event.organiser.uuid is same as(app.user.uuid) %}
 
 {% block body %}
     <div class="container mt-4">

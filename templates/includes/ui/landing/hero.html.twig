@@ -1,5 +1,5 @@
 {% set getStartedLink = (
-    app.user is defined
+    app.user.uuid is defined
         ? path('app_homepage')
         : path('app_register')
 ) %}

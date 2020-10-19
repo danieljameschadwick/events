@@ -31,21 +31,20 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $userName
-     *
+     * @param string $username
      * @return User|null
      */
-    public function getOneByUserName(string $userName): ?User
+    public function getOneByUserName(string $username): ?User
     {
         $qb = $this->getQueryBuilder();
         $eb = $qb->expr();
 
         return $qb
             ->andWhere(
-                $eb->eq('user.userName', ':userName')
+                $eb->eq('user.username', ':username')
             )
             ->setParameters([
-                'userName' => $userName,
+                'username' => $username,
             ])
             ->getQuery()
             ->getOneOrNullResult();

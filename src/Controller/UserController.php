@@ -33,8 +33,11 @@ class UserController extends AbstractController
         $currentUser = $this->getUser();
 
         if (
-            !$userName
-            || $currentUser->getUserName() === $userName
+            $currentUser instanceof User
+            && (
+                !$userName
+                || $currentUser->getUserName() === $userName
+            )
         ) {
             $user = $currentUser;
         }

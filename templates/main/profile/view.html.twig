@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% set isUserProfile = (app.user.username is same as(user)) %}
+{% set isUserProfile =
+    app.user.uuid is defined
+    and app.user.username is same as(user)
+%}
 
 {% block body %}
     <div class="container mt-4">
-        {% if navigation %}
-            {% include 'includes/ui/navigation.html.twig' %}
-        {% endif %}
-
         <div class="row">
             <h3>{{ user.name }}</h3>
         </div>
