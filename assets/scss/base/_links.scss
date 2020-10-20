@@ -1,0 +1,12 @@
+.link
+{
+    &--primary
+    {
+        @apply text-theme-primary;
+
+        &:hover
+        {
+            @apply underline;
+        }
+    }
+}

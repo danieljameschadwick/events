@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="app_index")
+     * @Route(name="app_index", path="/")
      */
     public function index(): Response
     {
@@ -27,7 +27,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/home", name="app_homepage")
+     * @Route(name="app_homepage", path="/home")
      */
     public function home(): Response
     {

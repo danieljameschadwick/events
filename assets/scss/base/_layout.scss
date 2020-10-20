@@ -1,11 +1,16 @@
 #page-container
 {
-    margin: 0 4%;
+    margin: 0 4% auto;
 
-    @media screen and (min-width: 1024px)
+    @media screen and (min-width: 768px)
     {
         margin: 0 auto;
     }
+}
+
+.container
+{
+    @apply mx-auto;
 }
 
 .breakout

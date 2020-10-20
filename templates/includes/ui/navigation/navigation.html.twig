@@ -16,27 +16,20 @@
         </div>
         <div class="w-auto flex-grow lg:flex lg:items-center">
             <div class="text-sm lg:flex-grow">
-                <a href="{{ path('event_listing') }}" class="inline-block hover:text-white mx-2 text-center">
+                <a href="{{ path('event_listing') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
                     Events
                 </a>
-                <a href="{{ path('news_listing') }}" class="inline-block hover:text-white mx-2 text-center">
+                <a href="{{ path('news_listing') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
                     News
                 </a>
             </div>
         </div>
         <div class="">
             {% if app.user %}
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.username }}
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ url('app_user_view', {'userName': app.user.username}) }}">Profile</a>
-                    <a class="dropdown-item" href="{{ url('app_user_view', {'userName': app.user.username, '_fragment': 'v-pills-settings'}) }}">Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url('app_logout') }}">Logout</a>
-                </div>
+                <a class="link--primary mr-3" href="{{ url('app_homepage') }}">{{ app.user.username }}</a>
+                <a class="link--primary" href="{{ url('app_logout') }}">Logout</a>
             {% else %}
-                <a href="{{ url('app_login') }}">Login</a>
+                <a class="link--primary" href="{{ url('app_login') }}">Login</a>
             {% endif %}
         </div>
     </div>

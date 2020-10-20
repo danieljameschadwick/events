@@ -8,8 +8,8 @@
 
 {% block body %}
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-12 mb-5">
+        <div class="flex">
+            <div class="w-full mb-5">
                 <div class="p-5 bg-gray-lighter rounded-xl">
                     <h4 class="mb-3">
                         Welcome back, {{ app.user.name }}!
@@ -22,8 +22,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 {{ isNewsEnabled ? 'col-sm-7 col-md-8 mb-4' }}">
+        <div class="flex">
+            <div class="w-full {{ isNewsEnabled ? 'sm:w-2/3 lg:3/5 mb-4 mr-5' }}">
                 <div class="flex flex-wrap sm:flex-no-wrap items-center justify-between mb-2">
                     <h4 class="w-full sm:w-1/2">
                         Your upcoming events
@@ -38,7 +38,7 @@
                         <div class="w-full sm:w-1/2 border-solid border p-3 rounded">
                             <div class="flex flex-wrap sm:flex-no-wrap items-center justify-between mb-2">
                                 <h2 class="text-lg font-semibold text-gray-900">
-                                    <a href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>
+                                    <a class="link--primary" href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>
                                 </h2>
                                 <small class="text-sm text-gray-700">
                                     {{ event.startDateTime|date('d/m/Y') }}
@@ -55,14 +55,14 @@
                             </div>
                         </div>
                     {% else %}
-                        <p>You haven't signed up for any events yet. Consider looking <a
-                                    href="{{ url('event_listing') }}">here</a>.</p>
+                        <p>You haven't signed up for any events yet. Consider looking
+                            <a class="link--primary" href="{{ url('event_listing') }}">here</a>.</p>
                     {% endfor %}
                 </div>
             </div>
 
             {% if isNewsEnabled %}
-                <div class="col-12 col-sm-5 col-md-4">
+                <div class="w-full sm:w-1/3 lg:2/5">
                     <div class="flex flex-wrap">
                         {% for article in articles %}
                             {{ include('includes/ui/news/news_card_block.html.twig', {
