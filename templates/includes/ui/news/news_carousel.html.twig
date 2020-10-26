@@ -1,0 +1,32 @@
+{%
+    set articles = [
+        {
+            id: 1,
+            slug: 'test-slug',
+            title: 'Test',
+        },
+        {
+            id: 1,
+            slug: 'test-slug',
+            title: 'Test',
+        },
+        {
+            id: 1,
+            slug: 'test-slug',
+            title: 'Test',
+        }
+    ]
+%}
+
+<div class="text-center">
+    <h3>Latest News</h3>
+{#    <hr class="border-theme-primary" />#}
+</div>
+
+<div class="flex w-full">
+    {% for article in articles %}
+        <div class="w-1/3 p-3">
+            {{ include('includes/ui/news/news_card_block.html.twig') }}
+        </div>
+    {% endfor %}
+</div>

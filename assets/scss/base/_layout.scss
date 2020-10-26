@@ -1,16 +1,34 @@
 #page-container
 {
-    margin: 0 4% auto;
+    @apply m-0;
+}
 
-    @media screen and (min-width: 768px)
+@screen md
+{
+    #page-container
     {
-        margin: 0 auto;
+        @apply mx-auto;
     }
 }
 
 .container
 {
+    @apply mx-5;
+    @apply w-full;
+}
+
+@screen sm
+{
+    .container
+    {
+        @apply mx-auto;
+    }
+}
+
+.container-fluid
+{
     @apply mx-auto;
+    @apply w-full;
 }
 
 .breakout

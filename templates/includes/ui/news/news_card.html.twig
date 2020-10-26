@@ -5,7 +5,7 @@
         </a>
     </h1>
     <p class="leading-relaxed mb-2 mb-sm-3">
-        {{ article.strapLine }}
+        {{ article.strapLine|default() }}
     </p>
     <div class="flex items-center flex-wrap">
         <a class="text-gray-500 inline-flex items-center w-100 justify-end">

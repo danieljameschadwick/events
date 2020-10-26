@@ -5,9 +5,15 @@
 {% endblock title %}
 
 {% block body %}
-    <div class="fluid-container">
+    <div class="container-fluid">
         {{ include('includes/ui/landing/hero.html.twig') }}
     </div>
+
+    {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::NEWS')) %}
+        <div class="container mt-5">
+            {{ include('includes/ui/news/news_carousel.html.twig') }}
+        </div>
+    {% endif %}
 
     <div class="container">
 {#        {{ include('includes/ui/landing/testimonial.html.twig') }}#}
