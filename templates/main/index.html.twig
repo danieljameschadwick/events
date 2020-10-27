@@ -1,17 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_fluid.html.twig' %}
 
 {% block title %}
     {{ parent() }} - Home
 {% endblock title %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid mt-8">
         {{ include('includes/ui/landing/hero.html.twig') }}
     </div>
 
     {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::NEWS')) %}
-        <div class="container mt-8">
-            {{ include('includes/ui/news/news_carousel.html.twig') }}
+        <div class="container mt-12 px-5 sm:mx-auto">
+            {{ include('includes/ui/news/news_carousel.html.twig', {
+                articles: getLatestNews()
+            }) }}
         </div>
     {% endif %}
 

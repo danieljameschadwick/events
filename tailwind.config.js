@@ -38,6 +38,10 @@ module.exports = {
                 '60': '60px',
                 '300': '300px',
             },
+            maxHeight: {
+                '300': '300px',
+                '400': '400px',
+            },
             zIndex: {
                 overlay: 100,
             }

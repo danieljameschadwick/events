@@ -41,7 +41,7 @@ class RegisterFormType extends AbstractType
                 'submit',
                 SubmitType::class,
                 [
-                    'label' => 'Save',
+                    'label' => 'Register',
                     'attr' => [
 //                        'formnovalidate' => 'formnovalidate'
                     ],

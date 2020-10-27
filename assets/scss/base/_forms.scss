@@ -1,0 +1,8 @@
+input,
+textarea
+{
+    &:focus {
+        @apply border-theme-primary;
+        @apply outline-none;
+    }
+}

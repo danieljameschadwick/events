@@ -21,9 +21,11 @@
             {% include 'includes/ui/navigation/navigation.html.twig' %}
         {% endblock header %}
 
-        <div id="page-container">
-            {% block body %}{% endblock %}
-        </div>
+        {% block page %}
+            <div id="page-container">
+                {% block body %}{% endblock %}
+            </div>
+        {% endblock page %}
 
         {% block footer %}
 {#            {% include 'footer/footer.html.twig' %}#}

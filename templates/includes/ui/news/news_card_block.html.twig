@@ -1,5 +1,7 @@
-<div class="h-auto w-full border-2 border-gray-200 rounded-lg overflow-hidden">
-    <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-         src="/images/sample/720x400.png" alt="blog">
+<div class="border-solid border-gray-lighter h-auto w-full border-2 border-gray-200 rounded-lg overflow-hidden">
+    <img class="max-h-300 sm:max-h-400 lg:h-auto md:h-36 w-full object-cover object-center"
+         src="/images/sample/720x400.png"
+         alt="{{ article.title }}"
+    />
     {{ include('includes/ui/news/news_card.html.twig') }}
 </div>

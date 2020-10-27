@@ -1,11 +1,11 @@
-<div class="p-6 border border-gray-500 border-top-0 w-full">
+<div class="p-4 sm:p-6 border border-gray-500 border-top-0 w-full">
     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
         <a href="{{ url('news_view', {'id': article.id, 'slug': article.slug}) }}">
             {{ article.title }}
         </a>
     </h1>
-    <p class="leading-relaxed mb-2 mb-sm-3">
-        {{ article.strapLine|default() }}
+    <p class="leading-relaxed mb-3 hidden sm:block">
+        {{ article.strapLine|default }}
     </p>
     <div class="flex items-center flex-wrap">
         <a class="text-gray-500 inline-flex items-center w-100 justify-end">
