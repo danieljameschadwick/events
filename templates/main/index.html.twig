@@ -10,7 +10,7 @@
     </div>
 
     {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::NEWS')) %}
-        <div class="container mt-5">
+        <div class="container mt-8">
             {{ include('includes/ui/news/news_carousel.html.twig') }}
         </div>
     {% endif %}

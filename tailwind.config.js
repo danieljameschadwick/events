@@ -22,12 +22,25 @@ module.exports = {
                 },
                 theme: {
                     primary: '#FF7D12',
+                    dark: '#b35708'
                 },
             },
             screens: {
                 lg: '1100px',
                 xl: '1100px',
             },
+            margin: {
+                '60': '60px',
+                '75': '75px',
+            },
+            minHeight: {
+                '25': '25px',
+                '60': '60px',
+                '300': '300px',
+            },
+            zIndex: {
+                overlay: 100,
+            }
         },
     },
     variants: {},

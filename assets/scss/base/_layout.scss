@@ -1,6 +1,7 @@
 #page-container
 {
     @apply m-0;
+    @apply mt-75;
 }
 
 @screen md
@@ -13,16 +14,8 @@
 
 .container
 {
-    @apply mx-5;
+    @apply mx-auto;
     @apply w-full;
-}
-
-@screen sm
-{
-    .container
-    {
-        @apply mx-auto;
-    }
 }
 
 .container-fluid
