@@ -18,7 +18,8 @@ module.exports = {
                     dark: '#2D2D2D',
                 },
                 black: {
-                    dark: '#000000',
+                    dark: '#2a2a2a',
+                    darkest: '#000000',
                 },
                 theme: {
                     primary: '#FF7D12',

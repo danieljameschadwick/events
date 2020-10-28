@@ -8,7 +8,9 @@
         {{ article.strapLine|default }}
     </p>
     <div class="flex items-center flex-wrap">
-        <a class="text-gray-500 inline-flex items-center w-100 justify-end">
+        <a class="text-gray-500 inline-flex items-center w-100 justify-end"
+            href="{{ url('news_view', {'id': article.id, 'slug': article.slug}) }}"
+        >
             Read More
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24"
                  stroke="currentColor" stroke-width="2" fill="none"

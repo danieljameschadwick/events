@@ -65,14 +65,14 @@
                 <div class="w-full sm:w-1/3 lg:2/5">
                     <div class="flex flex-wrap">
                         {% for article in articles %}
-                            {{ include('includes/ui/news/news_card_block.html.twig', {
+                            {{ include('components/news/news_card_block.html.twig', {
                                 article: article
                             }) }}
                         {% endfor %}
-                        {{ include('includes/ui/news/news_card.html.twig', {
+                        {{ include('components/news/news_card.html.twig', {
                             article: articles[0]
                         }) }}
-                        {{ include('includes/ui/news/news_card.html.twig', {
+                        {{ include('components/news/news_card.html.twig', {
                             article: articles[0]
                         }) }}
                     </div>

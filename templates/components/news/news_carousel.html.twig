@@ -4,10 +4,10 @@
     <hr class="border border-solid border-theme-primary w-12 mx-auto" />
 </div>
 
-<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-{{ articles|length }}">
     {% for article in articles|default %}
         <div class="mb-8 sm:mb-0">
-            {{ include('includes/ui/news/news_card_block.html.twig') }}
+            {{ include('components/news/news_card_block.html.twig') }}
         </div>
     {% else %}
         <p class="col-span-3 text-center">

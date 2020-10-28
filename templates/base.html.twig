@@ -6,7 +6,7 @@
 
         <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
-        {{ include('includes/fonts.html.twig') }}
+        {{ include('main/fonts.html.twig') }}
         {{ encore_entry_link_tags('main') }}
 
         {% block stylesheets %}
@@ -15,10 +15,10 @@
     <body>
         {% block header %}
             {% if not hideUserBar|default(true) %}
-                {% include 'includes/ui/navigation/userbar.html.twig' %}
+                {% include 'components/navigation/userbar.html.twig' %}
             {% endif %}
 
-            {% include 'includes/ui/navigation/navigation.html.twig' %}
+            {% include 'components/navigation/navigation.html.twig' %}
         {% endblock header %}
 
         {% block page %}
