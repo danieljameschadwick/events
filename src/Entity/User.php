@@ -255,9 +255,9 @@ class User implements UserInterface
     /**
      * @param int $upcomingRange
      *
-     * @return Event[]|ArrayCollection
+     * @return Event[]
      */
-    public function getUpcomingEvents(int $upcomingRange = 14): Collection
+    public function getUpcomingEvents(int $upcomingRange = 14): array
     {
         $events = [];
 
@@ -274,7 +274,7 @@ class User implements UserInterface
             $events[] = $event;
         }
 
-        return $this->events;
+        return $events;
     }
 
     /**

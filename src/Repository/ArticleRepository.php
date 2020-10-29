@@ -12,7 +12,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class ArticleRepository extends ServiceEntityRepository
 {
-    private const LATEST_NEWS_COUNT = 3;
+    public const LATEST_NEWS_COUNT = 3;
 
     public function __construct(ManagerRegistry $registry)
     {

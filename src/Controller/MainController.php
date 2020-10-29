@@ -35,16 +35,11 @@ class MainController extends AbstractController
             ->getRepository(Event::class)
             ->getUpcomingEvents();
 
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->getAll();
-
         return $this->render(
             'main/home.html.twig',
             [
                 'navigation' => NavigationEnumerator::$navigation,
                 'events' => $events,
-                'articles' => $articles,
             ]
         );
     }

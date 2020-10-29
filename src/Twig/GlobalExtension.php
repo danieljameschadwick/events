@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use App\Entity\Core\Feature;
 use App\Entity\News\Article;
+use App\Repository\ArticleRepository;
 use App\Traits\EntityManagerTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -37,12 +38,14 @@ class GlobalExtension extends AbstractExtension
     }
 
     /**
+     * @param int $count
+     *
      * @return Article[]
      */
-    public function getLatestNews(): array
+    public function getLatestNews(int $count = ArticleRepository::LATEST_NEWS_COUNT): array
     {
         return $this->getManager()
             ->getRepository(Article::class)
-            ->getLatestNews();
+            ->getLatestNews($count);
     }
 }

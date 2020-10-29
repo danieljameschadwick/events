@@ -16,7 +16,7 @@
                     </h4>
 
                     <p class="text-base mb-0">
-                        You have {{ app.user.getUpcomingEvents.count }} event in the next 2 weeks!
+                        You have {{ app.user.getUpcomingEvents|length }} event(s) in the next 2 weeks!
                     </p>
                 </div>
             </div>
@@ -35,10 +35,13 @@
 
                 <div class="flex items-start">
                     {% for event in events %}
-                        <div class="w-full sm:w-1/2 border-solid border p-3 rounded">
+                        <div class="w-full sm:w-1/2 border border-solid border-gray-lighter p-3 rounded">
                             <div class="flex flex-wrap sm:flex-no-wrap items-center justify-between mb-2">
                                 <h2 class="text-lg font-semibold text-gray-900">
-                                    <a class="link--primary" href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>
+                                    <a class="link--primary"
+                                       href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">
+                                        {{ event.name }}
+                                    </a>
                                 </h2>
                                 <small class="text-sm text-gray-700">
                                     {{ event.startDateTime|date('d/m/Y') }}
@@ -63,18 +66,26 @@
 
             {% if isNewsEnabled %}
                 <div class="w-full sm:w-1/3 lg:2/5">
+                    {% set articles = getLatestNews() %}
+
                     <div class="flex flex-wrap">
-                        {% for article in articles %}
-                            {{ include('components/news/news_card_block.html.twig', {
-                                article: article
-                            }) }}
+                        {{ include('components/news/news_card_block.html.twig', {
+                            article: articles[0],
+                            rounded: 'rounded-t-lg'
+                        }) }}
+
+                        {% for index in 1..2 %}
+                            {% if articles[index] is defined %}
+                                {% set bg = index % 2 %}
+
+                                {{ include('components/news/news_card.html.twig', {
+                                    article: articles[index],
+                                    padding: 'py-2 sm:px-6 sm:py-4',
+                                    rounded: loop.index is same as(2) ? 'rounded-b-lg' : '',
+                                    additionalClass: bg ? 'bg-gray-lighter' : ''
+                                }) }}
+                            {% endif %}
                         {% endfor %}
-                        {{ include('components/news/news_card.html.twig', {
-                            article: articles[0]
-                        }) }}
-                        {{ include('components/news/news_card.html.twig', {
-                            article: articles[0]
-                        }) }}
                     </div>
                 </div>
             {% endif %}
