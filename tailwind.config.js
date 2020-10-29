@@ -13,6 +13,7 @@ module.exports = {
             },
             colors: {
                 gray: {
+                    lightest: '#efefef',
                     lighter: '#E0E0E0',
                     light: '#BBBBBB',
                     dark: '#2D2D2D',
@@ -44,6 +45,8 @@ module.exports = {
                 '400': '400px',
             },
             zIndex: {
+                base: 0,
+                content: 5,
                 overlay: 100,
             }
         },

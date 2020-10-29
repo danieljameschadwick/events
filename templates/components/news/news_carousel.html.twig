@@ -6,7 +6,7 @@
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-{{ articles|length }}">
     {% for article in articles|default %}
-        <div class="mb-8 sm:mb-0">
+        <div class="mb-2 sm:mb-0">
             {{ include('components/news/news_card_block.html.twig') }}
         </div>
     {% else %}
