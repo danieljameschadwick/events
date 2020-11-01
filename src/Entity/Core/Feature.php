@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Feature
 {
     public const NEWS = 'NEWS';
+    public const WEB_APPLICATION = 'WEB_APPLICATION';
 
     /**
      * @var int|null

@@ -27,6 +27,10 @@ module.exports = {
                     dark: '#b35708'
                 },
             },
+            height: {
+                200: '200px',
+                250: '250px'
+            },
             screens: {
                 lg: '1100px',
                 xl: '1100px',
