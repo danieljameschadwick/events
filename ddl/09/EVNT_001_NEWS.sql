@@ -17,7 +17,7 @@ CREATE TABLE tblArticle
 INSERT INTO tblFeature
     (strHandle, strDescription, bolActive, intDisplayOrder)
 VALUES
-    ('NEWS', 'Enable/disable entire News component.', 1, 0)
+    ('NEWS', 'Enable entire News component.', 1, 0)
 ;
 
 COMMIT;

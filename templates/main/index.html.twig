@@ -11,17 +11,17 @@
 
     <section class="container my-16 flex flex-col sm:flex-row h-250 px-5 sm:p-0">
         {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION')) %}
-            <div class="w-full sm:w-1/2 mb-5 sm:mb-0">
+            <div class="h-full w-full sm:w-1/2 mb-5 sm:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}
             </div>
 
-            <div class="w-full sm:w-1/2 h-full flex items-center">
+            <div class="h-full w-full sm:w-1/2 h-full flex items-center">
                 {{ include('components/landing/mobile.html.twig') }}
             </div>
         {% else %}
-            <div class="w-full mb-5 sm:mb-0">
+            <div class="h-full w-full mb-5 sm:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}

@@ -1,5 +1,3 @@
-START TRANSACTION;
-
 DROP TABLE IF EXISTS tblFeature;
 
 CREATE TABLE tblFeature
@@ -11,5 +9,14 @@ CREATE TABLE tblFeature
     intDisplayOrder int(4)       not null default 0,
     constraint UK_strHandle UNIQUE (strHandle)
 );
+
+START TRANSACTION;
+
+INSERT INTO tblFeature
+    (strHandle, strDescription, bolActive, intDisplayOrder)
+VALUES
+    ('WEB_APPLICATION', 'Enable the Web Application. Used prior to release or disable all web features and go back to pre-release.', 1, 0)
+;
+
 
 COMMIT;
