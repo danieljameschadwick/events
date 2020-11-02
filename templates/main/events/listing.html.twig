@@ -17,7 +17,10 @@
                         <div class="col-12">
                             <p>
                                 {{ event.name }},
-                                <a href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">View</a>
+                                <a class="link--primary"
+                                    href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">
+                                     View
+                                </a>
                             </p>
                         </div>
                     </div>

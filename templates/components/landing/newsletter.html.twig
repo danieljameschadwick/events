@@ -5,9 +5,10 @@
                 data-aos="zoom-y-out">
                 <div class="relative flex flex-col lg:flex-row justify-between items-center">
                     <div class="text-center lg:text-left lg:max-w-xl">
-                        <h3 class="h3 text-3xl text-black mb-2">
+                        <h3 class="h3 text-3xl text-black mb-2 text--bold">
                             Power your events.
                         </h3>
+
                         <p class="text-gray-300 text-lg mb-6 max-w-3xl">
                             Keep up-to date on our latest features and updates with our newsletter. We won't spam your
                             mailbox and it is easy to unsubscribe if you change your mind.
@@ -15,16 +16,13 @@
 
                         <form class="w-full lg:w-auto">
                             <div class="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
-                                <input type="email"
-                                       class="w-full appearance-none bg-gray-800 border border-gray-700 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500
-                                          hover:border-theme-dark"
-                                       placeholder="Your email" />
-                                <a class="link--primary px-4 py-3 bg-black-darkest text-gray-200 leading-6 text-xs font-semibold rounded align-middle
-                                    hover:text-white hover:no-underline"
-                                    href="#">
-                                    Subscribe
-                                </a>
+                                {{ form_start(form) }}
+                                    {{ form_widget(form.email) }}
+
+                                    {{ form_widget(form.submit) }}
+                                {{ form_end(form) }}
                             </div>
+
                             <p class="text-sm text-gray-400 mt-3">
                                 If you don't interact with our emails - we will unsubscribe you <span class="text--bold">automatically</span>!
                             </p>

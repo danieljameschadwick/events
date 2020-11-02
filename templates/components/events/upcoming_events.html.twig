@@ -17,7 +17,10 @@
                     {{ event.startDateTime|date('H:i:s') }} - {{ event.endDateTime|date('H:i:s') }}
                 </td>
                 <td class="px-4 py-3">
-                    <a href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">{{ event.name }}</a>
+                    <a class="link--primary"
+                       href="{{ path('event_view', {'id': event.id, 'name': event.name}) }}">
+                        {{ event.name }}
+                    </a>
                 </td>
             </tr>
         {% else %}

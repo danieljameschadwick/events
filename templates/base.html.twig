@@ -12,7 +12,7 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    <body>
+    <body class="flex flex-col h-screen">
         {% block header %}
             {% if not hideUserBar|default(true) %}
                 {% include 'components/navigation/userbar.html.twig' %}
@@ -22,7 +22,7 @@
         {% endblock header %}
 
         {% block page %}
-            <div id="page-container">
+            <div id="page-container" class="w-full flex-grow px-5">
                 {% block body %}{% endblock %}
             </div>
         {% endblock page %}
