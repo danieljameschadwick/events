@@ -1,14 +1,14 @@
 {% set when = released ? 'now' : 'soon' %}
 
-<div class="bg-theme-primary flex flex-col justify-center h-full">
-    <div class="mx-auto mb-2 sm:mb-5 text-4xl sm:text-6xl text-black-dark font-semibold">
+<div class="bg-theme-primary flex flex-col justify-center h-full p-8">
+    <div class="mx-auto mb-2 sm:mb-5 text-5xl sm:text-6xl text-black-dark font-semibold">
         <span>
             Out {{ when }}.
         </span>
     </div>
 
-    <div class="flex flex-row space-x-3 justify-center">
-        <button class="bg-black-dark inline-flex py-3 px-5 rounded-lg items-center hover:bg-black-light focus:outline-none">
+    <div class="flex flex-col xs:flex-row xs:space-x-3 justify-center items-center">
+        <button class="w-64 bg-black-dark inline-flex py-3 px-5 mb-3 xs:mb-0 rounded-lg items-center hover:bg-black-light focus:outline-none">
             <svg class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88">
                 <path fill="#FFFFFF" d="M0 12.402l35.687-4.86.016 34.423-35.67.203zm35.67 33.529l.028 34.453L.028 75.48.026 45.7zm4.326-39.025L87.314 0v41.527l-47.318.376zm47.33 39.349l-.012 41.34-47.318-6.678-.066-34.74z" />
             </svg>
@@ -19,7 +19,7 @@
             </span>
         </button>
 
-        <button class="bg-black-dark inline-flex py-3 px-5 rounded-lg items-center hover:bg-black-light focus:outline-none">
+        <button class="w-64 bg-black-dark inline-flex py-3 px-5 rounded-lg items-center hover:bg-black-light focus:outline-none">
             <svg class="w-8" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                 <path d="M256 0C114.611 0 0 114.62 0 256c0 141.389 114.611 256 256 256s256-114.611 256-256C512 114.62 397.39 0 256 0z" fill="#FFFFFF"/>
                 <path d="M280.39 271.37l97.954 142.945H350.64l-67.686-98.76L256 276.223l-26.953 39.334-67.685 98.76h-27.704l97.954-142.946L242.149 256l-10.538-15.37-97.955-142.944h27.704l67.686 98.759L256 235.777l26.953-39.334 67.685-98.758h27.704l-97.954 142.944L269.851 256l10.539 15.37z" fill="#000000"/>

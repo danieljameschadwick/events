@@ -9,15 +9,15 @@
         {{ include('components/landing/hero.html.twig') }}
     </section>
 
-    <section class="container my-16 flex flex-col sm:flex-row h-250 px-5 sm:p-0">
+    <section class="container my-12 flex flex-col md:flex-row h-auto xs:h-250 mb-5 px-5 sm:p-0 sm:mb-16">
         {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION')) %}
-            <div class="h-full w-full sm:w-1/2 mb-5 sm:mb-0">
+            <div class="h-full w-full md:w-1/2 mb-5 xl:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}
             </div>
 
-            <div class="h-full w-full sm:w-1/2 h-full flex items-center">
+            <div class="flex items-center h-full w-full md:w-1/2 p-4 h-full">
                 {{ include('components/landing/mobile.html.twig') }}
             </div>
         {% else %}
@@ -30,7 +30,7 @@
     </section>
 
     {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::NEWS')) %}
-        <section class="container mt-12 mb-5 px-5 sm:px-0 sm:mx-auto">
+        <section class="container mt-12 mb-16 px-5 sm:px-0 sm:mx-auto">
             {{ include('components/news/news_carousel.html.twig', {
                 articles: getLatestNews()
             }) }}
