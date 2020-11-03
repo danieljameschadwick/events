@@ -12,7 +12,9 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    <body class="flex flex-col h-screen">
+    {# todo: enable footer sticky and body fill #}
+    {#    <body class="flex flex-col h-screen">#}
+    <body>
         {% block header %}
             {% if not hideUserBar|default(true) %}
                 {% include 'components/navigation/userbar.html.twig' %}

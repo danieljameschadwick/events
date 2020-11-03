@@ -9,19 +9,19 @@
         {{ include('components/landing/hero.html.twig') }}
     </section>
 
-    <section class="container my-12 flex flex-col md:flex-row h-auto xs:h-250 mb-5 px-5 sm:p-0 sm:mb-16">
+    <section class="container my-12 flex flex-col md:flex-row min-h-400 mb-5 px-5 sm:p-0 sm:mb-16">
         {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION')) %}
-            <div class="h-full w-full md:w-1/2 mb-5 xl:mb-0">
+            <div class="min-h-400  w-full md:w-1/2 mb-5 xl:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}
             </div>
 
-            <div class="flex items-center h-full w-full md:w-1/2 p-4 h-full">
+            <div class="flex items-center w-full md:w-1/2 p-4 h-full">
                 {{ include('components/landing/mobile.html.twig') }}
             </div>
         {% else %}
-            <div class="h-full w-full mb-5 sm:mb-0">
+            <div class="flex-grow mb-5 sm:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}

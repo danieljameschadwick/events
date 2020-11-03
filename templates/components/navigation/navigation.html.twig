@@ -19,6 +19,11 @@
 
         <div class="w-auto flex-grow lg:flex lg:items-center">
             <div class="text-sm lg:flex-grow">
+                {% if app.user.uuid is defined %}
+                    <a href="{{ path('app_homepage') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
+                        Home
+                    </a>
+                {% endif %}
                 <a href="{{ path('event_listing') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
                     Events
                 </a>

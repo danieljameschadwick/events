@@ -29,7 +29,9 @@ module.exports = {
             },
             height: {
                 200: '200px',
-                250: '250px'
+                250: '250px',
+                300: '300px',
+                400: '400px',
             },
             screens: {
                 xs: '420px',
@@ -44,6 +46,7 @@ module.exports = {
                 '25': '25px',
                 '60': '60px',
                 '300': '300px',
+                '400': '400px'
             },
             maxHeight: {
                 '300': '300px',

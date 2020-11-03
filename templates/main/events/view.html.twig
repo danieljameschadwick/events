@@ -55,40 +55,43 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="flex">
-            <div class="w-full sm:w-2/3">
-                <h4>Sign Ups</h4>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Sign Up Date</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for signUp in event.signUps %}
-                        <tr>
-                            <td>
-                                {{ signUp.name }}
-                            </td>
-                            <td>
-                                {{ signUp.signUpDate|date('d/m/Y H:i') }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <div class="container flex flex-col sm:flex-row">
+        <div class="w-full sm:w-2/3">
+            <h4 class="mb-3">
+                Sign Ups
+            </h4>
 
-            <div class="w-full sm:w-1/3 mb-4">
-                <div class="col-12 p-3">
-                    <h4 class="text-center mb-3">Location</h4>
-                    <p>Allam Sport Centre,</p>
-                    <p>Inglemire Lane,</p>
-                    <p>Hull,</p>
-                    <p>HU6 7TS.</p>
-                </div>
+            <table class="w-full">
+                <thead class="text-md text--bold">
+                    <tr>
+                        <td class="border border-solid border-gray-lighter p-3">Name</td>
+                        <td class="border border-solid border-gray-lighter p-3">Sign Up Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for signUp in event.signUps %}
+                    <tr>
+                        <td class="border border-solid border-gray-lighter p-3">
+                            {{ signUp.name }}
+                        </td>
+                        <td class="border border-solid border-gray-lighter p-3">
+                            {{ signUp.signUpDate|date('d/m/Y H:i') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="w-full sm:w-1/3 mb-4">
+            <div class="col-12 p-3 text-center">
+                <h4 class="mb-3">
+                    Location
+                </h4>
+                <p>Allam Sport Centre,</p>
+                <p>Inglemire Lane,</p>
+                <p>Hull,</p>
+                <p>HU6 7TS.</p>
             </div>
         </div>
     </div>
