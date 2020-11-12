@@ -150,7 +150,7 @@ class EventController extends AbstractController
         }
 
         return $this->render(
-            'main/events/sign-up.html.twig',
+            'main/events/sign_up.html.twig',
             [
                 'form' => $signUpForm->createView(),
             ]

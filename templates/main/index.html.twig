@@ -9,9 +9,9 @@
         {{ include('components/landing/hero.html.twig') }}
     </section>
 
-    <section class="container my-12 flex flex-col md:flex-row min-h-400 mb-5 px-5 sm:p-0 sm:mb-16">
+    <section class="container my-12 flex flex-col md:flex-row mb-5 px-5 sm:p-0 sm:mb-16">
         {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION')) %}
-            <div class="min-h-400  w-full md:w-1/2 mb-5 xl:mb-0">
+            <div class="min-h-400 w-full md:w-1/2 mb-5 xl:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}
@@ -21,7 +21,7 @@
                 {{ include('components/landing/mobile.html.twig') }}
             </div>
         {% else %}
-            <div class="flex-grow mb-5 sm:mb-0">
+            <div class="w-full mb-5 sm:mb-0">
                 {{ include('components/landing/release.html.twig', {
                     released: isFeatureEnabled(constant('App\\Entity\\Core\\Feature::WEB_APPLICATION'))
                 }) }}

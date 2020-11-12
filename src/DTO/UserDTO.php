@@ -37,11 +37,11 @@ class UserDTO
     /**
      * UserDTO constructor.
      *
-     * @param string|null $uuid
+     * @param UuidInterface|null $uuid
      * @param string|null $username
      * @param string|null $email
      * @param string|null $password
-     * @param array|null  $roles
+     * @param array|null $roles
      */
     public function __construct(?UuidInterface $uuid = null, ?string $username = null, ?string $email = null, ?string $password = null, array $roles = [])
     {

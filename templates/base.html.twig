@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
@@ -12,9 +12,7 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    {# todo: enable footer sticky and body fill #}
-    {#    <body class="flex flex-col h-screen">#}
-    <body>
+    <body class="flex flex-col h-screen">
         {% block header %}
             {% if not hideUserBar|default(true) %}
                 {% include 'components/navigation/userbar.html.twig' %}
@@ -23,11 +21,13 @@
             {% include 'components/navigation/navigation.html.twig' %}
         {% endblock header %}
 
-        {% block page %}
-            <div id="page-container" class="w-full flex-grow px-5">
-                {% block body %}{% endblock %}
-            </div>
-        {% endblock page %}
+        <div id="page" class="mb-auto">
+            {% block page %}
+                <div id="page-container" class="w-full flex-grow px-5">
+                    {% block body %}{% endblock %}
+                </div>
+            {% endblock page %}
+        </div>
 
         {% block footer %}
             {% include 'footer/footer.html.twig' %}

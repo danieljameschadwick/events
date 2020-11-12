@@ -35,8 +35,21 @@
 
         <div>
             {% if app.user %}
-                <a class="link--primary mr-3" href="{{ url('app_homepage') }}">{{ app.user.username }}</a>
-                <a class="link--primary" href="{{ url('app_logout') }}">Logout</a>
+                {{ include('components/ui/user_dropdown.html.twig', {
+                    'panelItems': [
+                        {
+                            'name': 'Settings',
+                            'routeName': 'app_user_settings',
+                            'routeParams': {
+                                'userName': app.user.username
+                            }
+                        },
+                        {
+                            'name': 'Logout',
+                            'routeName': 'app_logout'
+                        }
+                    ]
+                }) }}
             {% else %}
                 <a class="link--primary" href="{{ url('app_login') }}">Login</a>
             {% endif %}

@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use App\DTO\UserDTO;
 use App\Entity\User;
-use App\Enumeration\NavigationEnumerator;
 use App\Form\UserSettingFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,15 +48,53 @@ class UserController extends AbstractController
                 ->getOneByUserName($userName);
         }
 
-        $settingsForm = $this->createForm(UserSettingFormType::class, UserDTO::create($user))
-            ->createView();
+        $settingsForm = $this->createForm(
+            UserSettingFormType::class,
+            UserDTO::create($user)
+        );
 
         return $this->render(
             'main/profile/view.html.twig',
             [
-                'navigation' => NavigationEnumerator::$navigation,
                 'user' => $user,
-                'userSettingsForm' => $settingsForm,
+                'settingsForm' => $settingsForm->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route(name="settings", path="/{userName}/settings")
+     * @IsGranted("ROLE_USER")
+     *
+     * @param string $userName
+     *
+     * @return Response
+     */
+    public function setting(string $userName): Response
+    {
+        $settingsForm = null;
+        $user = null;
+        $currentUser = $this->getUser();
+
+        if ($currentUser instanceof User) {
+            $user = $currentUser;
+        }
+
+        if (!$user instanceof User) {
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->getOneByUserName($userName);
+        }
+
+        $settingsForm = $this->createForm(
+            UserSettingFormType::class,
+            UserDTO::create($user)
+        );
+
+        return $this->render(
+            'main/profile/settings.html.twig',
+            [
+                'settingsForm' => $settingsForm->createView(),
             ]
         );
     }
