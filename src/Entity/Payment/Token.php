@@ -11,7 +11,7 @@ use Payum\Core\Security\TokenInterface;
  * todo: refactor to remove dependency on TokenInterface.
  *
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblToken"
  * )
  * @ORM\Entity()

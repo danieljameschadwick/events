@@ -15,6 +15,12 @@ return PhpCsFixer\Config::create()
             'only_untyped' => false,
         ],
         'phpdoc_align' => false,
+        'braces' => [
+            'allow_single_line_closure' => false,
+            'position_after_functions_and_oop_constructs' => 'same',
+            'position_after_control_structures' => 'next',
+        ],
+        'void_return' => true
     ])
     ->setFinder($finder)
 ;

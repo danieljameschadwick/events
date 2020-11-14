@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblFeature"
  * )
  *

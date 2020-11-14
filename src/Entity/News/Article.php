@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Entity\News;
 
 use App\DTO\News\ArticleDTO;
-use App\Entity\User;
+use App\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblArticle"
  * )
  *
@@ -65,7 +65,7 @@ class Article
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User")
      * @ORM\JoinColumn(name="strAuthorUuid", referencedColumnName="strUuid")
      */
     private $author;

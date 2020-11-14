@@ -27,6 +27,9 @@
                 <a href="{{ path('event_listing') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
                     Events
                 </a>
+                <a href="{{ path('calendar_index') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
+                    Calendar
+                </a>
                 <a href="{{ path('news_listing') }}" class="link--primary inline-block hover:text-white mx-2 text-center">
                     News
                 </a>
@@ -38,6 +41,13 @@
                 {{ include('components/ui/user_dropdown.html.twig', {
                     'panelItems': [
                         {
+                            'name': 'Profile',
+                            'routeName': 'app_user_view',
+                            'routeParams': {
+                                'userName': app.user.username
+                            }
+                        },
+                        {
                             'name': 'Settings',
                             'routeName': 'app_user_settings',
                             'routeParams': {
@@ -46,7 +56,8 @@
                         },
                         {
                             'name': 'Logout',
-                            'routeName': 'app_logout'
+                            'routeName': 'app_logout',
+                            'additionalClass': 'bg-red-700 text-white'
                         }
                     ]
                 }) }}

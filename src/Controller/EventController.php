@@ -7,7 +7,7 @@ namespace App\Controller;
 use App\DTO\SignUpDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
-use App\Entity\User;
+use App\Entity\User\User;
 use App\Form\EventFormType;
 use App\Form\SignUpFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,10 +16,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class EventController.
+ *
+ * @Route(name="event_", path="/events")
+ */
 class EventController extends AbstractController
 {
     /**
-     * @Route(name="event_listing", path="/events")
+     * @Route(name="listing", path="/")
      *
      * @return Response
      */
@@ -38,7 +43,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_view", path="/events/{id}/{name}", priority="100")
+     * @Route(name="view", path="/{id}/{name}", priority="100")
      *
      * @param int $id
      *
@@ -63,7 +68,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_create", path="/events/create")
+     * @Route(name="create", path="/create")
      *
      * @param Request $request
      *
@@ -71,7 +76,8 @@ class EventController extends AbstractController
      */
     public function create(
         Request $request
-    ): Response {
+    ): Response
+    {
         $form = $this->createForm(EventFormType::class);
         $form->handleRequest($request);
 
@@ -97,11 +103,11 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_sign_up", priority=100, path="/events/sign-up/{id}/{name}")
+     * @Route(name="sign_up", priority=100, path="/sign-up/{id}/{name}")
      *
      * @param Request $request
      * @param Session $session
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -123,7 +129,7 @@ class EventController extends AbstractController
 
         if ($event->isUserSignedUp($user)) {
             return $this->redirectToRoute('event_sign_up_confirmation', [
-                'hash' => $event->getHash(),
+                'hash' => $event->getId(),
                 'repeated' => 'repeated',
             ]);
         }
@@ -158,11 +164,11 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="event_sign_up_confirmation", path="/events/sign-up/{id}/{name}/confirmation/{repeated?}")
+     * @Route(name="sign_up_confirmation", path="/sign-up/{id}/{name}/confirmation/{repeated?}")
      *
      * @param Session $session
-     * @param int     $id
-     * @param string  $repeated
+     * @param int $id
+     * @param string $repeated
      *
      * @return Response
      */

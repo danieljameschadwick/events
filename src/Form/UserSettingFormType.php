@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
+use App\Entity\User\Role;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -41,15 +44,12 @@ class UserSettingFormType extends AbstractType
             )
             ->add(
                 'roles',
-                ChoiceType::class,
+                EntityType::class,
                 [
                     'label' => 'Roles',
                     'multiple' => true,
                     'disabled' => true,
-                    'choices' => [
-                        'Role 1' => 'role_1',
-                        'Role 2' => 'role_2',
-                    ],
+                    'class' => Role::class,
                 ]
             )
             ->add(

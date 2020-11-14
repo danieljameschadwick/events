@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% set isUserProfile =
-    app.user.uuid is defined
-    and app.user.username is same as(user.username)
-%}
+	app.user.uuid is defined
+	and app.user.username is same as(user.username) %}
 
 {% block body %}
-    <div class="container mt-4">
-        <div class="row">
-            <h3>{{ user.name }}</h3>
-        </div>
+	<div class="container mt-4">
+		<div class="row">
+			<h3>{{ user.name }}</h3>
+		</div>
 
-    </div>
+		<div>
+			<h4>Groups</h4>
+
+			<div class="flex flex-grow w-full">
+				{% for group in user.groups %}
+					<div>
+						<a href="{{ path('app_group_view', {'name': group.name}) }}">{{ group.name }}</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock body %}

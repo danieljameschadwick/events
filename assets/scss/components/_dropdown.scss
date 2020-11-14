@@ -1,0 +1,13 @@
+.dropdown
+{
+    .panel-items
+    {
+        .panel-item
+        {
+            &:last-of-type
+            {
+                @apply pb-3 rounded-b-md;
+            }
+        }
+    }
+}

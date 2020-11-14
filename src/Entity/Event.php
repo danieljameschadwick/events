@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\DTO\EventDTO;
+use App\Entity\User\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblEvent"
  * )
  *
@@ -27,20 +29,17 @@ class Event
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(name="intEventId", type="integer", length=20)
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $id;
-
-    /**
-     * @var UuidInterface|null
-     *
-     * @ORM\Column(name="strUuid", type="uuid", length=40, unique=true)
-     */
-    private $hash;
 
     /**
      * @var string
      *
      * @ORM\Column(name="strName", type="string", length=120)
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $name;
 
@@ -48,14 +47,18 @@ class Event
      * @var string
      *
      * @ORM\Column(name="strDescription", type="text", nullable=true)
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $description;
 
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="events")
      * @ORM\JoinColumn(name="strOrganisedUuid", referencedColumnName="strUuid")
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $organiser;
 
@@ -63,6 +66,8 @@ class Event
      * @var \DateTime|null
      *
      * @ORM\Column(name="dtmStartDateTime", type="datetime", nullable=true)
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $startDateTime;
 
@@ -70,6 +75,8 @@ class Event
      * @var \DateTime|null
      *
      * @ORM\Column(name="dtmEndDateTime", type="datetime", nullable=true)
+     *
+     * @Groups("CALENDAR_EVENT")
      */
     private $endDateTime;
 
@@ -97,7 +104,6 @@ class Event
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
     ) {
-        $this->hash = Uuid::uuid4();
         $this->name = $name;
         $this->organiser = $organiser;
         $this->description = $description;
@@ -151,14 +157,6 @@ class Event
     public function getDescription(): string
     {
         return $this->description;
-    }
-
-    /**
-     * @return UuidInterface|null
-     */
-    public function getHash(): ?UuidInterface
-    {
-        return $this->hash;
     }
 
     /**

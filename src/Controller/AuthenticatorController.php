@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\DataClass\RegisterDataClass;
-use App\Entity\User;
+use App\Entity\User\User;
 use App\Form\LoginFormType;
 use App\Form\RegisterFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

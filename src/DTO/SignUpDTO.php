@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use App\Entity\Event;
-use App\Entity\User;
+use App\Entity\User\User;
 
 class SignUpDTO
 {

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\DTO\SignUpDTO;
+use App\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblSignUp"
  * )
  *
@@ -58,7 +59,7 @@ class SignUp
     /**
      * @var User|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="signUps")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="signUps")
      * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid", nullable=true)
      */
     private $user;

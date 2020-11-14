@@ -1,4 +1,4 @@
-<div id="dropdown" class="relative inline-block text-left">
+<div id="dropdown" class="dropdown relative inline-block text-left">
 	<div id="button">
 		{% block button %}
 			<span class="rounded-md shadow-sm">
@@ -16,14 +16,13 @@
 		{% endblock button %}
 	</div>
 
-	<div id="panel" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
+	<div id="panel" class="hidden origin-top-right absolute right-0 mt-1 w-56 rounded-md shadow-lg">
 		{% block panel %}
 			<div class="rounded-md bg-white shadow-xs">
-				<div class="py-1" role="menu">
+				<div class="panel-items pt-2" role="menu">
 					{% for item in panelItems %}
 						<a href="{{ path(item.routeName, item.routeParams|default([])) }}"
-						   class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-						   role="menuitem">
+						   class="panel-item block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 {{ item.additionalClass|default }}">
 							{{ item.name }}
 						</a>
 					{% endfor %}

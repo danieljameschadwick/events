@@ -11,7 +11,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * @ORM\Table(
- *     schema="events",
+ *     schema="Events",
  *     name="tblPayment"
  * )
  * @ORM\Entity

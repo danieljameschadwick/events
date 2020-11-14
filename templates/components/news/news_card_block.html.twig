@@ -1,4 +1,4 @@
-<div class="border-solid border-gray-lighter h-auto w-full border-2 border-gray-200 {{ rounded|default('rounded-lg') }} overflow-hidden">
+<div class="border-solid border-gray-lighter h-auto w-full border border-gray-200 {{ rounded|default('rounded-lg') }} overflow-hidden">
     <a href="{{ url('news_view', {'id': article.id, 'slug': article.slug}) }}">
         <img class="max-h-300 lg:h-auto md:h-36 w-full object-cover object-center"
              src="{{ article.imagePath }}"

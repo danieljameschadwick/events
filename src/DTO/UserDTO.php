@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Ramsey\Uuid\UuidInterface;
 
 class UserDTO

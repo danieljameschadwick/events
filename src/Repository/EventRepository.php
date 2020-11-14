@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Event;
+use App\Entity\User\User;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -44,24 +47,53 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param User $user
+     * @param CarbonInterface $startDate
+     * @param CarbonInterface $endDate
+     *
      * @return Event[]
      */
-    public function getUpcomingEvents(): array
+    public function getEvents(
+        CarbonInterface $startDate,
+        CarbonInterface $endDate,
+        ?User $user = null
+    ): array
     {
         $qb = $this->getQueryBuilder();
         $eb = $qb->expr();
 
-        return $qb
+        $qb->innerJoin('event.signUps', 'signUp')
+            ->leftJoin('signUp.user', 'user')
             ->andWhere(
                 $eb->gte('event.startDateTime', ':startDateTime'),
                 $eb->lte('event.startDateTime', ':endDateTime')
             )
             ->setParameters([
-                'startDateTime' => new \DateTime(),
-                'endDateTime' => new \DateTime('+4 weeks'),
-            ])
+                'startDateTime' => $startDate,
+                'endDateTime' => $endDate,
+            ]);
+
+        if ($user instanceof User) {
+            $qb->andWhere($eb->eq('user.uuid', ':uuid'))
+                ->setParameter('uuid', $user->getUuid());
+        }
+
+        return $qb
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param User|null $user
+     *
+     * @return Event[]
+     */
+    public function getUpcomingEvents(?User $user = null): array
+    {
+        $startDate = Carbon::now();
+        $endDate = $startDate->copy()->addWeeks(4);
+
+        return $this->getEvents($startDate, $endDate, $user);
     }
 
     /**

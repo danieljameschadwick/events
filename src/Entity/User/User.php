@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\User;
 
+use App\Entity\Event;
+use App\Entity\SignUp;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * which will be managed across all my applications.
  *
  * @ORM\Table(
- *     schema="events",
+ *     schema="Users",
  *     name="tblUser"
  * )
  *
@@ -89,7 +91,7 @@ class User implements UserInterface
      * @var Event[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="organiser")
-     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strOrangisedUuid")
+     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strOrganisedUuid")
      */
     private $events;
 
@@ -102,13 +104,25 @@ class User implements UserInterface
     private $signUps;
 
     /**
+     * @var UserGroup[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\User\UserGroup", mappedBy="user")
+     * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid")
+     */
+    private $groups;
+
+    /**
      * User constructor.
      *
      * @param string $username
      * @param string $email
      * @param string $password
      */
-    private function __construct(string $username, string $email, string $password)
+    private function __construct(
+        string $username,
+        string $email,
+        string $password
+    )
     {
         $this->username = $username;
         $this->email = $email;
@@ -117,6 +131,7 @@ class User implements UserInterface
         $this->roles = [];
         $this->events = new ArrayCollection();
         $this->signUps = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -126,7 +141,11 @@ class User implements UserInterface
      *
      * @return User
      */
-    public static function create($username, $email, $password): User
+    public static function create(
+        string $username,
+        string $email,
+        string $password
+    ): User
     {
         return new self(
             $username,
@@ -290,7 +309,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     /**
@@ -307,6 +326,14 @@ class User implements UserInterface
     public function getSignUps()
     {
         return $this->signUps;
+    }
+
+    /**
+     * @return UserGroup[]
+     */
+    public function getGroups(): array
+    {
+        return $this->groups->toArray();
     }
 
     /**

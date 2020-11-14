@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -33,6 +33,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @param string $username
      * @return User|null
+     *
      */
     public function getOneByUserName(string $username): ?User
     {
@@ -45,6 +46,27 @@ class UserRepository extends ServiceEntityRepository
             )
             ->setParameters([
                 'username' => $username,
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return User|null
+     */
+    public function getOneByUuid(string $uuid): ?User
+    {
+        $qb = $this->getQueryBuilder();
+        $eb = $qb->expr();
+
+        return $qb
+            ->andWhere(
+                $eb->eq('user.uuid', ':uuid')
+            )
+            ->setParameters([
+                'uuid' => $uuid,
             ])
             ->getQuery()
             ->getOneOrNullResult();

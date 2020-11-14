@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO\News;
 
-use App\Entity\User;
+use App\Entity\User\User;
 
 class ArticleDTO
 {
