@@ -73,4 +73,17 @@ class CalendarController extends AbstractFOSRestController
             ),
         );
     }
+
+    /**
+     * @TODO: Object returned as https://fullcalendar.io/docs/event-object
+     *
+     * @Rest\Get(path="/events")
+     * @Rest\View(serializerGroups={"CALENDAR_EVENT"})
+     *
+     * @return View
+     */
+    public function events(): View
+    {
+        return View::create();
+    }
 }

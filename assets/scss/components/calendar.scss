@@ -9,4 +9,12 @@
             @apply bg-blue-200;
         }
     }
+
+    .fc-daygrid-day
+    {
+        &.fc-day-today
+        {
+            @apply bg-theme-primary;
+        }
+    }
 }

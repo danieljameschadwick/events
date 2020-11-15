@@ -45,6 +45,8 @@ Encore
         corejs: 3
     })
 
+    .enableReactPreset()
+
     // enables Less support
     .enableLessLoader() // todo: remove legacy styling
     // enable SASS

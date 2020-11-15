@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,45 +42,40 @@ class Group
     private $owner;
 
     /**
-     * @var User[]
+     * @var UserGroup[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\User\User", mappedBy="uuid")
+     * @ORM\OneToMany(targetEntity="App\Entity\User\UserGroup", mappedBy="group")
      */
-    private $members;
+    private $users;
 
     /**
      * @param string $name
      * @param User $owner
-     * @param User[] $members
      */
     private function __construct(
         string $name,
-        User $owner,
-        array $members
+        User $owner
     )
     {
         $this->name = $name;
         $this->owner = $owner;
-        $this->members = $members;
+        $this->users = new ArrayCollection();
     }
 
     /**
      * @param string $name
      * @param User $owner
-     * @param User[] $members
      *
      * @return Group
      */
     public static function create(
         string $name,
-        User $owner,
-        array $members
+        User $owner
     ): self
     {
         return new self(
             $name,
-            $owner,
-            $members
+            $owner
         );
     }
 
@@ -110,8 +106,8 @@ class Group
     /**
      * @return User[]
      */
-    public function getMembers(): array
+    public function getUsers(): array
     {
-        return $this->members;
+        return $this->users;
     }
 }

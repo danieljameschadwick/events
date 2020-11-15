@@ -28,7 +28,7 @@ class UserGroup
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="userGroups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="groups")
      * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid")
      */
     private $user;
@@ -36,7 +36,7 @@ class UserGroup
     /**
      * @var Group
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\Group", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\Group", inversedBy="users")
      * @ORM\JoinColumn(name="intGroupId", referencedColumnName="intGroupId")
      */
     private $group;
