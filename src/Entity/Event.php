@@ -154,6 +154,16 @@ class Event
     /**
      * @return string
      */
+    public function getSlug(): string
+    {
+        return strtolower(
+            str_replace(' ', '-', $this->getName())
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\EventDTO;
 use App\DTO\SignUpDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
 use App\Entity\User\User;
+use App\Form\EventEditType;
 use App\Form\EventFormType;
 use App\Form\SignUpFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +45,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="view", path="/{id}/{name}", priority="100")
+     * @Route(name="view", path="/{id}/{slug}", priority="100")
      *
      * @param int $id
      *
@@ -98,6 +100,39 @@ class EventController extends AbstractController
             'main/events/create.html.twig',
             [
                 'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route(name="edit", path="/edit/{id}/{slug}")
+     *
+     * @param Request $request
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit(
+        Request $request,
+        int $id
+    ): Response
+    {
+        $event = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->getOneById($id);
+
+        if (!$event instanceof Event) {
+            throw new \InvalidArgumentException(sprintf('Event %s not found', $id));
+        }
+
+        $form = $this->createForm(EventEditType::class, EventDTO::populate($event));
+        $form->handleRequest($request);
+
+        return $this->render(
+            'main/events/edit.html.twig',
+            [
+                'event' => $event,
+                'form' => $form->createView()
             ]
         );
     }

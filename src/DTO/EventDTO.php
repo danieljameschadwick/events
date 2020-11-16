@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
+use App\Entity\Event;
 use App\Entity\User\User;
+use Doctrine\Common\Collections\Collection;
 
 class EventDTO
 {
@@ -39,12 +41,12 @@ class EventDTO
     private $signUpDTOs;
 
     /**
-     * @param string|null    $name
-     * @param User|null      $organiser
-     * @param string|null    $description
+     * @param string|null $name
+     * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[]    $signUpDTOs
+     * @param SignUpDTO[] $signUpDTOs
      */
     public function __construct(
         ?string $name = null,
@@ -53,7 +55,8 @@ class EventDTO
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    ) {
+    )
+    {
         $this->name = $name;
         $this->organiser = $organiser;
         $this->description = $description;
@@ -63,12 +66,12 @@ class EventDTO
     }
 
     /**
-     * @param string|null    $name
-     * @param User|null      $organiser
-     * @param string|null    $description
+     * @param string|null $name
+     * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[]    $signUpDTOs
+     * @param SignUpDTO[] $signUpDTOs
      *
      * @return EventDTO
      */
@@ -79,7 +82,8 @@ class EventDTO
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    ): EventDTO {
+    ): EventDTO
+    {
         return new self(
             $name,
             $organiser,
@@ -88,6 +92,39 @@ class EventDTO
             $endDateTime,
             $signUpDTOs
         );
+    }
+
+    /**
+     * @param Event $event
+     *
+     * @return EventDTO
+     */
+    public static function populate(Event $event): EventDTO
+    {
+        return new self(
+            $event->getName(),
+            $event->getOrganiser(),
+            $event->getDescription(),
+            $event->getStartDateTime(),
+            $event->getEndDateTime(),
+            self::populateSignUps($event->getSignUps())
+        );
+    }
+
+    /**
+     * @param Collection $signUps
+     *
+     * @return SignUpDTO[]
+     */
+    private static function populateSignUps(Collection $signUps): array
+    {
+        $signUpDTOs = [];
+
+        foreach ($signUps as $signUp) {
+            $signUpDTOs[] = SignUpDTO::populate($signUp);
+        }
+
+        return $signUpDTOs;
     }
 
     /**

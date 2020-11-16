@@ -9,7 +9,15 @@
     and event.organiser.uuid is same as(app.user.uuid) %}
 
 {% block body %}
-    <div class="container mt-4">
+    <div class="container mt-4 relative">
+        <a href="{{ path('event_edit', {'id': event.id, 'slug': event.slug}) }}" class="flex absolute right-0 top-0 p-2 bg-theme-primary rounded-md items-center">
+            <div class="w-5 h-5 ml-1 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" width="24" height="24" viewBox="0 0 24 24"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>
+            </div>
+
+            Edit
+        </a>
+
         <div class="grid grid-cols-1 gap-2 text-center mb-4">
             <div class="w-full">
                 <h3>{{ event.name }}</h3>
@@ -29,21 +37,10 @@
 
         <div class="flex">
             {# todo: after grid is implemented, clean up fractions #}
-            <div class="w-full sm:w-{{ canEdit ? '2/3' : 'full' }} mb-4">
+            <div class="w-full sm:w-full mb-4">
                 <h4>Description</h4>
                 {{ event.description }}
             </div>
-
-            {% if canEdit %}
-                <div class="w-full sm:w-1/3 mb-4">
-                    <div class="w-auto p-3 theme--background-light">
-                        <h4 class="text-center mb-3">Manage</h4>
-                        <p class="text-center">
-                            Placeholder text for the event edit form.
-                        </p>
-                    </div>
-                </div>
-            {% endif %}
         </div>
     </div>
 
