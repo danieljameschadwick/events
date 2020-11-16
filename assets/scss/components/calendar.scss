@@ -1,20 +1,65 @@
-.calendar
+.calendar .fc-theme-standard
 {
-    .date
+    th, td
     {
-        @apply inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 text-black-darkest;
+        @apply border-0;
+    }
 
-        &:hover
+    .fc-daygrid, .fc-scrollgrid
+    {
+        @apply border-0;
+    }
+
+    .fc-col-header
+    {
+        .fc-col-header-cell
         {
-            @apply bg-blue-200;
+            font-family: 'Source Sans Pro', sans-serif;
+
+            @apply text-xl font-semibold;
         }
     }
 
     .fc-daygrid-day
     {
+        @apply border-0 rounded-xl p-1 h-100;
+
+        .fc-daygrid-day-frame
+        {
+            @apply rounded-xl border border-solid border-gray-lightest;
+
+            .fc-daygrid-day-top
+            {
+                @apply flex-row;
+
+                .fc-daygrid-day-number
+                {
+                    font-family: 'Source Sans Pro', sans-serif;
+
+                    @apply ml-1 text-2xl font-semibold;
+                }
+            }
+        }
+
         &.fc-day-today
         {
-            @apply bg-theme-primary;
+            .fc-daygrid-day-frame
+            {
+                @apply bg-theme-primary border-theme-primary;
+            }
+        }
+    }
+
+    .fc-button-primary
+    {
+        @apply bg-theme-primary border-0;
+
+        &.fc-today-button
+        {
+            &:disabled
+            {
+                @apply bg-black-darkest opacity-100;
+            }
         }
     }
 }

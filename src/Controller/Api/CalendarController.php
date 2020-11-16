@@ -38,10 +38,7 @@ class CalendarController extends AbstractFOSRestController
         EntityManagerInterface $doctrine
     ): View
     {
-        $uuid = '690ecd86-fc46-11ea-ae6d-acde48001122'; // @TODO: parameterize
-
-        $user = $doctrine->getRepository(User::class)
-            ->getOneByUuid($uuid);
+        $user = $this->getUser();
 
         if (!$user instanceof User) {
             return View::create('Can\'t find user', Response::HTTP_NOT_FOUND);
@@ -84,6 +81,12 @@ class CalendarController extends AbstractFOSRestController
      */
     public function events(): View
     {
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            return View::create('Can\'t find user', Response::HTTP_NOT_FOUND);
+        }
+
         return View::create();
     }
 }

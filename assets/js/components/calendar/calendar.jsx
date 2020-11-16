@@ -52,9 +52,9 @@ const Calendar = () => {
                         for (const [key, event] of Object.entries(events)) {
                             formattedEvents.push({
                                 'title': event.name,
-                                'date': event.startDateTime
+                                'date': event.startDateTime,
                             })
-                        }
+                           }
                     }
 
                     setEvents(formattedEvents);
@@ -66,14 +66,10 @@ const Calendar = () => {
             )
     }, []);
 
-    const handleDateClick = (arg) => {
-        alert(arg.dateStr);
-    }
-
     const handleEventClick = (arg) => {
         setModalData({
-            title: arg.title,
-            startDateTime: arg.startDateTime
+            title: arg.event.title,
+            date: arg.event.date
         });
 
         openModal();
@@ -91,6 +87,8 @@ const Calendar = () => {
                     eventClick={handleEventClick}
                     initialView="dayGridMonth"
                     events={events}
+                    themeSystem={'theme'}
+                    firstDay={1}
                 />
 
                 <Modal
@@ -100,9 +98,9 @@ const Calendar = () => {
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <h2>Test Modal</h2>
+                    <h2>{modalData.title}</h2>
                     <button onClick={closeModal}>close</button>
-                    <div>{ modalData.startDateTime }</div>
+                    <div>{ modalData.date }</div>
                 </Modal>
             </div>
         )
