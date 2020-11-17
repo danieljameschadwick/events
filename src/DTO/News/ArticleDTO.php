@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTO\News;
 
+use App\Entity\News\Article;
 use App\Entity\User\User;
 
 class ArticleDTO
@@ -89,6 +90,23 @@ class ArticleDTO
             $imagePath,
             $strapLine,
             $publishDate
+        );
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return ArticleDTO
+     */
+    public static function populate(Article $article): ArticleDTO
+    {
+        return new self(
+            $article->getTitle(),
+            $article->getText(),
+            $article->getAuthor(),
+            $article->getImagePath(),
+            $article->getStrapLine(),
+            $article->getPublishDate()
         );
     }
 

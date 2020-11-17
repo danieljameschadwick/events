@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% set canEdit = is_granted('ROLE_ADMIN') %}
+
+{% block body %}
+    <div class="container mt-4">
+        {{ form_start(form) }}
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock body %}

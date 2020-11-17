@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\DTO\EventDTO;
+use App\DTO\News\ArticleDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventEditType extends AbstractType
+class ArticleEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,30 +24,56 @@ class EventEditType extends AbstractType
     {
         $builder
             ->add(
-                'name',
+                'title',
                 TextType::class,
                 [
+                    'label' => 'Title:',
                     'required' => true,
-                    'label' => 'Event Name:',
                 ]
             )
             ->add(
-                'startDateTime',
-                DateTimeType::class,
+                'text',
+                TextareaType::class,
                 [
+                    'label' => 'Body:',
                     'required' => true,
-                    'label' => 'Date Time:',
                 ]
             )
             ->add(
-                'organiser',
+                'author',
                 UserType::class,
                 [
-                    'required' => true,
+                    'label' => 'Author:',
+                    'required' => false,
+                    'disabled' => true,
                 ]
             )
             ->add(
-                'submit',
+                'imagePath',
+                TextType::class,
+                [
+                    'required' => false,
+                    'label' => 'Body:',
+                ]
+            )
+            ->add(
+                'strapLine',
+                TextType::class,
+                [
+                    'required' => false,
+                    'label' => 'Strap Line:',
+                ]
+            )
+            ->add(
+                'publishDate',
+                DateTimeType::class,
+                [
+                    'required' => false,
+                    'label' => 'Publish Date:',
+                ]
+            )
+            ->add(
+                'save',
                 SubmitType::class
             );
     }
@@ -56,7 +84,7 @@ class EventEditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => EventDTO::class,
+            'data_class' => ArticleDTO::class,
         ]);
     }
 }

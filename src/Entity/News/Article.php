@@ -112,6 +112,18 @@ class Article
     }
 
     /**
+     * @param ArticleDTO $articleDTO
+     */
+    public function updateFromDTO(ArticleDTO $articleDTO): void
+    {
+        $this->title = $articleDTO->getTitle();
+        $this->text = $articleDTO->getText();
+        $this->imagePath = $articleDTO->getImagePath();
+        $this->strapLine = $articleDTO->getStrapLine();
+        $this->publishDate = $articleDTO->getPublishDate();
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -132,9 +144,12 @@ class Article
      */
     public function getSlug(): string
     {
-        return strtolower(
+        $slugify = strtolower(
             str_replace(' ', '-', $this->getText())
         );
+
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $slugify);
+
     }
 
     /**
