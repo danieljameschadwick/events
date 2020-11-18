@@ -7,3 +7,4 @@ const $ = require('jquery');
 
 // base
 import '../components/ui/dropdown';
+import '../components/ui/editor';

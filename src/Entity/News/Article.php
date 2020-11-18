@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\News;
 
+use App\Classes\Formatter\ArticleFormatter;
 use App\DTO\News\ArticleDTO;
 use App\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -37,9 +38,9 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="strText", type="string")
+     * @ORM\Column(name="strBody", type="string")
      */
-    private $text;
+    private $body;
 
     /**
      * @var string|null
@@ -71,23 +72,23 @@ class Article
     private $author;
 
     /**
-     * @param string                  $title
-     * @param string                  $text
-     * @param User                    $author
-     * @param string|null             $imagePath
-     * @param string|null             $strapLine
+     * @param string $title
+     * @param string $body
+     * @param User $author
+     * @param string|null $imagePath
+     * @param string|null $strapLine
      * @param \DateTimeInterface|null $publishDate
      */
     private function __construct(
         string $title,
-        string $text,
+        string $body,
         User $author,
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
     ) {
         $this->title = $title;
-        $this->text = $text;
+        $this->body = $body;
         $this->author = $author;
         $this->imagePath = $imagePath;
         $this->strapLine = $strapLine;
@@ -103,7 +104,7 @@ class Article
     {
         return new self(
             $articleDTO->getTitle(),
-            $articleDTO->getText(),
+            $articleDTO->getBody(),
             $articleDTO->getAuthor(),
             $articleDTO->getImagePath(),
             $articleDTO->getStrapLine(),
@@ -117,7 +118,7 @@ class Article
     public function updateFromDTO(ArticleDTO $articleDTO): void
     {
         $this->title = $articleDTO->getTitle();
-        $this->text = $articleDTO->getText();
+        $this->body = $articleDTO->getBody();
         $this->imagePath = $articleDTO->getImagePath();
         $this->strapLine = $articleDTO->getStrapLine();
         $this->publishDate = $articleDTO->getPublishDate();
@@ -145,7 +146,7 @@ class Article
     public function getSlug(): string
     {
         $slugify = strtolower(
-            str_replace(' ', '-', $this->getText())
+            str_replace(' ', '-', $this->getBody())
         );
 
         return preg_replace('/[^A-Za-z0-9\-]/', '', $slugify);
@@ -155,9 +156,17 @@ class Article
     /**
      * @return string
      */
-    public function getText(): string
+    public function getBody(): string
     {
-        return $this->text;
+        return $this->body;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBodyBlocks(): array
+    {
+        return ArticleFormatter::format($this->getBody());
     }
 
     /**

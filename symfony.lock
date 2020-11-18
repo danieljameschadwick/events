@@ -2,6 +2,9 @@
     "clue/stream-filter": {
         "version": "v1.4.1"
     },
+    "codex-team/editor.js": {
+        "version": "dev-master"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -92,6 +95,9 @@
         "files": [
             "config/packages/dev/easy_log_handler.yaml"
         ]
+    },
+    "ezyang/htmlpurifier": {
+        "version": "v4.13.0"
     },
     "fresh/doctrine-enum-bundle": {
         "version": "6.0",

@@ -3,8 +3,22 @@
 {% set canEdit = is_granted('ROLE_ADMIN') %}
 
 {% block body %}
+	<div class="container mt-4">
+		<a href="{{ url('news_view', {id: article.id, slug: article.slug}) }}"
+			class="link link--primary">
+			< Return to article
+		</a>
+	</div>
     <div class="container mt-4">
         {{ form_start(form) }}
+            {{ form_row(form.title) }}
+
+        	<div>
+				{{ form_label(form.body) }}
+				<div id="editorjs" class="editor--js"></div>
+				{{ form_widget(form.body, {'attr': {'class': 'hidden', 'data-editor': 'editorjs'}}) }}
+			</div>
+
             {{ form_rest(form) }}
         {{ form_end(form) }}
     </div>

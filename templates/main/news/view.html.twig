@@ -14,22 +14,10 @@
     </div>
 
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <h2>{{ article.title }}</h2>
-            </div>
-        </div>
+        <h2>{{ article.title }}</h2>
 
-        <div class="row">
-            <div class="col-12">
-                {{ article.text }}
-            </div>
-        </div>
+        {{ article.bodyBlocks|formatBlocks }}
 
-        <div class="row mt-5">
-            <div class="col-12">
-                - {{ article.author.name }}
-            </div>
-        </div>
+        - {{ article.author.name }}
     </div>
 {% endblock body %}

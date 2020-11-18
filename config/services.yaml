@@ -43,6 +43,14 @@ services:
             - '@security.helper'
             - '@session'
 
+    # Extensions
+
+    App\Twig\ArticleExtension:
+        calls:
+            - ['setTwig', ['@twig']]
+        tags:
+            - 'twig.extension'
+
     App\Twig\GlobalExtension:
         calls:
             - ['setDoctrine', ['@doctrine']]

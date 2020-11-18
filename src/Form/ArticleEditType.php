@@ -32,8 +32,8 @@ class ArticleEditType extends AbstractType
                 ]
             )
             ->add(
-                'text',
-                TextareaType::class,
+                'body',
+                TextType::class,
                 [
                     'label' => 'Body:',
                     'required' => true,

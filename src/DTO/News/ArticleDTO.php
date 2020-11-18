@@ -17,7 +17,7 @@ class ArticleDTO
     /**
      * @var string|null
      */
-    private $text;
+    private $body;
 
     /**
      * @var User|null
@@ -42,23 +42,24 @@ class ArticleDTO
     /**
      * ArticleDTO constructor.
      *
-     * @param string|null             $title
-     * @param string|null             $text
-     * @param User|null               $author
-     * @param string|null             $imagePath
-     * @param string|null             $strapLine
+     * @param string|null $title
+     * @param string|null $body
+     * @param User|null $author
+     * @param string|null $imagePath
+     * @param string|null $strapLine
      * @param \DateTimeInterface|null $publishDate
      */
     public function __construct(
         ?string $title,
-        ?string $text,
+        ?string $body,
         ?User $author,
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
-    ) {
+    )
+    {
         $this->title = $title;
-        $this->text = $text;
+        $this->body = $body;
         $this->author = $author;
         $this->imagePath = $imagePath;
         $this->strapLine = $strapLine;
@@ -66,26 +67,27 @@ class ArticleDTO
     }
 
     /**
-     * @param string|null             $title
-     * @param string|null             $text
-     * @param User|null               $author
-     * @param string|null             $imagePath
-     * @param string|null             $strapLine
+     * @param string|null $title
+     * @param string|null $body
+     * @param User|null $author
+     * @param string|null $imagePath
+     * @param string|null $strapLine
      * @param \DateTimeInterface|null $publishDate
      *
      * @return self
      */
     public static function create(
         ?string $title,
-        ?string $text,
+        ?string $body,
         ?User $author,
         ?string $imagePath,
         ?string $strapLine,
         ?\DateTimeInterface $publishDate
-    ): self {
+    ): self
+    {
         return new self(
             $title,
-            $text,
+            $body,
             $author,
             $imagePath,
             $strapLine,
@@ -102,7 +104,7 @@ class ArticleDTO
     {
         return new self(
             $article->getTitle(),
-            $article->getText(),
+            $article->getBody(),
             $article->getAuthor(),
             $article->getImagePath(),
             $article->getStrapLine(),
@@ -129,17 +131,17 @@ class ArticleDTO
     /**
      * @return string|null
      */
-    public function getText(): ?string
+    public function getBody(): ?string
     {
-        return $this->text;
+        return $this->body;
     }
 
     /**
-     * @param string $text
+     * @param string $body
      */
-    public function setText(string $text): void
+    public function setBody(string $body): void
     {
-        $this->text = $text;
+        $this->body = $body;
     }
 
     /**
