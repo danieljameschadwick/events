@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const LinkTool = require('@editorjs/link');
         const Embed = require('@editorjs/embed');
         const Table = require('@editorjs/table');
+        const ImageTool = require('@editorjs/image');
 
         const editor = new EditorJS({
             holder: editorElement.id,
@@ -30,20 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     class: Header,
                     inlineToolbar : true
                 },
-
-                image: SimpleImage,
-
+                image: {
+                    class: ImageTool,
+                    config: {
+                        endpoints: {
+                            byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
+                            byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                        }
+                    }
+                },
                 list: {
                     class: List,
                     inlineToolbar: true,
                     shortcut: 'CMD+SHIFT+L'
                 },
-
                 checklist: {
                     class: Checklist,
                     inlineToolbar: true,
                 },
-
                 quote: {
                     class: Quote,
                     inlineToolbar: true,
@@ -53,35 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     shortcut: 'CMD+SHIFT+O'
                 },
-
-                warning: Warning,
-
                 marker: {
                     class:  Marker,
                     shortcut: 'CMD+SHIFT+M'
                 },
-
                 code: {
                     class:  CodeTool,
                     shortcut: 'CMD+SHIFT+C'
                 },
-
-                delimiter: Delimiter,
-
                 inlineCode: {
                     class: InlineCode,
                     shortcut: 'CMD+SHIFT+C'
                 },
-
-                linkTool: LinkTool,
-
-                embed: Embed,
-
                 table: {
                     class: Table,
                     inlineToolbar: true,
                     shortcut: 'CMD+ALT+T'
                 },
+                warning: Warning,
+                delimiter: Delimiter,
+                linkTool: LinkTool,
+                embed: Embed,
+                simpleImage: SimpleImage,
             },
 
             data: data,

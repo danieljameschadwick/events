@@ -55,14 +55,14 @@ class ArticleExtension extends AbstractExtension
         $content = '';
 
         foreach ($blocks as $block) {
+            dump($block);
+
             $content .= $this->getTwig()->render(
                 sprintf(
                     ArticleType::TEMPLATE_PATH,
                     $block['type']
                 ),
-                [
-                    'data' => $block['data']['text'],
-                ]
+                $block['data']
             );
         }
 
