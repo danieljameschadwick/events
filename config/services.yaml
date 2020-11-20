@@ -56,3 +56,9 @@ services:
             - ['setDoctrine', ['@doctrine']]
         tags:
             - 'twig.extension'
+
+    # Files
+
+    App\Classes\File\FileUploader:
+        arguments:
+            - '%kernel.project_dir%/public/tmp/'

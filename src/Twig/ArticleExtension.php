@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use App\Classes\Articles\ArticleType;
-use App\Entity\Core\Feature;
-use App\Entity\News\Article;
-use App\Repository\ArticleRepository;
-use App\Traits\EntityManagerTrait;
+use App\Classes\Articles\ComponentType;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Markup;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 class ArticleExtension extends AbstractExtension
 {
@@ -55,11 +50,9 @@ class ArticleExtension extends AbstractExtension
         $content = '';
 
         foreach ($blocks as $block) {
-            dump($block);
-
             $content .= $this->getTwig()->render(
                 sprintf(
-                    ArticleType::TEMPLATE_PATH,
+                    ComponentType::TEMPLATE_PATH,
                     $block['type']
                 ),
                 $block['data']

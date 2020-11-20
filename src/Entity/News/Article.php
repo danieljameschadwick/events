@@ -146,7 +146,7 @@ class Article
     public function getSlug(): string
     {
         $slugify = strtolower(
-            str_replace(' ', '-', $this->getBody())
+            str_replace(' ', '-', $this->getTitle())
         );
 
         return preg_replace('/[^A-Za-z0-9\-]/', '', $slugify);

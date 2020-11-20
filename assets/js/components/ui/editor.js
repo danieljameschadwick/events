@@ -1,4 +1,5 @@
 import EditorJS from '@editorjs/editorjs';
+const Routing = require('../../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js');
 
 document.addEventListener('DOMContentLoaded', () => {
     const editors = document.querySelectorAll('.editor--js');
@@ -35,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     class: ImageTool,
                     config: {
                         endpoints: {
-                            byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
-                            byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                            // byFile: Routing.generate('file_app_api_file_upload'), // Your backend file uploader endpoint
+                            byFile: 'https://events.local/api/file/upload', // Your backend file uploader endpoint
+                            byUrl: 'https://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
                         }
                     }
                 },
