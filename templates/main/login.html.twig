@@ -3,6 +3,7 @@
 {% block title %}
     {{ parent() }} - Login
 {% endblock title %}
+
 {% block body %}
     <div class="login">
 {#        <form method="post" data-parsley-validate data-parsley-trigger="keyup">#}
@@ -37,7 +38,7 @@
 
 {#        </form>#}
 
-        {{ form_start(form, {'method': 'POST', 'attr': { 'data-parsley-validate': true, 'data-parsley-trigger': 'keyup' }}) }}
+        {{ form_start(form, {'method': 'POST'}) }}
             {{ form_row(form.username) }}
             {{ form_row(form.password) }}
             {{ form_row(form.submit) }}
@@ -48,7 +49,3 @@
 {% block stylesheets %}
     {{ encore_entry_link_tags('login') }}
 {% endblock stylesheets %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('parsley') }}
-{% endblock javascripts %}

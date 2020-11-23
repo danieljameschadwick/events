@@ -1,10 +1,4 @@
 module.exports = {
-    future: {
-        // removeDeprecatedGapUtilities: true,
-        // purgeLayersByDefault: true,
-        // defaultLineHeights: true,
-        // standardFontWeights: true
-    },
     purge: [],
     theme: {
         extend: {
@@ -19,8 +13,9 @@ module.exports = {
                     dark: '#2D2D2D',
                 },
                 black: {
-                    dark: '#2a2a2a',
+                    base: '#000000',
                     darkest: '#000000',
+                    dark: '#2a2a2a',
                 },
                 theme: {
                     primary: '#FF7D12',
@@ -54,6 +49,9 @@ module.exports = {
             maxHeight: {
                 '300': '300px',
                 '400': '400px',
+            },
+            maxWidth: {
+                'page': '2000px',
             },
             zIndex: {
                 base: 0,

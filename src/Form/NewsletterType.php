@@ -24,7 +24,7 @@ class NewsletterType extends AbstractType
                 [
                     'attr' => [
                         'placeholder' => 'Your email',
-                        'class' => 'w-full appearance-none bg-gray-800 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black placeholder-gray-500',
+                        'class' => 'w-full appearance-none bg-white rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-black-base placeholder-gray-500',
                     ],
                 ]
             )
