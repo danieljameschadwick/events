@@ -2,7 +2,7 @@
 {
     &--primary
     {
-        @apply text-theme-primary;
+        @apply text-theme-primary dark:text-black-base;
 
         &:hover
         {
