@@ -35,7 +35,7 @@
 
                 <div class="flex items-start">
                     {% for event in events %}
-                        <div class="w-full lg:w-1/2 border border-solid border-gray-lighter p-3 rounded">
+                        <div class="w-full lg:w-1/2 border border-solid border-gray-lighter dark:border-theme-primary p-3 rounded dark:bg-black-dark">
                             <div class="flex flex-wrap sm:flex-nowrap items-center justify-between mb-2">
                                 <h2 class="text-lg font-semibold text-gray-900">
                                     <a class="link--primary"
@@ -44,15 +44,15 @@
                                     </a>
                                 </h2>
 
-                                <small class="text-sm text-gray-700">
+                                <small class="text-sm text-black-base dark:text-theme-primary">
                                     {{ event.startDateTime|date('d/m/Y') }}
                                     {{ event.startDateTime|date('H:i') }} - {{ event.endDateTime|date('H:i') }}
                                 </small>
                             </div>
 
                             <div class="flex items-center">
-                                <div class="flex mr-2 text-gray-700 text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 178" class="w-4 h-5 mr-1">
+                                <div class="flex mr-2 text-black-dark dark:text-theme-primary text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 178" class="w-4 h-5 mr-1 fill-current dark:text-theme-primary">
                                         <path d="M75.6 8.6C53.1 14 37.9 37.2 41.8 60.3 48 97 93 111.6 119.1 85.5c32.9-33 1.8-87.9-43.5-76.9zm25.5 13.6c6.9 3.2 13.5 9.8 16.8 16.8 3.7 7.9 3.7 20.1 0 28-3.3 7-9.9 13.6-16.9 16.9-4.6 2.2-6.9 2.6-14 2.6s-9.4-.4-14-2.6C66 80.6 59.4 74 56.1 67c-3.7-7.9-3.7-20.1 0-28 2.8-5.9 9.4-13.2 14.3-15.7 9.6-5 21.3-5.4 30.7-1.1zM71.3 116.4c-24.9 4.8-46.9 19.2-60.5 39.8-4.2 6.3-4.7 9.6-1.9 12.2 3.6 3.3 7 1.7 11.9-5.4C33 145 52.5 132.1 73 128.4c30.3-5.4 61.2 7.3 78.8 32.6 2.5 3.6 5.2 7.1 6.1 7.7 3.5 3 9.1.1 9.1-4.6 0-5.4-15.3-23.7-26.5-31.7-8.3-5.8-21.3-11.9-31-14.5-10.3-2.6-28.4-3.4-38.2-1.5z"/>
                                     </svg>
                                     <span>{{ event.getNumberOfSignUps }}</span>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <p class="dark:text-white">
+                        <p>
                             You haven't signed up for any events yet. Consider looking
                             <a class="link--primary" href="{{ url('event_listing') }}">here</a>.
                         </p>
