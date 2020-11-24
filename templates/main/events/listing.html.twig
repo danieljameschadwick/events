@@ -15,7 +15,7 @@
                 {% for event in events %}
                     <div class="row">
                         <div class="col-12">
-                            <p>
+                            <p class="dark:text-white">
                                 {{ event.name }},
                                 <a class="link--primary"
                                     href="{{ path('event_view', {'id': event.id, 'slug': event.slug}) }}">

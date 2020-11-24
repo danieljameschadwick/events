@@ -6,6 +6,7 @@ import 'popper.js';
 const $ = require('jquery');
 
 // base
+import '../components/ui/viewport';
 import '../components/ui/dropdown';
 import '../components/ui/editor';
 import '../components/ui/dark-mode';

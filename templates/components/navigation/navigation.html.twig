@@ -22,17 +22,17 @@
 		<div class="w-auto flex-grow lg:flex lg:items-center">
 			<div class="text-sm lg:flex-grow">
 				{% if app.user.uuid is defined %}
-					<a href="{{ path('app_homepage') }}" class="link--primary inline-block mx-2 text-center">
+					<a href="{{ path('app_homepage') }}" class="link--primary dark:text-black-base inline-block mx-2 text-center">
 						Home
 					</a>
 				{% endif %}
-				<a href="{{ path('event_listing') }}" class="link--primary inline-block mx-2 text-center">
+				<a href="{{ path('event_listing') }}" class="link--primary dark:text-black-base inline-block mx-2 text-center">
 					Events
 				</a>
-				<a href="{{ path('calendar_index') }}" class="link--primary inline-block mx-2 text-center">
+				<a href="{{ path('calendar_index') }}" class="link--primary dark:text-black-base inline-block mx-2 text-center">
 					Calendar
 				</a>
-				<a href="{{ path('news_listing') }}" class="link--primary inline-block mx-2 text-center">
+				<a href="{{ path('news_listing') }}" class="link--primary dark:text-black-base inline-block mx-2 text-center">
 					News
 				</a>
 			</div>
@@ -67,12 +67,12 @@
 						{
 							'name': 'Logout',
 							'routeName': 'app_logout',
-							'additionalClass': 'bg-red-700 text-white'
+							'additionalClass': 'panel-item--logout'
 						}
 					]
 				}) }}
 			{% else %}
-				<a class="link--primary" href="{{ url('app_login') }}">Login</a>
+				<a class="link--primary dark:text-black-base" href="{{ url('app_login') }}">Login</a>
 			{% endif %}
 		</div>
 	</div>

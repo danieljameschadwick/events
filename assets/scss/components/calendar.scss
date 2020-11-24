@@ -1,5 +1,7 @@
 .calendar .fc-theme-standard
 {
+    @apply dark:text-white;
+
     th, td
     {
         @apply border-0;

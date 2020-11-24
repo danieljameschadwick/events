@@ -4,6 +4,13 @@
     {
         .panel-item
         {
+            @apply block px-4 py-2 text-sm leading-5 text-gray-700 dark:text-theme-primary;
+
+            &--logout
+            {
+                @apply bg-red-700 text-white dark:text-white;
+            }
+
             &:last-of-type
             {
                 @apply pb-3 rounded-b-md;

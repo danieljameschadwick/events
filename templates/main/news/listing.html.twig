@@ -11,7 +11,7 @@
                 {% for article in articles %}
                     <div class="row">
                         <div class="col-12">
-                            <p>
+                            <p class="dark:text-white">
                                 {{ article.title }},
 
                                 <a class="link--primary" href="{{ path('news_view', {'id': article.id, 'slug': article.slug}) }}">View</a>

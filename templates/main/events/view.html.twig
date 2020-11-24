@@ -24,14 +24,16 @@
             </div>
 
             <div class="w-full">
-                {{ event.formattedDateTime }}
+                <p>{{ event.formattedDateTime }}</p>
             </div>
 
             <div class="w-full">
-                Organised by:
-                <a class="link--primary" href="{{ url('app_user_view', {'userName': event.organiser.username}) }}">
-                    <span class="text--bold">{{ event.organiser.name }}</span>
-                </a>
+                <p>
+                    Organised by:
+                    <a class="link--primary" href="{{ url('app_user_view', {'userName': event.organiser.username}) }}">
+                        <span class="text--bold">{{ event.organiser.name }}</span>
+                    </a>
+                </p>
             </div>
         </div>
 
@@ -39,7 +41,9 @@
             {# todo: after grid is implemented, clean up fractions #}
             <div class="w-full sm:w-full mb-4">
                 <h4>Description</h4>
-                {{ event.description }}
+                <p>
+                    {{ event.description }}
+                </p>
             </div>
         </div>
     </div>
@@ -61,17 +65,21 @@
             <table class="w-full">
                 <thead class="text-md text--bold">
                     <tr>
-                        <td class="border border-solid border-gray-lighter p-3">Name</td>
-                        <td class="border border-solid border-gray-lighter p-3">Sign Up Date</td>
+                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
+                            Name
+                        </td>
+                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
+                            Sign Up Date
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
                 {% for signUp in event.signUps %}
                     <tr>
-                        <td class="border border-solid border-gray-lighter p-3">
+                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
                             {{ signUp.name }}
                         </td>
-                        <td class="border border-solid border-gray-lighter p-3">
+                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
                             {{ signUp.signUpDate|date('d/m/Y H:i') }}
                         </td>
                     </tr>

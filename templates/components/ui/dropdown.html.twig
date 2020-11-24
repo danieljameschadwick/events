@@ -4,7 +4,7 @@
 			<span class="rounded-md shadow-sm">
 				<button type="button"
 						class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-theme-primary text-sm leading-5 font-medium text-black-base
-						    hover:text-white hover:bg-theme-black transition ease-in-out duration-150 dark:bg-black-base dark:text-white"
+						    hover:text-white hover:bg-theme-black transition ease-in-out duration-150 dark:bg-black-base dark:text-theme-primary"
 						id="options-menu" aria-haspopup="true" aria-expanded="true">
 					{% block buttonText %}{% endblock buttonText %}
 
@@ -19,11 +19,11 @@
 
 	<div id="panel" class="hidden origin-top-right absolute right-0 mt-1 w-56 rounded-md shadow-lg">
 		{% block panel %}
-			<div class="rounded-md bg-white shadow-xs">
+			<div class="rounded-md bg-white dark:bg-black-dark shadow-xs">
 				<div class="panel-items pt-2" role="menu">
 					{% for item in panelItems %}
 						<a href="{{ path(item.routeName, item.routeParams|default([])) }}"
-						   class="panel-item block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 {{ item.additionalClass|default }}">
+						   class="panel-item {{ item.additionalClass|default }}">
 							{{ item.name }}
 						</a>
 					{% endfor %}
