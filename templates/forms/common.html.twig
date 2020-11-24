@@ -103,9 +103,7 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}
-            class="link--primary px-4 py-3 bg-black-darkest text-gray-200 text-xs
-            font-semibold rounded hover:bg-theme-primary hover:text-black-base-darkest hover:no-underline"
-    >
+            class="link--primary px-4 py-3 bg-black-darkest text-gray-200 text-xs font-semibold rounded hover:bg-theme-primary hover:text-black-darkest hover:no-underline dark:text-white">
         {%- if translation_domain is same as(false) -%}
             {%- if label_html is same as(false) -%}
                 {{- label -}}

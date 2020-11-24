@@ -30,7 +30,7 @@
     </section>
 
     {% if isFeatureEnabled(constant('App\\Entity\\Core\\Feature::NEWS')) %}
-        <section class="container mt-12 mb-16 px-5 sm:px-0 sm:mx-auto">
+        <section class="container mt-12 mb-16 px-5 sm:p-0 sm:mx-auto">
             {{ include('components/news/news_carousel.html.twig', {
                 articles: getLatestNews()
             }) }}
@@ -41,7 +41,7 @@
         {#        {{ include('components/landing/testimonial.html.twig') }}#}
     </section>
 
-    <section class="container">
+    <section class="container px-5 sm:p-0">
         {{ include('components/landing/newsletter.html.twig', {
             form: newsletterForm
         }, false) }}

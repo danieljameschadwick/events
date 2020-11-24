@@ -1,4 +1,4 @@
-<div class="{{ padding|default('p-4 sm:p-6') }} border border-gray-500 border-top-0 w-full {{ additionalClass|default }}">
+<div class="{{ padding|default('p-4 sm:p-6') }} border border-gray-500 border-top-0 w-full dark:bg-white {{ additionalClass|default }}">
     <div class="flex flex-row">
         <h1 class="flex-grow title-font text-lg font-medium text-gray-900 mb-3">
             <a href="{{ url('news_view', {'id': article.id, 'slug': article.slug}) }}">

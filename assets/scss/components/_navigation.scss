@@ -1,0 +1,26 @@
+.navigation
+{
+    .night-mode
+    {
+        .icon
+        {
+            @apply h-7 fill-current;
+        }
+
+        &.dark
+        {
+            .icon
+            {
+                @apply text-black-base;
+            }
+        }
+
+        &.light
+        {
+            .icon
+            {
+                @apply text-white;
+            }
+        }
+    }
+}

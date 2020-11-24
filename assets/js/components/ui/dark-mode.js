@@ -17,8 +17,6 @@ document.querySelector('#theme-icon').addEventListener('click', (event) => {
     const target = event.currentTarget;
     const html = document.querySelector('html');
 
-    console.log(target);
-
     if (target.classList.contains('dark')) {
         target.classList.remove('dark');
         target.classList.add('light');

@@ -34,8 +34,7 @@ class NewsletterType extends AbstractType
                 [
                     'label' => 'Subscribe',
                     'attr' => [
-                        'class' => 'link--primary px-4 py-3 bg-black-darkest text-theme-primary leading-6 text-xs font-semibold rounded align-middle
-                            hover:text-white hover:no-underline',
+                        'class' => 'link--primary px-4 py-3 bg-black-darkest text-theme-primary leading-6 text-xs font-semibold rounded align-middle hover:text-white hover:no-underline dark:text-white',
                     ],
                 ]
             );
