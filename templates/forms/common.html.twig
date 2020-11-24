@@ -26,7 +26,7 @@
 
 {%- block form_label -%}
     {% if label is not same as(false) -%}
-        {% set _default_class = 'block text-sm font-medium leading-5 text-gray-700' %}
+        {% set _default_class = 'block text-sm font-medium leading-5 text-black-base dark:text-white' %}
 
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}

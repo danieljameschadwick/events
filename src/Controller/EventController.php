@@ -12,6 +12,7 @@ use App\Entity\User\User;
 use App\Form\EventEditType;
 use App\Form\EventFormType;
 use App\Form\SignUpFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,7 @@ class EventController extends AbstractController
 
     /**
      * @Route(name="create", path="/create")
+     * @IsGranted("ROLE_USER") // @todo: add permission for this
      *
      * @param Request $request
      *
@@ -106,6 +108,7 @@ class EventController extends AbstractController
 
     /**
      * @Route(name="edit", path="/edit/{id}/{slug}")
+     * @IsGranted("ROLE_ADMIN") // @todo: debug organiser/admin to edit event
      *
      * @param Request $request
      * @param int $id
