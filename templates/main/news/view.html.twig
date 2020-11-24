@@ -18,6 +18,8 @@
 
         {{ article.bodyBlocks|formatBlocks }}
 
-        - {{ article.author.name }}
+        <span class="text-black-base dark:text-white">
+            - {{ article.author.name }}
+        </span>
     </div>
 {% endblock body %}
