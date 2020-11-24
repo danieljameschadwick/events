@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
+use App\DTO\UserPreferencesDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
 use Carbon\Carbon;
@@ -88,6 +89,14 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var UserPreferences
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\User\UserPreferences", mappedBy="user")
+     * @ORM\JoinColumn(name="intUserPreferencesId", referencedColumnName="intUserPreferencesId")
+     */
+    private $preferences;
+
+    /**
      * @var Event[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="organiser")
@@ -117,16 +126,24 @@ class User implements UserInterface
      * @param string $username
      * @param string $email
      * @param string $password
+     * @param UserPreferencesDTO $preferencesDTO
      */
     private function __construct(
         string $username,
         string $email,
-        string $password
+        string $password,
+        ?UserPreferencesDTO $preferencesDTO = null
     )
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+
+        if ($preferencesDTO instanceof UserPreferencesDTO) {
+            $this->preferences = UserPreferences::createFromDTO($preferencesDTO);
+        } else {
+            $this->preferences = UserPreferences::create($this);
+        }
 
         $this->roles = [];
         $this->events = new ArrayCollection();
@@ -135,22 +152,25 @@ class User implements UserInterface
     }
 
     /**
-     * @param $username
-     * @param $email
-     * @param $password
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @param UserPreferencesDTO|null $preferencesDTO
      *
      * @return User
      */
     public static function create(
         string $username,
         string $email,
-        string $password
+        string $password,
+        ?UserPreferencesDTO $preferencesDTO = null
     ): User
     {
         return new self(
             $username,
             $email,
-            $password
+            $password,
+            $preferencesDTO
         );
     }
 
@@ -162,7 +182,7 @@ class User implements UserInterface
         return new self(
             '',
             '',
-            ''
+            '',
         );
     }
 
@@ -310,6 +330,14 @@ class User implements UserInterface
     public function getPassword(): string
     {
         return (string)$this->password;
+    }
+
+    /**
+     * @return UserPreferences
+     */
+    public function getPreferences(): UserPreferences
+    {
+        return $this->preferences;
     }
 
     /**

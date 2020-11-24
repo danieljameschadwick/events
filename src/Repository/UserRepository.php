@@ -27,7 +27,9 @@ class UserRepository extends ServiceEntityRepository
      */
     private function getQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('user');
+        return $this->createQueryBuilder('user')
+            ->addSelect('preferences')
+            ->innerJoin('user.preferences', 'preferences');
     }
 
     /**

@@ -14,6 +14,15 @@ CREATE TABLE tblUser
 	CONSTRAINT jsnRoles CHECK (json_valid(`jsnRoles`))
 );
 
+CREATE TABLE tblUserPreferences
+(
+    intUserPreferencesId INT AUTO_INCREMENT PRIMARY KEY,
+    strUuid char(36) NOT NULL,
+    bolDarkMode BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT UK_strUuid UNIQUE (strUuid),
+    CONSTRAINT FK_tblUserPreferences_strUuid FOREIGN KEY (strUuid) REFERENCES tblUser (strUuid)
+);
+
 CREATE TABLE ublRole
 (
 	intRoleId int auto_increment primary key,
