@@ -67,7 +67,7 @@ class CalendarController extends AbstractFOSRestController
             array_merge(
                 $calendar,
                 EventFormatter::formatEventsByDate($events)
-            ),
+            )
         );
     }
 

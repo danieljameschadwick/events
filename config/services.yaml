@@ -33,6 +33,10 @@ services:
 #        tags:
 #            - { name: payum.gateway_factory_builder, factory: paypal }
 
+    ##
+    # Forms
+    ##
+
     App\Form\EventFormType:
         arguments:
             - '@security.helper'
@@ -43,7 +47,9 @@ services:
             - '@security.helper'
             - '@session'
 
+    ##
     # Extensions
+    ##
 
     App\Twig\ArticleExtension:
         calls:
@@ -57,8 +63,20 @@ services:
         tags:
             - 'twig.extension'
 
+    ##
     # Files
+    ##
 
     App\Classes\File\FileUploader:
         arguments:
             - '%kernel.project_dir%/public/tmp/'
+
+    ##
+    # Doctrine
+    ##
+
+    App\Listener\MappingListener:
+        arguments:
+            - '%env(string:APP_SCHEMA)%'
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
