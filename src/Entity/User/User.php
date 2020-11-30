@@ -90,7 +90,7 @@ class User implements UserInterface
     /**
      * @var UserPreferences
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\User\UserPreferences", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\User\UserPreferences", mappedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(name="intUserPreferencesId", referencedColumnName="intUserPreferencesId")
      */
     private $preferences;
@@ -181,7 +181,7 @@ class User implements UserInterface
         return new self(
             '',
             '',
-            '',
+            ''
         );
     }
 

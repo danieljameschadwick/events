@@ -74,12 +74,9 @@ class AuthenticatorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-
             $username = isset($form['username']) ?
                 $form['username']->getData() :
-                $form['email']->getData()
-            ;
+                $form['email']->getData();
 
             $user = User::create(
                 $username,
