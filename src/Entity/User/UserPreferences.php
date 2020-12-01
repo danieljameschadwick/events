@@ -38,7 +38,7 @@ class UserPreferences
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="groups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="preferences")
      * @ORM\JoinColumn(name="strUuid", referencedColumnName="strUuid")
      */
     private $user;

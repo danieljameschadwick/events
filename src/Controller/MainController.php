@@ -7,13 +7,16 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\NewsletterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class MainController extends AbstractController
 {
     /**
      * @Route(name="app_index", path="/")
+     * @return Response
      */
     public function index(): Response
     {
