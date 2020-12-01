@@ -58,18 +58,27 @@ class EventFormType extends AbstractType
                 ]
             )
             ->add(
-                'dateTime',
+                'startDateTime',
                 DateTimeType::class,
                 [
                     'required' => true,
-                    'label' => 'Date Time:',
+                    'label' => 'Start Date Time:',
+                ]
+            )
+            ->add(
+                'endDateTime',
+                DateTimeType::class,
+                [
+                    'required' => false,
+                    'label' => 'End Date Time:',
                 ]
             )
             ->add(
                 'organiser',
                 UserType::class,
                 [
-                    'required' => true,
+                    'required' => false,
+                    'disabled' => true,
                 ]
             )
             ->add(

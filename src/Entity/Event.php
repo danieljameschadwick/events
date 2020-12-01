@@ -156,15 +156,16 @@ class Event
      */
     public function getSlug(): string
     {
+        // todo: replace with Convert::slugify()
         return strtolower(
             str_replace(' ', '-', $this->getName())
         );
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
