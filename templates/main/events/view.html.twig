@@ -77,7 +77,13 @@
                 {% for signUp in event.signUps %}
                     <tr>
                         <td class="border border-solid border-gray-lighter p-3 dark:text-white">
-                            {{ signUp.name }}
+                            {% if signUp.user is not null %}
+                                <a class="link--primary" href="{{ url('app_user_view', { userName: signUp.user.username }) }}">
+                                    {{ signUp.name }}
+                                </a>
+                            {% else %}
+                                {{ signUp.name }}
+                            {% endif %}
                         </td>
                         <td class="border border-solid border-gray-lighter p-3 dark:text-white">
                             {{ signUp.signUpDate|date('d/m/Y H:i') }}
