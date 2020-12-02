@@ -141,7 +141,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="sign_up", priority=100, path="/sign-up/{id}/{name}")
+     * @Route(name="sign_up", priority=100, path="/sign-up/{id}/{slug}")
      *
      * @param Request $request
      * @param Session $session

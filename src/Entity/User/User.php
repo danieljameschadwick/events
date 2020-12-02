@@ -7,6 +7,7 @@ namespace App\Entity\User;
 use App\DTO\UserPreferencesDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
+use App\Exception\InvalidMethodException;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -205,26 +206,36 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
      * @return string
+     *
+     * @throws InvalidMethodException
      */
     private function getFullName(): string
     {
+        if (!$this->getFirstName()) {
+            throw new InvalidMethodException('First name not found.');
+        }
+
+        if (!$this->getLastName()) {
+            throw new InvalidMethodException('Last name not found.');
+        }
+
         return sprintf(
             '%s %s',
             $this->getFirstName(),
@@ -238,7 +249,7 @@ class User implements UserInterface
     public function getName(): string
     {
         if (
-            $this->firstName && $this->lastName
+            ($this->getFirstName() && $this->getLastName())
             && $this->prefersRealName()
         ) {
             return $this->getFullName();
