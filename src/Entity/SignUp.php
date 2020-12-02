@@ -134,11 +134,8 @@ class SignUp
     public function getName(): string
     {
         if ($this->getUser() instanceof User) {
-            return sprintf(
-                '%s %s',
-                $this->getUser()->getFirstName(),
-                $this->getUser()->getLastName()
-            );
+            return $this->getUser()
+                ->getName();
         }
 
         return sprintf(
