@@ -24,7 +24,9 @@ class EventRepository extends ServiceEntityRepository
      */
     private function getQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('event');
+        return $this->createQueryBuilder('event')
+            ->innerJoin('event.signUps', 'signUp')
+            ->leftJoin('signUp.user', 'user');
     }
 
     /**
@@ -61,9 +63,7 @@ class EventRepository extends ServiceEntityRepository
         $qb = $this->getQueryBuilder();
         $eb = $qb->expr();
 
-        $qb->innerJoin('event.signUps', 'signUp')
-            ->leftJoin('signUp.user', 'user')
-            ->andWhere(
+        $qb->andWhere(
                 $eb->gte('event.startDateTime', ':startDateTime'),
                 $eb->lte('event.startDateTime', ':endDateTime')
             )

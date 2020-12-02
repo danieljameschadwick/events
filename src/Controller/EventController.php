@@ -62,10 +62,18 @@ class EventController extends AbstractController
             throw new \InvalidArgumentException(sprintf('Event %s not found', $id));
         }
 
+        $signedUp = false;
+        $user = $this->getUser();
+
+        if ($user instanceof User) {
+            $signedUp = $event->isUserSignedUp($user);
+        }
+
         return $this->render(
             'main/events/view.html.twig',
             [
                 'event' => $event,
+                'signedUp' => $signedUp,
             ]
         );
     }
