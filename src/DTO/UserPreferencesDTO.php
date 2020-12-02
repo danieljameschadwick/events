@@ -27,8 +27,7 @@ class UserPreferencesDTO
     private function __construct(
         User $user,
         bool $darkMode
-    )
-    {
+    ) {
         $this->user = $user;
         $this->darkMode = $darkMode;
     }
@@ -42,8 +41,7 @@ class UserPreferencesDTO
     public static function create(
         User $user,
         bool $darkMode = false
-    ): UserPreferencesDTO
-    {
+    ): UserPreferencesDTO {
         return new self(
             $user,
             $darkMode

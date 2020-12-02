@@ -80,8 +80,7 @@ class EventController extends AbstractController
      */
     public function create(
         Request $request
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(EventFormType::class);
         $form->handleRequest($request);
 
@@ -107,19 +106,18 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="edit", path="/edit/{id}/{slug}")
+     * @Route(name="edit", path="/{id}/{slug}/edit")
      * @IsGranted("ROLE_ADMIN") // @todo: debug organiser/admin to edit event
      *
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      *
      * @return Response
      */
     public function edit(
         Request $request,
         int $id
-    ): Response
-    {
+    ): Response {
         $event = $this->getDoctrine()
             ->getRepository(Event::class)
             ->getOneById($id);
@@ -135,17 +133,17 @@ class EventController extends AbstractController
             'main/events/edit.html.twig',
             [
                 'event' => $event,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }
 
     /**
-     * @Route(name="sign_up", priority=100, path="/sign-up/{id}/{slug}")
+     * @Route(name="sign_up", priority=100, path="/{id}/{slug}/sign-up")
      *
      * @param Request $request
      * @param Session $session
-     * @param int $id
+     * @param int     $id
      *
      * @return Response
      */
@@ -161,13 +159,13 @@ class EventController extends AbstractController
 
         $user = $this->getUser();
 
-        if (!$user instanceof User) {
-            throw new \InvalidArgumentException('User not found.');
-        }
-
-        if ($event->isUserSignedUp($user)) {
+        if (
+            $user instanceof User
+            && $event->isUserSignedUp($user)
+        ) {
             return $this->redirectToRoute('event_sign_up_confirmation', [
-                'hash' => $event->getId(),
+                'id' => $event->getId(),
+                'slug' => $event->getSlug(),
                 'repeated' => 'repeated',
             ]);
         }
@@ -190,6 +188,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('event_sign_up_confirmation', [
                 'id' => $event->getId(),
+                'slug' => $event->getSlug(),
             ]);
         }
 
@@ -202,11 +201,11 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route(name="sign_up_confirmation", path="/sign-up/{id}/{name}/confirmation/{repeated?}")
+     * @Route(name="sign_up_confirmation", path="/{id}/{slug}/sign-up/confirmation/{repeated?}")
      *
      * @param Session $session
-     * @param int $id
-     * @param string $repeated
+     * @param int     $id
+     * @param string  $repeated
      *
      * @return Response
      */
@@ -215,14 +214,35 @@ class EventController extends AbstractController
         /** @var SignUp $signUp */
         $signUp = $session->get('event_sign_up');
 
-        if (!$signUp instanceof Event) {
-            throw new \InvalidArgumentException('SignUp not found.');
+        $event = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->getOneById($id);
+
+        $user = $this->getUser();
+
+        if (!$event instanceof Event) {
+            throw new \InvalidArgumentException('Event not found.');
         }
 
-        return $this->render('main/events/confirmation.html.twig', [
-            'signUp' => $signUp,
-            'repeatSignUp' => isset($repeated),
-            'event' => $signUp->getEvent(),
-        ]);
+        if ($signUp instanceof SignUp) {
+            return $this->render('main/events/confirmation.html.twig', [
+                'signUp' => $signUp,
+                'repeatSignUp' => isset($repeated),
+                'event' => $signUp->getEvent(),
+            ]);
+        }
+
+        if (
+            $user instanceof User
+            && $event->isUserSignedUp($user)
+        ) {
+            return $this->render('main/events/confirmation.html.twig', [
+                'signUp' => $event->getUserSignUp($user),
+                'repeatSignUp' => isset($repeated),
+                'event' => $event,
+            ]);
+        }
+
+        throw new \InvalidArgumentException('SignUp not found.');
     }
 }

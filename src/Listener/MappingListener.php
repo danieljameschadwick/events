@@ -33,7 +33,7 @@ class MappingListener
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $eventArgs->getClassMetadata();
 
-        if ($this->app === self::DEFAULT) {
+        if (self::DEFAULT === $this->app) {
             return;
         }
 

@@ -122,9 +122,9 @@ class User implements UserInterface
     /**
      * User constructor.
      *
-     * @param string $username
-     * @param string $email
-     * @param string $password
+     * @param string             $username
+     * @param string             $email
+     * @param string             $password
      * @param UserPreferencesDTO $preferencesDTO
      */
     private function __construct(
@@ -132,8 +132,7 @@ class User implements UserInterface
         string $email,
         string $password,
         ?UserPreferencesDTO $preferencesDTO = null
-    )
-    {
+    ) {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -151,9 +150,9 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $username
-     * @param string $email
-     * @param string $password
+     * @param string                  $username
+     * @param string                  $email
+     * @param string                  $password
      * @param UserPreferencesDTO|null $preferencesDTO
      *
      * @return User
@@ -163,8 +162,7 @@ class User implements UserInterface
         string $email,
         string $password,
         ?UserPreferencesDTO $preferencesDTO = null
-    ): User
-    {
+    ): User {
         return new self(
             $username,
             $email,
@@ -338,7 +336,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string)$this->password;
+        return (string) $this->password;
     }
 
     /**

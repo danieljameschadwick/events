@@ -34,7 +34,7 @@ class EventFormType extends AbstractType
      * EventFormType constructor.
      *
      * @param Security $security
-     * @param Session $session
+     * @param Session  $session
      */
     public function __construct(Security $security, Session $session)
     {
@@ -44,7 +44,7 @@ class EventFormType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

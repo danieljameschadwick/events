@@ -64,15 +64,14 @@ class NewsController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      *
      * @return Response
      */
     public function edit(
         Request $request,
         int $id
-    ): Response
-    {
+    ): Response {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->getOneById($id);
@@ -93,7 +92,7 @@ class NewsController extends AbstractController
             'main/news/edit.html.twig',
             [
                 'article' => $article,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }

@@ -24,6 +24,7 @@ class FileUploader
 
     /**
      * @param UploadedFile $file
+     *
      * @return string
      */
     public function upload(UploadedFile $file): string
@@ -31,7 +32,7 @@ class FileUploader
         $uuid = Uuid::uuid4();
 
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $fileName = $uuid->toString() . '.' . $file->guessExtension();
+        $fileName = $uuid->toString().'.'.$file->guessExtension();
 
         try {
             $file->move($this->targetDirectory, $fileName);
@@ -39,6 +40,6 @@ class FileUploader
             dd('failed');
         }
 
-        return self::PUBLIC_DIRECTORY . $fileName;
+        return self::PUBLIC_DIRECTORY.$fileName;
     }
 }

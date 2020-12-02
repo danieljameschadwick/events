@@ -28,7 +28,7 @@ class CalendarController extends AbstractFOSRestController
      * @Rest\Get(path="/")
      * @Rest\View(serializerGroups={"CALENDAR_EVENT"})
      *
-     * @param Request $request
+     * @param Request                $request
      * @param EntityManagerInterface $doctrine
      *
      * @return View
@@ -36,8 +36,7 @@ class CalendarController extends AbstractFOSRestController
     public function index(
         Request $request,
         EntityManagerInterface $doctrine
-    ): View
-    {
+    ): View {
         $user = $this->getUser();
 
         if (!$user instanceof User) {

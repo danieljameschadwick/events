@@ -34,8 +34,8 @@ class UserRepository extends ServiceEntityRepository
 
     /**
      * @param string $username
-     * @return User|null
      *
+     * @return User|null
      */
     public function getOneByUserName(string $username): ?User
     {

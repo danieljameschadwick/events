@@ -5,16 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use App\DTO\UserPreferencesDTO;
-use App\Entity\Event;
-use App\Entity\SignUp;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(
@@ -59,8 +50,7 @@ class UserPreferences
     private function __construct(
         User $user,
         bool $darkMode
-    )
-    {
+    ) {
         $this->user = $user;
         $this->darkMode = $darkMode;
     }
@@ -74,8 +64,7 @@ class UserPreferences
     public static function create(
         User $user,
         bool $darkMode = false
-    ): self
-    {
+    ): self {
         return new self(
             $user,
             $darkMode
@@ -96,7 +85,7 @@ class UserPreferences
     }
 
     /**
-     * @return integer|null
+     * @return int|null
      */
     public function getId(): ?int
     {

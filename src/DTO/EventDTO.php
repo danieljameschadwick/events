@@ -41,12 +41,12 @@ class EventDTO
     private $signUpDTOs;
 
     /**
-     * @param string|null $name
-     * @param User|null $organiser
-     * @param string|null $description
+     * @param string|null    $name
+     * @param User|null      $organiser
+     * @param string|null    $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[] $signUpDTOs
+     * @param SignUpDTO[]    $signUpDTOs
      */
     public function __construct(
         ?string $name = null,
@@ -55,8 +55,7 @@ class EventDTO
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    )
-    {
+    ) {
         $this->name = $name;
         $this->organiser = $organiser;
         $this->description = $description;
@@ -66,12 +65,12 @@ class EventDTO
     }
 
     /**
-     * @param string|null $name
-     * @param User|null $organiser
-     * @param string|null $description
+     * @param string|null    $name
+     * @param User|null      $organiser
+     * @param string|null    $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[] $signUpDTOs
+     * @param SignUpDTO[]    $signUpDTOs
      *
      * @return EventDTO
      */
@@ -82,8 +81,7 @@ class EventDTO
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    ): EventDTO
-    {
+    ): EventDTO {
         return new self(
             $name,
             $organiser,

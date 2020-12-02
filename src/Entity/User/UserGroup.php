@@ -42,20 +42,19 @@ class UserGroup
     private $group;
 
     /**
-     * @param User $user
+     * @param User  $user
      * @param Group $group
      */
     private function __construct(
         User $user,
         Group $group
-    )
-    {
+    ) {
         $this->user = $user;
         $this->group = $group;
     }
 
     /**
-     * @param User $user
+     * @param User  $user
      * @param Group $group
      *
      * @return UserGroup
@@ -63,8 +62,7 @@ class UserGroup
     public static function create(
         User $user,
         Group $group
-    ): UserGroup
-    {
+    ): UserGroup {
         return new self(
             $user,
             $group

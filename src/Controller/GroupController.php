@@ -24,6 +24,7 @@ class GroupController extends AbstractController
      * @Route(name="view", path="/{name}")
      *
      * @param string $name
+     *
      * @return Response
      */
     public function view(string $name): Response
@@ -33,10 +34,7 @@ class GroupController extends AbstractController
             ->getByName($name);
 
         if (!$group instanceof Group) {
-            throw new \InvalidArgumentException(sprintf(
-                'Group %s doesn\'t exist.',
-                $name
-            ));
+            throw new \InvalidArgumentException(sprintf('Group %s doesn\'t exist.', $name));
         }
 
         return $this->render(

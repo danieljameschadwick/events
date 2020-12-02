@@ -13,8 +13,9 @@
 
 {% block body %}
     <div class="container mt-4">
-        <div class="row">
-            {{ signUp.firstName ~ ' ' ~ signUp.lastName }}, {{ confirmationMessage }} {{ event.name }}.
-        </div>
+        <p>
+            {{ signUp.firstName ~ ' ' ~ signUp.lastName }}, {{ confirmationMessage }}
+            <a class="link--primary" href="{{ url('event_view', { id: event.id, slug: event.slug }) }}">{{ event.name }}</a>.
+        </p>
     </div>
 {% endblock body %}

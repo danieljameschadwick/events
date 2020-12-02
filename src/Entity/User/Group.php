@@ -50,13 +50,12 @@ class Group
 
     /**
      * @param string $name
-     * @param User $owner
+     * @param User   $owner
      */
     private function __construct(
         string $name,
         User $owner
-    )
-    {
+    ) {
         $this->name = $name;
         $this->owner = $owner;
         $this->users = new ArrayCollection();
@@ -64,15 +63,14 @@ class Group
 
     /**
      * @param string $name
-     * @param User $owner
+     * @param User   $owner
      *
      * @return Group
      */
     public static function create(
         string $name,
         User $owner
-    ): self
-    {
+    ): self {
         return new self(
             $name,
             $owner

@@ -9,8 +9,6 @@ use App\Entity\User\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -248,13 +246,23 @@ class Event
      */
     public function isUserSignedUp(User $user): bool
     {
+        return $this->getUserSignUp($user) instanceof SignUp;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return SignUp|null
+     */
+    public function getUserSignUp(User $user): ?SignUp
+    {
         foreach ($this->getSignUps() as $signUp) {
             if ($signUp->getUser() === $user) {
-                return true;
+                return $signUp;
             }
         }
 
-        return false;
+        return null;
     }
 
     /**

@@ -47,7 +47,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param User $user
+     * @param User            $user
      * @param CarbonInterface $startDate
      * @param CarbonInterface $endDate
      *
@@ -57,8 +57,7 @@ class EventRepository extends ServiceEntityRepository
         CarbonInterface $startDate,
         CarbonInterface $endDate,
         ?User $user = null
-    ): array
-    {
+    ): array {
         $qb = $this->getQueryBuilder();
         $eb = $qb->expr();
 

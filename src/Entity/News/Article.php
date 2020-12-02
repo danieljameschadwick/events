@@ -72,11 +72,11 @@ class Article
     private $author;
 
     /**
-     * @param string $title
-     * @param string $body
-     * @param User $author
-     * @param string|null $imagePath
-     * @param string|null $strapLine
+     * @param string                  $title
+     * @param string                  $body
+     * @param User                    $author
+     * @param string|null             $imagePath
+     * @param string|null             $strapLine
      * @param \DateTimeInterface|null $publishDate
      */
     private function __construct(
@@ -150,7 +150,6 @@ class Article
         );
 
         return preg_replace('/[^A-Za-z0-9\-]/', '', $slugify);
-
     }
 
     /**

@@ -23,7 +23,7 @@ class FileController extends AbstractFOSRestController
      * @Rest\Post(path="/upload")
      * @Rest\View()
      *
-     * @param Request $request
+     * @param Request      $request
      * @param FileUploader $fileUploader
      *
      * @return View
@@ -31,25 +31,24 @@ class FileController extends AbstractFOSRestController
     public function upload(
         Request $request,
         FileUploader $fileUploader
-    ): View
-    {
+    ): View {
         $file = $request->files->get('image');
 
         if (!$file instanceof UploadedFile) {
             return View::create([
-                "success" => 0,
-                "file" => null
+                'success' => 0,
+                'file' => null,
             ]);
         }
 
         $filePath = $fileUploader->upload($file);
 
         return View::create([
-            "success" => 1,
-            "file" => [
-                "url" => "https://events.local/" . $filePath,
+            'success' => 1,
+            'file' => [
+                'url' => 'https://events.local/'.$filePath,
                 // ... and any additional fields you want to store, such as width, height, color, extension, etc
-            ]
+            ],
         ]);
     }
 }
