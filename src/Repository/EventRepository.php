@@ -25,7 +25,9 @@ class EventRepository extends ServiceEntityRepository
     private function getQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('event')
+            ->addSelect('signUp', 'address', 'user')
             ->innerJoin('event.signUps', 'signUp')
+            ->leftJoin('event.address', 'address')
             ->leftJoin('signUp.user', 'user');
     }
 

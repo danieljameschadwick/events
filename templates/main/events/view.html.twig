@@ -106,10 +106,12 @@
                     Location
                 </h4>
 
-                <p>Allam Sport Centre,</p>
-                <p>Inglemire Lane,</p>
-                <p>Hull,</p>
-                <p>HU6 7TS.</p>
+                {% if event.address is not null %}
+                    <p>{{ event.address.addressLine1 }},</p>
+                    <p>{{ event.address.region.name }},</p>
+                    <p>{{ event.address.country.name }},</p>
+                    <p>{{ event.address.postCode }}.</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -29,15 +29,18 @@ CREATE TABLE tblArticle
 CREATE TABLE tblEvent
 (
 	intEventId       int(10)      NOT NULL AUTO_INCREMENT,
+	intAddressId     int(10)      NULL,
+	strOrganisedUuid varchar(40)  NOT NULL,
 	strName          varchar(120) NOT NULL,
 	strDescription   text     DEFAULT NULL,
-	strOrganisedUuid varchar(40)  NOT NULL,
 	dtmStartDateTime datetime     NOT NULL,
 	dtmEndDateTime   datetime DEFAULT NULL,
 	PRIMARY KEY (intEventId),
-	UNIQUE KEY UK_intEventId (intEventId),
+    UNIQUE KEY UK_intEventId (intEventId),
+    UNIQUE KEY UK_intAddressId (intAddressId),
 	KEY K_strOrganisedUuid (strOrganisedUuid),
-	CONSTRAINT tblArticle_strOrganisedUuid FOREIGN KEY (strOrganisedUuid) REFERENCES Users.tblUser (strUuid)
+    CONSTRAINT tblArticle_strOrganisedUuid FOREIGN KEY (strOrganisedUuid) REFERENCES Users.tblUser (strUuid),
+    CONSTRAINT tblArticle_intAddressId FOREIGN KEY (intAddressId) REFERENCES Locations.tblAddress (intAddressId)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
@@ -54,22 +57,9 @@ CREATE TABLE tblFeature
   AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb4;
 
-CREATE TABLE tblPayment
-(
-	intPaymentId        int(10)     NOT NULL AUTO_INCREMENT,
-	strReference        varchar(35) DEFAULT NULL,
-	strDescription      varchar(30) DEFAULT NULL,
-	strEmail            varchar(40) NOT NULL,
-	strClientId         varchar(40) NOT NULL,
-	intCentesimalAmount int(11)     NOT NULL,
-	strCurrencyCode     varchar(7)  NOT NULL,
-	PRIMARY KEY (intPaymentId)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4;
-
 CREATE TABLE tblSignUp
 (
-	intSignUpId   int(10)     NOT NULL AUTO_INCREMENT,
+	intSignUpId   INT(10)     NOT NULL AUTO_INCREMENT,
 	strFirstName  varchar(70) NOT NULL,
 	strLastName   varchar(70) NOT NULL,
 	dtmSignUpDate datetime    DEFAULT NULL,
@@ -82,18 +72,6 @@ CREATE TABLE tblSignUp
 	CONSTRAINT FK_tblEvent_intEventId FOREIGN KEY (intEventId) REFERENCES tblEvent (intEventId)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
-  DEFAULT CHARSET = utf8mb4;
-
-CREATE TABLE tblToken
-(
-	intTokenId     int(10)      NOT NULL AUTO_INCREMENT,
-	strGatewayName varchar(30)  NOT NULL,
-	strAfterUrl    varchar(500) DEFAULT NULL,
-	strTargetUrl   varchar(500) DEFAULT NULL,
-	strHash        varchar(150) NOT NULL,
-	PRIMARY KEY (intTokenId),
-	KEY K_intTokenId (intTokenId)
-) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
 START TRANSACTION;

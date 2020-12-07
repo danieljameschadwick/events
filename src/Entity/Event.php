@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\DTO\EventDTO;
+use App\Entity\Location\Address;
 use App\Entity\User\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -85,6 +86,14 @@ class Event
      * @ORM\JoinColumn(name="intEventId", referencedColumnName="intEventId")
      */
     private $signUps;
+
+    /**
+     * @var Address|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Address")
+     * @ORM\JoinColumn(name="intAddressId", referencedColumnName="intAddressId")
+     */
+    private $address;
 
     /**
      * @param string         $name
@@ -263,6 +272,14 @@ class Event
         }
 
         return null;
+    }
+
+    /**
+     * @return Address|null
+     */
+    public function getAddress(): ?Address
+    {
+        return $this->address;
     }
 
     /**
