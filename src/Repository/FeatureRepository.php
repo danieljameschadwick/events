@@ -29,9 +29,9 @@ class FeatureRepository extends ServiceEntityRepository
      */
     public function getAll(): array
     {
-        $qb = $this->getQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
 
-        return $qb
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }
@@ -43,10 +43,10 @@ class FeatureRepository extends ServiceEntityRepository
      */
     public function getFeatureByHandle(string $handle): Feature
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        $feature = $qb
+        $feature = $queryBuilder
             ->andWhere(
                 $eb->eq('feature.handle', ':handle')
             )

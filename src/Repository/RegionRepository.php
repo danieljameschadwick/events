@@ -4,22 +4,19 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\User\Group;
+use App\Entity\Location\Address;
+use App\Entity\Location\Country;
+use App\Entity\Location\Region;
+use App\Entity\News\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * @method Group|null find($id, $lockMode = null, $lockVersion = null)
- * @method Group|null findOneBy(array $criteria, array $orderBy = null)
- * @method Group[]    findAll()
- * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class GroupRepository extends ServiceEntityRepository
+class RegionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Group::class);
+        parent::__construct($registry, Region::class);
     }
 
     /**
@@ -27,25 +24,37 @@ class GroupRepository extends ServiceEntityRepository
      */
     private function getQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('groups');
+        return $this->createQueryBuilder('region');
     }
 
     /**
-     * @param string $name
-     *
-     * @return Group|null
+     * @return Address[]
      */
-    public function getByName(string $name): ?Group
+    public function getAll(): array
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Address
+     */
+    public function getOneById(int $id): Address
     {
         $queryBuilder = $this->getQueryBuilder();
         $eb = $queryBuilder->expr();
 
         return $queryBuilder
             ->andWhere(
-                $eb->eq('groups.name', ':name')
+                $eb->eq('region.id', ':id')
             )
             ->setParameters([
-                'name' => $name,
+                'id' => $id,
             ])
             ->getQuery()
             ->getOneOrNullResult();

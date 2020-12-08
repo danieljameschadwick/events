@@ -1,7 +1,8 @@
-@layer base {
+@layer base
+{
     h1
     {
-        font-size: 2.5rem;
+        font-size:   2.5rem;
         font-weight: 500;
 
         @apply dark:text-white;
@@ -9,7 +10,7 @@
 
     h2
     {
-        font-size: 2rem;
+        font-size:   2rem;
         font-weight: 500;
 
         @apply dark:text-white;
@@ -17,7 +18,7 @@
 
     h3
     {
-        font-size: 1.75rem;
+        font-size:   1.75rem;
         font-weight: 500;
 
         @apply dark:text-white;
@@ -25,7 +26,7 @@
 
     h4
     {
-        font-size: 1.5rem;
+        font-size:   1.5rem;
         font-weight: 500;
 
         @apply dark:text-white;

@@ -8,9 +8,15 @@
     <div class="container mt-4">
         <div class="row">
             {{ form_start(form) }}
+                <div class="hidden">
+                    {{ form_row(form.address.user) }}
+                </div>
+
                 {{ form_row(form.name) }}
                 {{ form_row(form.startDateTime) }}
                 {{ form_row(form.endDateTime) }}
+
+                {{ form_row(form.address) }}
 
                 {{ form_row(form.submit) }}
 

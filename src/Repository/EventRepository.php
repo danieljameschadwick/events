@@ -36,10 +36,10 @@ class EventRepository extends ServiceEntityRepository
      */
     public function getAll(): array
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->gte('event.startDateTime', ':startDateTime')
             )
@@ -62,10 +62,10 @@ class EventRepository extends ServiceEntityRepository
         CarbonInterface $endDate,
         ?User $user = null
     ): array {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        $qb->andWhere(
+        $queryBuilder->andWhere(
                 $eb->gte('event.startDateTime', ':startDateTime'),
                 $eb->lte('event.startDateTime', ':endDateTime')
             )
@@ -75,11 +75,11 @@ class EventRepository extends ServiceEntityRepository
             ]);
 
         if ($user instanceof User) {
-            $qb->andWhere($eb->eq('user.uuid', ':uuid'))
+            $queryBuilder->andWhere($eb->eq('user.uuid', ':uuid'))
                 ->setParameter('uuid', $user->getUuid());
         }
 
-        return $qb
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }
@@ -94,7 +94,11 @@ class EventRepository extends ServiceEntityRepository
         $startDate = Carbon::now();
         $endDate = $startDate->copy()->addWeeks(4);
 
-        return $this->getEvents($startDate, $endDate, $user);
+        return $this->getEvents(
+            $startDate,
+            $endDate,
+            $user
+        );
     }
 
     /**
@@ -104,10 +108,10 @@ class EventRepository extends ServiceEntityRepository
      */
     public function getOneByHash(string $hash): ?Event
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('event.hash', ':hash')
             )
@@ -125,10 +129,10 @@ class EventRepository extends ServiceEntityRepository
      */
     public function getOneById(int $id): ?Event
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('event.id', ':id')
             )

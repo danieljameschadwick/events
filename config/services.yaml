@@ -47,6 +47,10 @@ services:
             - '@security.helper'
             - '@session'
 
+    App\Form\AddressType:
+        calls:
+            - ['setDoctrine', ['@doctrine']]
+
     ##
     # Extensions
     ##

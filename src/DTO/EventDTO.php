@@ -41,12 +41,18 @@ class EventDTO
     private $signUpDTOs;
 
     /**
-     * @param string|null    $name
-     * @param User|null      $organiser
-     * @param string|null    $description
+     * @var AddressDTO|null
+     */
+    private $address;
+
+    /**
+     * @param string|null $name
+     * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[]    $signUpDTOs
+     * @param SignUpDTO[] $signUpDTOs
+     * @param AddressDTO|null $address
      */
     public function __construct(
         ?string $name = null,
@@ -54,7 +60,8 @@ class EventDTO
         ?string $description = null,
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
-        array $signUpDTOs = []
+        array $signUpDTOs = [],
+        AddressDTO $address = null
     ) {
         $this->name = $name;
         $this->organiser = $organiser;
@@ -62,15 +69,17 @@ class EventDTO
         $this->startDateTime = $startDateTime;
         $this->endDateTime = $endDateTime;
         $this->signUpDTOs = $signUpDTOs;
+        $this->address = $address;
     }
 
     /**
-     * @param string|null    $name
-     * @param User|null      $organiser
-     * @param string|null    $description
+     * @param string|null $name
+     * @param User|null $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param SignUpDTO[]    $signUpDTOs
+     * @param SignUpDTO[] $signUpDTOs
+     * @param AddressDTO|null $address
      *
      * @return EventDTO
      */
@@ -80,7 +89,8 @@ class EventDTO
         ?string $description = null,
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
-        array $signUpDTOs = []
+        array $signUpDTOs = [],
+        AddressDTO $address = null
     ): EventDTO {
         return new self(
             $name,
@@ -88,7 +98,8 @@ class EventDTO
             $description,
             $startDateTime,
             $endDateTime,
-            $signUpDTOs
+            $signUpDTOs,
+            $address
         );
     }
 
@@ -219,5 +230,21 @@ class EventDTO
     public function setSignUpDTOs(array $signUpDTOs): void
     {
         $this->signUpDTOs = $signUpDTOs;
+    }
+
+    /**
+     * @return AddressDTO|null
+     */
+    public function getAddress(): ?AddressDTO
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param AddressDTO|null $address
+     */
+    public function setAddress(?AddressDTO $address = null): void
+    {
+        $this->address = $address;
     }
 }

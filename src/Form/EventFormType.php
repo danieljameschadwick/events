@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\DTO\AddressDTO;
 use App\DTO\EventDTO;
 use App\Entity\Event;
+use App\Entity\Location\Address;
 use App\Entity\User\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -74,6 +76,13 @@ class EventFormType extends AbstractType
                 ]
             )
             ->add(
+                'address',
+                AddressType::class,
+                [
+                    'required' => false,
+                ]
+            )
+            ->add(
                 'organiser',
                 UserType::class,
                 [
@@ -92,6 +101,16 @@ class EventFormType extends AbstractType
     }
 
     /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => EventDTO::class,
+        ]);
+    }
+
+    /**
      * @param FormEvent $formEvent
      */
     public function setUser(FormEvent $formEvent): void
@@ -106,18 +125,21 @@ class EventFormType extends AbstractType
             throw new \InvalidArgumentException('User not found.');
         }
 
-        /** @var Event $event */
+        /** @var EventDTO $event */
         $eventDTO = $formEvent->getData();
         $eventDTO->setOrganiser($user);
-    }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => EventDTO::class,
-        ]);
+        /** @var EventDTO $addressDTO */
+        $addressDTO = $eventDTO->getAddress();
+
+        dump($addressDTO);
+
+        if ($addressDTO instanceof AddressDTO) {
+            $eventDTO->setAddress(
+                $addressDTO->setUser($user)
+            );
+        }
+        
+        dd($eventDTO);
     }
 }

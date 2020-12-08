@@ -39,10 +39,10 @@ class UserRepository extends ServiceEntityRepository
      */
     public function getOneByUserName(string $username): ?User
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('user.username', ':username')
             )
@@ -60,10 +60,10 @@ class UserRepository extends ServiceEntityRepository
      */
     public function getOneByUuid(string $uuid): ?User
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('user.uuid', ':uuid')
             )

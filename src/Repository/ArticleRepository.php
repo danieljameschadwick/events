@@ -32,10 +32,10 @@ class ArticleRepository extends ServiceEntityRepository
      */
     private function getActiveQueryBuilder(): QueryBuilder
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->isNotNull('article.publishDate'),
                 $eb->lte('article.publishDate', ':now')
@@ -50,9 +50,9 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function getAll(): array
     {
-        $qb = $this->getActiveQueryBuilder();
+        $queryBuilder = $this->getActiveQueryBuilder();
 
-        return $qb
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }
@@ -64,10 +64,10 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function getOneById(int $id): Article
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('article.id', ':id')
             )
@@ -85,9 +85,9 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function getLatestNews($count = self::LATEST_NEWS_COUNT): array
     {
-        $qb = $this->getActiveQueryBuilder();
+        $queryBuilder = $this->getActiveQueryBuilder();
 
-        return $qb
+        return $queryBuilder
             ->orderBy('article.publishDate', 'DESC')
             ->setMaxResults($count)
             ->getQuery()

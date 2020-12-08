@@ -30,9 +30,9 @@ class AddressRepository extends ServiceEntityRepository
      */
     public function getAll(): array
     {
-        $qb = $this->getQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
 
-        return $qb
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }
@@ -44,10 +44,10 @@ class AddressRepository extends ServiceEntityRepository
      */
     public function getOneById(int $id): Address
     {
-        $qb = $this->getQueryBuilder();
-        $eb = $qb->expr();
+        $queryBuilder = $this->getQueryBuilder();
+        $eb = $queryBuilder->expr();
 
-        return $qb
+        return $queryBuilder
             ->andWhere(
                 $eb->eq('address.id', ':id')
             )

@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="ublRegion"
  * )
  *
- * @ORM\Entity(repositoryClass="Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository", readOnly=true)
+ * @ORM\Entity(repositoryClass="App\Repository\RegionRepository", readOnly=true)
  */
 class Region
 {
