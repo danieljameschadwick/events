@@ -19,7 +19,8 @@ Encore
     //js entry
     .addEntry('app', './assets/js/entry_points/app.js')
     .addEntry('parsley', './assets/js/entry_points/parsley.js')
-    .addEntry('calendar', ['./assets/js/entry_points/calendar.js', "./assets/scss/components/calendar.scss"])
+    .addEntry('calendar', ['./assets/js/entry_points/calendar.js', './assets/scss/components/calendar.scss'])
+    .addEntry('events', ['./assets/js/entry_points/events.js'])
 
     //css entry
     .addStyleEntry('main', ['./assets/less/main.less', './assets/scss/main.scss'])

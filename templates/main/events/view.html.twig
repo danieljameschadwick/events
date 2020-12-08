@@ -52,7 +52,7 @@
         <div class="container-fluid breakout">
             <div class="flex">
                 <div class="w-full mb-5 p-0">
-                    <div id="map" data-latitude="{{ event.address.latitude }}" data-longitude="{{ event.address.longitude }}"></div>
+                    <div id="map" class="maps--google" data-address-id="{{ event.address.id }}" data-latitude="{{ event.address.latitude }}" data-longitude="{{ event.address.longitude }}" data-title="{{ event.address.name }}"></div>
                 </div>
             </div>
         </div>
@@ -71,27 +71,28 @@
                             Name
                         </td>
                         <td class="border border-solid border-gray-lighter p-3 dark:text-white">
-                            Sign Up Date
+                            Date
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                {% for signUp in event.signUps %}
-                    <tr>
-                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
-                            {% if signUp.user is not null %}
-                                <a class="link--primary" href="{{ url('app_user_view', { userName: signUp.user.username }) }}">
+                    {% for signUp in event.signUps %}
+                        <tr>
+                            <td class="border border-solid border-gray-lighter p-3 dark:text-white">
+                                {% if signUp.user is not null %}
+                                    <a class="link--primary" href="{{ url('app_user_view', { userName: signUp.user.username }) }}">
+                                        {{ signUp.name }}
+                                    </a>
+                                {% else %}
                                     {{ signUp.name }}
-                                </a>
-                            {% else %}
-                                {{ signUp.name }}
-                            {% endif %}
-                        </td>
-                        <td class="border border-solid border-gray-lighter p-3 dark:text-white">
-                            {{ signUp.signUpDate|date('d/m/Y H:i') }}
-                        </td>
-                    </tr>
-                {% endfor %}
+                                {% endif %}
+                            </td>
+
+                            <td class="border border-solid border-gray-lighter p-3 dark:text-white">
+                                {{ signUp.signUpDate|date('d/m/Y H:i') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
@@ -120,30 +121,8 @@
 {% endblock body %}
 
 {% block javascripts %}
-    <script type="application/javascript">
-        function initMap() {
-            const mapElement = document.getElementById('map');
-
-            const latLng = {
-                lat: Number.parseFloat(mapElement.dataset.latitude),
-                lng: Number.parseFloat(map.dataset.longitude)
-            };
-
-            map = new google.maps.Map(mapElement, {
-                center: latLng,
-                zoom: 8,
-            });
-
-            marker = new google.maps.Marker({
-                position: latLng,
-                map,
-                title: 'Allam Sport Centre',
-            });
-
-            marker.setMap(map);
-        }
-    </script>
-
     <script defer type="application/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx-wq3RG2fnxmuNV0dZPmY8d_FE0wPteM&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx-wq3RG2fnxmuNV0dZPmY8d_FE0wPteM"></script>
+
+    {{ encore_entry_script_tags('events') }}
 {% endblock javascripts %}
