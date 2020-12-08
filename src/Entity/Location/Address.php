@@ -71,6 +71,20 @@ class Address
     private $postCode;
 
     /**
+     * @var float|null
+     *
+     * @ORM\Column(name="decLatitude", type="decimal", length=10, nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="decLongitude", type="decimal", length=10, nullable=true)
+     */
+    private $longitude;
+
+    /**
      * @var Country
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Location\Country")
@@ -191,6 +205,14 @@ class Address
     }
 
     /**
+     * @return string|null
+     */
+    public function getAddressLine2(): ?string
+    {
+        return $this->addressLine2;
+    }
+
+    /**
      * @return string
      */
     public function getAddressLine3(): string
@@ -212,6 +234,30 @@ class Address
     public function getPostCode(): string
     {
         return $this->postCode;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getLatitude(): ?float
+    {
+        if ($this->latitude === null) {
+            return null;
+        }
+
+        return (float) $this->latitude;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getLongitude(): ?float
+    {
+        if ($this->longitude === null) {
+            return null;
+        }
+
+        return (float) $this->longitude;
     }
 
     /**

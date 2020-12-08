@@ -48,13 +48,15 @@
         </div>
     </div>
 
-    <div class="container-fluid breakout">
-        <div class="flex">
-            <div class="w-full mb-5 p-0">
-                <div id="map"></div>
+    {% if event.address is not null %}
+        <div class="container-fluid breakout">
+            <div class="flex">
+                <div class="w-full mb-5 p-0">
+                    <div id="map" data-latitude="{{ event.address.latitude }}" data-longitude="{{ event.address.longitude }}"></div>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="container flex flex-col sm:flex-row">
         <div class="w-full sm:w-2/3">
@@ -120,10 +122,14 @@
 {% block javascripts %}
     <script type="application/javascript">
         function initMap() {
-            const latLng = { lat: 53.773969, lng: -0.368551 };
+            const mapElement = document.getElementById('map');
 
+            const latLng = {
+                lat: Number.parseFloat(mapElement.dataset.latitude),
+                lng: Number.parseFloat(map.dataset.longitude)
+            };
 
-            map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(mapElement, {
                 center: latLng,
                 zoom: 8,
             });
