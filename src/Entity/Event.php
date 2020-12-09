@@ -96,12 +96,12 @@ class Event
     private $address;
 
     /**
-     * @param string         $name
-     * @param User           $organiser
-     * @param string|null    $description
+     * @param string $name
+     * @param User $organiser
+     * @param string|null $description
      * @param \DateTime|null $startDateTime
      * @param \DateTime|null $endDateTime
-     * @param array          $signUpDTOs
+     * @param array $signUpDTOs
      */
     private function __construct(
         string $name,
@@ -110,7 +110,8 @@ class Event
         ?\DateTime $startDateTime = null,
         ?\DateTime $endDateTime = null,
         array $signUpDTOs = []
-    ) {
+    )
+    {
         $this->name = $name;
         $this->organiser = $organiser;
         $this->description = $description;
@@ -140,6 +141,15 @@ class Event
             $eventDTO->getEndDateTime(),
             $eventDTO->getSignUpDTOs()
         );
+    }
+
+    /**
+     * @param EventDTO $eventDTO
+     */
+    public function updateFromDTO(EventDTO $eventDTO): void
+    {
+        $this->name = $eventDTO->getName();
+        $this->startDateTime = $eventDTO->getStartDateTime();
     }
 
     /**

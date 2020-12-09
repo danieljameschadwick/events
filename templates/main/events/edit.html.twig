@@ -6,8 +6,21 @@
 
 {% block body %}
     <div class="container mt-4">
+        <div class="mb-3">
+            <a class="link--primary" href="{{ url('event_view', { id: event.id, slug: event.slug }) }}">
+                < Back to {{ event.name }}
+            </a>
+        </div>
+
         {{ form_start(form) }}
-            {{ form_rest(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.startDateTime) }}
+
+            {{ form_row(form.submit) }}
+
+            <div class="hidden">
+                {{ form_rest(form) }}
+            </div>
         {{ form_end(form) }}
     </div>
 {% endblock body %}

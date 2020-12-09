@@ -41,7 +41,7 @@ class EventEditType extends AbstractType
                 'organiser',
                 UserType::class,
                 [
-                    'required' => true,
+                    'required' => false,
                 ]
             )
             ->add(

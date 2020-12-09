@@ -12,6 +12,8 @@ use App\Entity\User\User;
 use App\Form\EventEditType;
 use App\Form\EventFormType;
 use App\Form\SignUpFormType;
+use App\Interfaces\DoctrineAwareInterface;
+use App\Traits\EntityManagerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,7 +90,8 @@ class EventController extends AbstractController
      */
     public function create(
         Request $request
-    ): Response {
+    ): Response
+    {
         $form = $this->createForm(EventFormType::class);
         $form->handleRequest($request);
 
@@ -118,14 +121,15 @@ class EventController extends AbstractController
      * @IsGranted("ROLE_ADMIN") // @todo: debug organiser/admin to edit event
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
     public function edit(
         Request $request,
         int $id
-    ): Response {
+    ): Response
+    {
         $event = $this->getDoctrine()
             ->getRepository(Event::class)
             ->getOneById($id);
@@ -136,6 +140,16 @@ class EventController extends AbstractController
 
         $form = $this->createForm(EventEditType::class, EventDTO::populate($event));
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $event->updateFromDTO($form->getData());
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('event_view', [
+                'id' => $event->getId(),
+                'slug' => $event->getSlug(),
+            ]);
+        }
 
         return $this->render(
             'main/events/edit.html.twig',
@@ -151,7 +165,7 @@ class EventController extends AbstractController
      *
      * @param Request $request
      * @param Session $session
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -212,8 +226,8 @@ class EventController extends AbstractController
      * @Route(name="sign_up_confirmation", path="/{id}/{slug}/sign-up/confirmation/{repeated?}")
      *
      * @param Session $session
-     * @param int     $id
-     * @param string  $repeated
+     * @param int $id
+     * @param string $repeated
      *
      * @return Response
      */
