@@ -132,14 +132,10 @@ class EventFormType extends AbstractType
         /** @var EventDTO $addressDTO */
         $addressDTO = $eventDTO->getAddress();
 
-        dump($addressDTO);
-
         if ($addressDTO instanceof AddressDTO) {
             $eventDTO->setAddress(
                 $addressDTO->setUser($user)
             );
         }
-        
-        dd($eventDTO);
     }
 }

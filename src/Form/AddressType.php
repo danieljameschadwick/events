@@ -11,23 +11,65 @@ use App\Interfaces\DoctrineAwareInterface;
 use App\Traits\EntityManagerTrait;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AddressType extends AbstractType implements DoctrineAwareInterface
 {
     use EntityManagerTrait;
-    
+
+    private const NAME = 'name';
+    private const ADDRESS_LINE_1 = 'addressLine1';
+    private const ADDRESS_LINE_2 = 'addressLine2';
+    private const ADDRESS_LINE_3 = 'addressLine3';
+    private const ADDRESS_LINE_4 = 'addressLine4';
+    private const POST_CODE = 'postCode';
+    private const LATITUDE = 'latitude';
+    private const LONGITUDE = 'longitude';
+    private const COUNTRY = 'country';
+    private const REGION = 'region';
+    private const USER = 'user';
+
+    private const ENABLED_FIELDS = [
+        self::NAME,
+        self::ADDRESS_LINE_1,
+        self::POST_CODE,
+        self::COUNTRY,
+        self::REGION,
+        self::USER,
+    ];
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add(
+                'enabled',
+                CheckboxType::class,
+                [
+                    'required' => true,
+                    'mapped' => false,
+                    'label' => 'Enable Address:',
+                ]
+            )
             ->add(
                 'name',
                 TextType::class,
                 [
                     'required' => true,
                     'label' => 'Address Name:',
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
             ->add(
@@ -35,6 +77,9 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => true,
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
             ->add(
@@ -63,6 +108,9 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => true,
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
             ->add(
@@ -72,7 +120,6 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                     'required' => false,
                 ]
             )
-
             ->add(
                 'longitude',
                 TextType::class,
@@ -94,7 +141,10 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                     'choices' =>
                         $this->getManager()
                             ->getRepository(Country::class)
-                            ->getAll()
+                            ->getAll(),
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
             ->add(
@@ -111,7 +161,10 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                     'choices' =>
                         $this->getManager()
                             ->getRepository(Region::class)
-                            ->getAll()
+                            ->getAll(),
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
             ->add(
@@ -119,9 +172,12 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 UserType::class,
                 [
                     'required' => true,
+                    'constraints' => [
+                        new NotBlank()
+                    ],
                 ]
             )
-        ;
+            ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'isRequired']);
     }
 
     /**
@@ -132,5 +188,50 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
         $resolver->setDefaults([
             'data_class' => AddressDTO::class,
         ]);
+    }
+
+    /**
+     * @param FormEvent $formEvent
+     */
+    public function isRequired(FormEvent $formEvent): void
+    {
+        $data = $formEvent->getData();
+        $form = $formEvent->getForm();
+        $addressEnabled = $data['enabled'] ?? false;
+
+        if ($addressEnabled) {
+            $this->requireAddress($form);
+        }
+
+        if (!$addressEnabled) {
+            $this->requireAddress($form, false);
+        }
+    }
+
+    /**
+     * @param FormInterface $form
+     */
+    private function requireAddress(FormInterface $form, bool $required = true): void
+    {
+        foreach (self::ENABLED_FIELDS as $fieldKey) {
+            $field = $form->get($fieldKey);
+            $config = $field->getConfig();
+
+            $type = $config->getType()->getInnerType();
+
+            $options = $config->getOptions();
+            $options['required'] = $required;
+
+            if (!$required) {
+                $options['constraints'] = [];
+            }
+
+            $form->remove($fieldKey)
+                ->add(
+                    $fieldKey,
+                    get_class($type),
+                    $options
+                );
+        }
     }
 }
