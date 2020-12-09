@@ -92,6 +92,12 @@
                                 {{ signUp.signUpDate|date('d/m/Y H:i') }}
                             </td>
                         </tr>
+                    {% else %}
+                        <tr>
+                            <td class="border border-solid border-gray-lighter p-3 dark:text-white" colspan="2">
+                                There are no sign-ups for this event.
+                            </td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
