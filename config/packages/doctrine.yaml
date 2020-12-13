@@ -1,6 +1,5 @@
 doctrine:
     dbal:
-        # configure these for your database server
         driver: 'pdo_mysql'
         server_version: '8.0'
         charset: utf8mb4
@@ -11,6 +10,7 @@ doctrine:
         types:
             currencyCode: App\Entity\Payment\CurrencyCode
             uuid: Ramsey\Uuid\Doctrine\UuidType
+            carbondatetime: Carbon\Doctrine\CarbonType
 
     orm:
         auto_generate_proxy_classes: true

@@ -7,6 +7,8 @@ namespace App\Entity\News;
 use App\Classes\Formatter\ArticleFormatter;
 use App\DTO\News\ArticleDTO;
 use App\Entity\User\User;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,9 +59,9 @@ class Article
     private $strapLine;
 
     /**
-     * @var \DateTimeInterface
+     * @var CarbonInterface|null
      *
-     * @ORM\Column(name="dtmPublishDate", type="datetime", nullable=true)
+     * @ORM\Column(name="dtmPublishDate", type="carbondatetime", nullable=true)
      */
     private $publishDate;
 
@@ -72,12 +74,12 @@ class Article
     private $author;
 
     /**
-     * @param string                  $title
-     * @param string                  $body
-     * @param User                    $author
-     * @param string|null             $imagePath
-     * @param string|null             $strapLine
-     * @param \DateTimeInterface|null $publishDate
+     * @param string $title
+     * @param string $body
+     * @param User $author
+     * @param string|null $imagePath
+     * @param string|null $strapLine
+     * @param CarbonInterface|null $publishDate
      */
     private function __construct(
         string $title,
@@ -85,7 +87,7 @@ class Article
         User $author,
         ?string $imagePath,
         ?string $strapLine,
-        ?\DateTimeInterface $publishDate
+        ?CarbonInterface $publishDate
     ) {
         $this->title = $title;
         $this->body = $body;
@@ -193,9 +195,9 @@ class Article
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return CarbonInterface|null
      */
-    public function getPublishDate(): \DateTimeInterface
+    public function getPublishDate(): ?CarbonInterface
     {
         return $this->publishDate;
     }
@@ -205,7 +207,8 @@ class Article
      */
     public function isPublished(): bool
     {
-        return null !== $this->getPublishDate();
+        return $this->getPublishDate() instanceof Carbon
+            && $this->getPublishDate()->gte(Carbon::now());
     }
 
     /**

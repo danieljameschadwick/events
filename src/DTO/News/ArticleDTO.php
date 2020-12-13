@@ -6,6 +6,7 @@ namespace App\DTO\News;
 
 use App\Entity\News\Article;
 use App\Entity\User\User;
+use Carbon\CarbonInterface;
 
 class ArticleDTO
 {
@@ -35,7 +36,7 @@ class ArticleDTO
     private $strapLine;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var CarbonInterface|null
      */
     private $publishDate;
 
@@ -47,7 +48,7 @@ class ArticleDTO
      * @param User|null               $author
      * @param string|null             $imagePath
      * @param string|null             $strapLine
-     * @param \DateTimeInterface|null $publishDate
+     * @param CarbonInterface|null $publishDate
      */
     public function __construct(
         ?string $title,
@@ -55,7 +56,7 @@ class ArticleDTO
         ?User $author,
         ?string $imagePath,
         ?string $strapLine,
-        ?\DateTimeInterface $publishDate
+        ?CarbonInterface $publishDate
     ) {
         $this->title = $title;
         $this->body = $body;
@@ -71,7 +72,7 @@ class ArticleDTO
      * @param User|null               $author
      * @param string|null             $imagePath
      * @param string|null             $strapLine
-     * @param \DateTimeInterface|null $publishDate
+     * @param CarbonInterface|null $publishDate
      *
      * @return self
      */
@@ -81,7 +82,7 @@ class ArticleDTO
         ?User $author,
         ?string $imagePath,
         ?string $strapLine,
-        ?\DateTimeInterface $publishDate
+        ?CarbonInterface $publishDate
     ): self {
         return new self(
             $title,
@@ -191,17 +192,17 @@ class ArticleDTO
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return CarbonInterface|null
      */
-    public function getPublishDate(): ?\DateTimeInterface
+    public function getPublishDate(): ?CarbonInterface
     {
         return $this->publishDate;
     }
 
     /**
-     * @param \DateTimeInterface $publishDate
+     * @param CarbonInterface $publishDate
      */
-    public function setPublishDate(\DateTimeInterface $publishDate): void
+    public function setPublishDate(CarbonInterface $publishDate): void
     {
         $this->publishDate = $publishDate;
     }

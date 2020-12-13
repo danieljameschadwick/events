@@ -56,7 +56,6 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 'enabled',
                 CheckboxType::class,
                 [
-                    'required' => true,
                     'mapped' => false,
                     'label' => 'Enable Address:',
                 ]
@@ -65,7 +64,6 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 'name',
                 TextType::class,
                 [
-                    'required' => true,
                     'label' => 'Address Name:',
                     'constraints' => [
                         new NotBlank()
@@ -76,7 +74,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 'addressLine1',
                 TextType::class,
                 [
-                    'required' => true,
+                    'label' => 'Address Line 1:',
                     'constraints' => [
                         new NotBlank()
                     ],
@@ -87,6 +85,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => false,
+                    'label' => 'Address Line 2:',
                 ]
             )
             ->add(
@@ -94,6 +93,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => false,
+                    'label' => 'Address Line 3:',
                 ]
             )
             ->add(
@@ -101,13 +101,14 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => false,
+                    'label' => 'Address Line 4:',
                 ]
             )
             ->add(
                 'postCode',
                 TextType::class,
                 [
-                    'required' => true,
+                    'label' => 'Post Code:',
                     'constraints' => [
                         new NotBlank()
                     ],
@@ -118,6 +119,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => false,
+                    'label' => 'Latitude:',
                 ]
             )
             ->add(
@@ -125,13 +127,14 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 TextType::class,
                 [
                     'required' => false,
+                    'label' => 'Longitude:',
                 ]
             )
             ->add(
                 'country',
                 EntityType::class,
                 [
-                    'required' => true,
+                    'label' => 'Country:',
                     'class' => Country::class,
                     'choice_label' => function (?Country $country) {
                         return $country instanceof Country
@@ -151,7 +154,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 'region',
                 EntityType::class,
                 [
-                    'required' => true,
+                    'label' => 'Region:',
                     'class' => Region::class,
                     'choice_label' => function (?Region $region) {
                         return $region instanceof Region
@@ -171,7 +174,6 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
                 'user',
                 UserType::class,
                 [
-                    'required' => true,
                     'constraints' => [
                         new NotBlank()
                     ],
@@ -210,6 +212,7 @@ class AddressType extends AbstractType implements DoctrineAwareInterface
 
     /**
      * @param FormInterface $form
+     * @param bool $required
      */
     private function requireAddress(FormInterface $form, bool $required = true): void
     {

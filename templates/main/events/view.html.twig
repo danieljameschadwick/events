@@ -42,7 +42,7 @@
             <div class="w-full sm:w-full mb-4">
                 <h4>Description</h4>
                 <p>
-                    {{ event.description }}
+                    {{ event.description|default('Maybe the organiser should add a description...') }}
                 </p>
             </div>
         </div>
@@ -120,6 +120,10 @@
                     <p>{{ event.address.region.name }},</p>
                     <p>{{ event.address.country.name }},</p>
                     <p>{{ event.address.postCode }}.</p>
+                {% else %}
+                    <p>
+                        No location planned for this event.
+                    </p>
                 {% endif %}
             </div>
         </div>
