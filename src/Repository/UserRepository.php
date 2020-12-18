@@ -28,8 +28,8 @@ class UserRepository extends ServiceEntityRepository
     private function getQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('user')
-            ->addSelect('preferences')
-            ->innerJoin('user.preferences', 'preferences');
+            ->addSelect('preference')
+            ->leftJoin('user.preference', 'preference');
     }
 
     /**

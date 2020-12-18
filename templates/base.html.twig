@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="{{ (app.user.uuid is defined and app.user.preferences.darkMode) ? 'dark' : '' }}">
+<html lang="en" class="{{ (app.user.uuid is defined and app.user.preference is not null and app.user.preference.darkMode) ? 'dark' : '' }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -34,6 +34,8 @@
         {% block footer %}
             {% include 'footer/footer.html.twig' %}
         {% endblock footer %}
+
+        {{ include('components/ui/flashes.html.twig') }}
 
         {{ encore_entry_script_tags('app') }}
 

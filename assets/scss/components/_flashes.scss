@@ -1,0 +1,22 @@
+.flashes
+{
+    @apply w-full md:max-w-xs absolute bottom-0 right-0 z-absolute p-5;
+
+    .flash
+    {
+        &--error
+        {
+            @apply bg-red-800;
+        }
+
+        &--warning
+        {
+            @apply bg-theme-primary;
+        }
+
+        &--success
+        {
+            @apply bg-theme-primary;
+        }
+    }
+}

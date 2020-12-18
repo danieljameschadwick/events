@@ -60,6 +60,7 @@ module.exports = {
                 base: 0,
                 content: 5,
                 overlay: 100,
+                absolute: 1000,
             }
         },
     },

@@ -64,6 +64,7 @@ class NewsletterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => NewsletterDTO::class,
+            'csrf_protection' => false,
         ]);
     }
 

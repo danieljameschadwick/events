@@ -1,7 +1,7 @@
-<div class="container {{ additionalClasses|default }}">
+<div class="flashes {{ additionalClasses|default }}">
 	{% for label, messages in app.flashes %}
 		{% for message in messages %}
-			<div class="flash flash--label">
+			<div class="flash flash--{{ label }}">
 				{{ message }}
 			</div>
 		{% endfor %}

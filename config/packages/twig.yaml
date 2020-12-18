@@ -4,4 +4,6 @@ twig:
     form_themes: ['forms/common.html.twig']
 
     globals:
+        app: '@App\Twig\AppVariable'
+
         site_name: 'events'

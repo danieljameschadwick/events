@@ -30,14 +30,20 @@ class Controller extends AbstractController
     ): Response
     {
         $newsletterDTO = NewsletterDTO::create();
-        $newsletterData = $request->query->get('newsletter');
-
         $newsletterForm = $this->createForm(NewsletterType::class, $newsletterDTO, [
             'action' => $this->generateUrl('app_index'),
             'method' => 'POST',
         ]);
 
-        $newsletterForm->submit($newsletterData);
+        $newsletterData = $request->query->get($newsletterForm->getName());
+
+dump($newsletterDTO);
+
+        if ($newsletterData) {
+            $newsletterForm->submit($newsletterData);
+        }
+
+dump($newsletterDTO);
 
         if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
             $userProcessor->setNewsletterDTO($newsletterDTO);

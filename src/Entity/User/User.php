@@ -92,9 +92,9 @@ class User implements UserInterface
      * @var Preference
      *
      * @ORM\OneToOne(targetEntity="App\Entity\User\Preference", mappedBy="user", cascade={"persist"})
-     * @ORM\JoinColumn(name="intPreferenceId", referencedColumnName="intPreferenceId", nullable=true)
+     * @ORM\JoinColumn(name="intPreferenceId", referencedColumnName="intPreferenceId")
      */
-    private $preferences;
+    private $preference;
 
     /**
      * @var Newsletter|null
@@ -134,25 +134,23 @@ class User implements UserInterface
      * @param string             $username
      * @param string             $email
      * @param string             $password
-     * @param PreferenceDTO $preferencesDTO
+     * @param PreferenceDTO $preferenceDTO
      */
     private function __construct(
         string $username,
         string $email,
         string $password,
-        ?PreferenceDTO $preferencesDTO = null
+        ?PreferenceDTO $preferenceDTO = null
     ) {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
 
-        if ($preferencesDTO instanceof PreferenceDTO) {
-            $this->preferences = Preference::createFromDTO($preferencesDTO);
+        if ($preferenceDTO instanceof PreferenceDTO) {
+            $this->preference = Preference::createFromDTO($preferenceDTO);
         } else {
-            $this->preferences = Preference::create($this);
+            $this->preference = Preference::create($this);
         }
-
-        $this->newsletter = null;
 
         $this->roles = [];
         $this->events = new ArrayCollection();
@@ -164,7 +162,7 @@ class User implements UserInterface
      * @param string                  $username
      * @param string                  $email
      * @param string                  $password
-     * @param PreferenceDTO|null $preferencesDTO
+     * @param PreferenceDTO|null $preferenceDTO
      *
      * @return User
      */
@@ -172,13 +170,13 @@ class User implements UserInterface
         string $username,
         string $email,
         string $password,
-        ?PreferenceDTO $preferencesDTO = null
+        ?PreferenceDTO $preferenceDTO = null
     ): User {
         return new self(
             $username,
             $email,
             $password,
-            $preferencesDTO
+            $preferenceDTO
         );
     }
 
@@ -200,6 +198,20 @@ class User implements UserInterface
     public function getUuid(): ?UuidInterface
     {
         return $this->uuid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUuidString(): ?string
+    {
+        $uuid = $this->getUuid();
+
+        if (!$uuid) {
+            return null;
+        }
+
+        return $uuid->toString();
     }
 
     /**
@@ -345,9 +357,9 @@ class User implements UserInterface
     /**
      * @return Preference
      */
-    public function getPreferences(): Preference
+    public function getPreference(): Preference
     {
-        return $this->preferences;
+        return $this->preference;
     }
 
     /**
