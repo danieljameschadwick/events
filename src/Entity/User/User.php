@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
-use App\DTO\UserPreferencesDTO;
+use App\DTO\PreferenceDTO;
 use App\Entity\Event;
 use App\Entity\SignUp;
 use App\Exception\InvalidMethodException;
@@ -89,11 +89,20 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var UserPreferences
+     * @var Preference
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\User\UserPreferences", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User\Preference", mappedBy="user", cascade={"persist"})
+     * @ORM\JoinColumn(name="intPreferenceId", referencedColumnName="intPreferenceId", nullable=true)
      */
     private $preferences;
+
+    /**
+     * @var Newsletter|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\User\Newsletter", cascade={"persist"})
+     * @ORM\JoinColumn(name="intNewsletterId", referencedColumnName="intNewsletterId", nullable=true)
+     */
+    private $newsletter;
 
     /**
      * @var Event[]|ArrayCollection
@@ -125,23 +134,25 @@ class User implements UserInterface
      * @param string             $username
      * @param string             $email
      * @param string             $password
-     * @param UserPreferencesDTO $preferencesDTO
+     * @param PreferenceDTO $preferencesDTO
      */
     private function __construct(
         string $username,
         string $email,
         string $password,
-        ?UserPreferencesDTO $preferencesDTO = null
+        ?PreferenceDTO $preferencesDTO = null
     ) {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
 
-        if ($preferencesDTO instanceof UserPreferencesDTO) {
-            $this->preferences = UserPreferences::createFromDTO($preferencesDTO);
+        if ($preferencesDTO instanceof PreferenceDTO) {
+            $this->preferences = Preference::createFromDTO($preferencesDTO);
         } else {
-            $this->preferences = UserPreferences::create($this);
+            $this->preferences = Preference::create($this);
         }
+
+        $this->newsletter = null;
 
         $this->roles = [];
         $this->events = new ArrayCollection();
@@ -153,7 +164,7 @@ class User implements UserInterface
      * @param string                  $username
      * @param string                  $email
      * @param string                  $password
-     * @param UserPreferencesDTO|null $preferencesDTO
+     * @param PreferenceDTO|null $preferencesDTO
      *
      * @return User
      */
@@ -161,7 +172,7 @@ class User implements UserInterface
         string $username,
         string $email,
         string $password,
-        ?UserPreferencesDTO $preferencesDTO = null
+        ?PreferenceDTO $preferencesDTO = null
     ): User {
         return new self(
             $username,
@@ -332,19 +343,27 @@ class User implements UserInterface
     }
 
     /**
+     * @return Preference
+     */
+    public function getPreferences(): Preference
+    {
+        return $this->preferences;
+    }
+
+    /**
+     * @return Newsletter|null
+     */
+    public function getNewsletter(): ?Newsletter
+    {
+        return $this->newsletter;
+    }
+
+    /**
      * @return string
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
-    }
-
-    /**
-     * @return UserPreferences
-     */
-    public function getPreferences(): UserPreferences
-    {
-        return $this->preferences;
+        return $this->password;
     }
 
     /**

@@ -19,30 +19,39 @@ class NewsletterDTO
     private $email;
 
     /**
+     * @var bool
+     */
+    private $subscribed = false;
+
+    /**
      * @var User|null
      */
     private $user;
 
     /**
      * @param string $email
+     * @param bool $subscribed
      * @param User $user
      */
-    public function __construct(?string $email = null, ?User $user = null)
+    public function __construct(?string $email = null, bool $subscribed = false, ?User $user = null)
     {
         $this->email = $email;
+        $this->subscribed = $subscribed;
         $this->user = $user;
     }
 
     /**
      * @param string $email
+     * @param bool $subscribed
      * @param User $user
      *
      * @return NewsletterDTO
      */
-    public static function create(?string $email = null, ?User $user = null): NewsletterDTO
+    public static function create(?string $email = null, bool $subscribed = false, ?User $user = null): NewsletterDTO
     {
         return new self(
             $email,
+            $subscribed,
             $user
         );
     }
@@ -77,6 +86,22 @@ class NewsletterDTO
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscribed(): bool
+    {
+        return $this->subscribed;
+    }
+
+    /**
+     * @param bool $subscribed
+     */
+    public function setSubscribed(bool $subscribed): void
+    {
+        $this->subscribed = $subscribed;
     }
 
     /**

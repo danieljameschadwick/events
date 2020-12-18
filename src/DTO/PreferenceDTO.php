@@ -6,7 +6,7 @@ namespace App\DTO;
 
 use App\Entity\User\User;
 
-class UserPreferencesDTO
+class PreferenceDTO
 {
     /**
      * @var User|null
@@ -36,12 +36,12 @@ class UserPreferencesDTO
      * @param User $user
      * @param bool $darkMode
      *
-     * @return UserPreferencesDTO
+     * @return PreferenceDTO
      */
     public static function create(
         User $user,
         bool $darkMode = false
-    ): UserPreferencesDTO {
+    ): PreferenceDTO {
         return new self(
             $user,
             $darkMode

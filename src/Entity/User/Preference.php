@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Entity\User;
 
-use App\DTO\UserPreferencesDTO;
+use App\DTO\PreferenceDTO;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
  *     schema="Users",
- *     name="tblUserPreferences"
+ *     name="tblPreference"
  * )
  *
  * @ORM\Entity()
  */
-class UserPreferences
+class Preference
 {
     /**
      * @var int|null
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(name="intUserPreferencesId", type="integer", length=20)
+     * @ORM\Column(name="intPreferenceId", type="integer", length=20)
      */
     private $id;
 
@@ -72,11 +72,11 @@ class UserPreferences
     }
 
     /**
-     * @param UserPreferencesDTO $userPreferencesDTO
+     * @param PreferenceDTO $userPreferencesDTO
      *
      * @return static
      */
-    public static function createFromDTO(UserPreferencesDTO $userPreferencesDTO): self
+    public static function createFromDTO(PreferenceDTO $userPreferencesDTO): self
     {
         return self::create(
             $userPreferencesDTO->getUser(),

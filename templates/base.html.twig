@@ -23,6 +23,8 @@
 
         <div id="page" class="mb-auto">
             {% block page %}
+                {% include 'components/ui/flashes.html.twig' %}
+
                 <div id="page-container" class="w-full flex-grow px-5">
                     {% block body %}{% endblock %}
                 </div>

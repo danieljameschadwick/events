@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block page %}
+    {{ include('components/ui/flashes.html.twig', {
+        additionalClasses: 'mt-20',
+    }) }}
+
     {% block body %}{% endblock %}
 {% endblock page %}

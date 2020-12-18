@@ -6,8 +6,6 @@ namespace App\Form;
 
 use App\DTO\AddressDTO;
 use App\DTO\EventDTO;
-use App\Entity\Event;
-use App\Entity\Location\Address;
 use App\Entity\User\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

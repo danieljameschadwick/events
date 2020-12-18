@@ -7,6 +7,7 @@ namespace App\Traits;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Trait EntityManagerTrait.
@@ -17,6 +18,11 @@ trait EntityManagerTrait
      * @var Registry
      */
     protected $doctrine;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
     /**
      * @var string
@@ -33,7 +39,7 @@ trait EntityManagerTrait
      *
      * @return $this
      */
-    public function setEntityManagerName($entityManagerName)
+    public function setEntityManagerName($entityManagerName): self
     {
         $this->entityManagerName = $entityManagerName;
 
@@ -43,9 +49,17 @@ trait EntityManagerTrait
     /**
      * @param Registry $doctrine
      */
-    public function setDoctrine(Registry $doctrine)
+    public function setDoctrine(Registry $doctrine): void
     {
         $this->doctrine = $doctrine;
+    }
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function setManager(EntityManagerInterface $entityManager): void
+    {
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -71,10 +85,14 @@ trait EntityManagerTrait
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManagerInterface
      */
-    protected function getManager()
+    protected function getManager(): EntityManagerInterface
     {
+        if ($this->entityManager instanceof EntityManagerInterface) {
+            return $this->entityManager;
+        }
+
         return $this->getDoctrine()->getManager($this->entityManagerName);
     }
 
