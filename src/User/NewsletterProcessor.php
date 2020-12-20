@@ -86,7 +86,7 @@ class NewsletterProcessor implements DoctrineAwareInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function getNewsletter(): ?Newsletter
+    public function getNewsletter(): ?Newsletter
     {
         if ($this->newsletter instanceof Newsletter) {
             return $this->newsletter;

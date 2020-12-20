@@ -74,3 +74,9 @@ yarn-error.log
 
 # tmp
 /public/tmp
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
