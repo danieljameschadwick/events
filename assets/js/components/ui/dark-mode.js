@@ -22,10 +22,8 @@ document.querySelector('#theme-icon').addEventListener('click', (event) => {
         target.classList.add('light');
 
         html.classList.remove('dark');
-
         localStorage.theme = 'light';
 
-        console.log(localStorage.theme);
         return;
     }
 
@@ -34,10 +32,8 @@ document.querySelector('#theme-icon').addEventListener('click', (event) => {
         target.classList.add('dark');
 
         html.classList.add('dark');
-
         localStorage.theme = 'dark';
 
-        console.log(localStorage.theme);
         return;
     }
 

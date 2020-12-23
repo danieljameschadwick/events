@@ -36,7 +36,7 @@ class Group
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="uuid")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User", inversedBy="groups")
      * @ORM\JoinColumn(name="strOwnerUuid", referencedColumnName="strUuid")
      */
     private $owner;

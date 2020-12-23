@@ -9,8 +9,6 @@ use App\Entity\User\Newsletter;
 use App\Repository\NewsletterRepository;
 use App\User\NewsletterProcessor;
 use Doctrine\ORM\EntityManager;
-use PHPUnit\Framework\MockObject\MockBuilder;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Security\Core\Security;
@@ -29,30 +27,15 @@ class NewsletterProcessorTest extends TestCase
     private $testClass;
 
     /**
-     * @var EntityManager|MockObject
-     */
-    private $entityManager;
-
-    /**
-     * @var Security|MockObject
-     */
-    private $security;
-
-    /**
-     * @var FlashBag|MockObject
-     */
-    private $flashBag;
-
-    /**
      * @var NewsletterDTO
      */
     private $newsletterDTO;
 
     public function setUp(): void
     {
-        $this->entityManager = $this->createMock(EntityManager::class);
-        $this->security = $this->createMock(Security::class);
-        $this->flashBag = $this->createMock(FlashBag::class);
+        $entityManager = $this->createMock(EntityManager::class);
+        $security = $this->createMock(Security::class);
+        $flashBag = $this->createMock(FlashBag::class);
 
         $this->newsletterDTO = NewsletterDTO::create(
             'daniel@chadwk.com',
@@ -69,14 +52,14 @@ class NewsletterProcessorTest extends TestCase
             ->method('getOneByEmail')
             ->willReturn($newsletter);
 
-        $this->entityManager
+        $entityManager
             ->method('getRepository')
             ->willReturn($repository);
 
         $this->testClass = new NewsletterProcessor(
-            $this->entityManager,
-            $this->security,
-            $this->flashBag
+            $entityManager,
+            $security,
+            $flashBag
         );
     }
 
@@ -93,6 +76,7 @@ class NewsletterProcessorTest extends TestCase
 
         $newsletter = $this->testClass->getNewsletter();
 
+        self::assertNull($newsletter->getId());
         self::assertEquals($this->newsletterDTO->getEmail(), $newsletter->getEmail());
         self::assertTrue($newsletter->isSubscribed());
     }
